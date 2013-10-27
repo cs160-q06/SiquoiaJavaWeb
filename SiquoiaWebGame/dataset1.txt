@@ -1,7 +1,7 @@
-Free software
+Social science>General Knowledge>Free software
 
-
-Society>DMV
+
+Branded>N/A>DMV
 
 You must notify DMV within 5 days if you:
 Sell your vehicle
@@ -352,14 +352,12 @@ To help avoid being hit from the rear by another driver when preparing to turn, 
 Signal at least 100 feet before you turn 
 Keep parking lights on at all times 
 Check your rearview mirror often 
-
 Signal at least 50 feet before you turn 
 
 You must not cross a solid double line in the center of the roadway to 
 Overtake and pass another vehicle 
 Make a left turn 
 Enter a private driveway 
-
 Enter a parking lot
 
 You are driving a slow moving vehicle on a winding two-lane highway. You must pull over when it is safe and let other drivers pass when you are followed by 
@@ -446,7 +444,6 @@ On your left
 Signaling a turn
 In front of you
 
-
 Carpool lanes are marked with a diamond symbol. To use these lanes during the special hours shown on the signs you must 
 Have the minimum number of passengers shown on the signs. 
 Be driving a van or bus 
@@ -470,7 +467,6 @@ You are passing a school and see children near the street. You may not drive fas
 35 m.p.h. 
 20 m.p.h. 
 15 m.p.h
-
 
 It has been proven that safety belts: 
 Can reduce injury and death
@@ -502,7 +498,6 @@ After crossing the crosswalk
 Out far enough to see cross traffic 
 None of these
 
-
 When a school bus with flashing red lights has stopped on the road ahead of you, you must 
 Stop until the lights stop flashing
 Slow to 10 m.p.h. 
@@ -525,15 +520,12 @@ If traffic light is red, but a police officer or fire fighter on duty tells you 
 Do as he or she tells you
 Wait for the green light 
 Report him or her to police 
-
 None of these
-
 
 How many days do you have to report to DMV the sale or transfer of your vehicle? 
 5 days 
 10 days 
 20 days 
-
 30 days
 
 If you are repeatedly convicted for traffic violations 
@@ -624,7 +616,6 @@ If you are the first person to stop to give assistance at a collision scene, you
 After you have passed the collision scene 
 Before you reach the collision scene 
 Next to the collision scene 
-
 All of these
 
 The 'implied consent law” says you have agreed to take a test for the alcohol content of your blood 
@@ -766,7 +757,7 @@ Drive 20 to 25 mph under the speed limit
 Avoid driving
 
 
-Society>Capitals
+Social science>General Knowledge>Capitals
 
 What is the capital of Indonesia?
 Jakarta
@@ -797,7 +788,6 @@ Luanda
 Kabul
 Nassau
 None of these
-
 
 What is the capital of United Arab Emirates?
 Abu Dhabi
@@ -1526,7 +1516,7 @@ Pristina
 None of these
 
 
-Math>Arithmetic
+Science>Math>Arithmetic
 
 100 / 20 * 6 =
 30
@@ -1828,8 +1818,8 @@ What is the product of all the numbers (0 through 9) in the dial of a telephone?
 18 years old
 20 years old
 
-
-Math>Algebra
+
+Science>Math>Algebra
 
 If you multiply an inequality by a negative number, when should you reverse the inequality symbol?
 Always
@@ -2582,7 +2572,7 @@ Every integer has an additive inverse.
 Every integer has an multiplicative identity.
 
 
-Science>Botany
+Science>Biology>Botany
 
 What is the smallest angiosperm among the following?
 Wolffia
@@ -2645,4 +2635,4 @@ Chromatin
 Chromosome
 
 
-Science>Zoology
+Science>Biology>Zoology

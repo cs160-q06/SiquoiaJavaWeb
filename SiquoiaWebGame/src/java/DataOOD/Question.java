@@ -17,15 +17,25 @@ public class Question {
     private String answer2;
     private String answer3;
     private int ranking;
+    private  String question;
 
-    public Question(int id, Topic topic, String correctAnswer, String answer1, String answer2, String answer3, int ranking) {
+    public Question(int id, Topic topic,String question, String correctAnswer, String answer1, String answer2, String answer3, int ranking) {
         this.id = id;
         this.topic = topic;
+        this.question = question;
         this.correctAnswer = correctAnswer;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.ranking = ranking;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public int getId() {
@@ -80,4 +90,14 @@ public class Question {
     public void incrementRanking() {
         ranking++;
     }
+
+    @Override
+    public String toString() {
+        String s = "Question #" + id + " (" + topic.toSimpleString()+"): ";
+        s+=question+"\n\tc: "+correctAnswer+"\n\ta1: "+answer1
+                +"\n\ta2: " + answer2 +"\n\ta3: " +answer3;
+        return s; //To change body of generated methods, choose Tools | Templates.
+    }
+  
+    
 }

@@ -11,52 +11,100 @@ import java.util.List;
  *
  * @author mr.nam
  */
-public class Node {
+public class Node<Topic> {
 
-    private Node parent;
-    private List<Node> children;
-    private Topic topic;
+    private Topic data;
+    private Node<Topic> parent;
+    private List<Node<Topic>> children;
+    private int id;
 
-    public Node(Node parent, List<Node> children, Topic topic) {
-        this.parent = parent;
-        this.children = children;
-        this.topic = topic;
+    public Node(int id, Topic data) {
+        this.id = id;
+        this.data = data;
+        parent = null;
+        children = new ArrayList<>();
     }
 
-    public Node getParent() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Topic getData() {
+        return data;
+    }
+
+    public void setData(Topic data) {
+        this.data = data;
+    }
+
+    public Node<Topic> getParent() {
         return parent;
     }
 
-    public void setParent(Node parent) {
+    public void setParent(Node<Topic> parent) {
         this.parent = parent;
+        parent.addChild(this);
     }
 
-    public List<Node> getChildren() {
+    public List<Node<Topic>> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Node> children) {
+    public void setChildren(List<Node<Topic>> children) {
         this.children = children;
     }
 
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
+    private void addChild(Node<Topic> child) {
+        if (children == null) {
+            this.children = new ArrayList<>();
+        }
+        children.add(child);
     }
 
     @Override
     public String toString() {
-        return "Node{children=" + children + ", topic=" + topic + '}';
+        return "\n" + toString("   ");
     }
 
-    public void addChild(Node child) {
+    public String toString(String p) {
+        String s = "Node{";
+        String c = p + "|";
+        s += data;
         if (children == null) {
-            this.children = new ArrayList<>();
+            s += "\n" + c + "_null";
         } else {
-            children.add(child);
+            for (Node<Topic> child : children) {
+                if (children.indexOf(child) == children.size() - 1) {
+                    s += "\n" + c + "_" + child.toString(p + "   ");
+                } else {
+                    s += "\n" + c + "_" + child.toString(c + " " + "   ");
+                }
+
+            }
         }
+        s += '}';
+        return s;
+    }
+
+    public Node<Topic> getChildByID(int countTopic) {
+        if (id == countTopic) {
+            return this;
+        } else {
+            if (children.isEmpty()) {
+                return null;
+            } else {
+                for (Node<Topic> node : children) {
+                    Node<Topic> result = node.getChildByID(countTopic);
+                    if (result != null) {
+                        return result;
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

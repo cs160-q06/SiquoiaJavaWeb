@@ -30,9 +30,20 @@ public class Topic {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+   
+
     @Override
     public String toString() {
-        return "[["+id+"],["+topic+"]]";
+        return "[[id:"+id+"],[topic:"+topic+"]]";
     }
+
+    String toSimpleString() {
+        return topic;
+    }
+
     
 }

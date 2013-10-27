@@ -5,6 +5,7 @@
 package DataOOD;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -33,7 +34,15 @@ public class Quiz {
     public Question getCurrentQuestion() {
         return questionList.get(currentQuestionIndex);
     }
-
+    public Question getCurrentQuestionRandomShuffle() {
+        Question question = questionList.get(currentQuestionIndex);
+        String[] set= {question.getCorrectAnswer(), question.getAnswer1()
+                , question.getAnswer2() ,question.getAnswer3()};
+        shuffleArray(set);
+        question = new Question(question.getId(), question.getTopic()
+                ,question.getQuestion(),set[0] ,set[1], set[2],set[3], question.getRanking());
+        return question;
+    }
     public void next() {
         currentQuestionIndex++;
     }
@@ -41,6 +50,19 @@ public class Quiz {
     
     public boolean isCurrentCorrect(String answer) {
         return getCurrentQuestion().getCorrectAnswer().toLowerCase().equals(answer.toLowerCase());
+    }
+    
+    // Implementing Fisher–Yates shuffle. From http://stackoverflow.com/
+
+    private void shuffleArray(String [] ar) {
+        Random rnd = new Random();
+        for (int i = ar.length - 1; i > 0; i--) {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            String a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
     }
 
     

@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /*
@@ -29,7 +30,8 @@ public class Controller {
 
         //test2();
 //        test3("dataset1.txt");
-        test();
+         test();
+        //test4();
 
     }
 
@@ -166,7 +168,7 @@ public class Controller {
                     //return;
                 }
                 printMenu(in);
-                
+
             } else if (menuLevel == EnumString.LOGIN) {
                 //in = scLine.nextLine();
                 if (in.equals(EnumString.BACK_C.getValue())) {
@@ -238,6 +240,7 @@ public class Controller {
     }
 
     private static void tutorial(Scanner scLine) {
+        System.out.println("---Start Tutorial Quiz---");
         List<Question> list = new ArrayList();
         String topic = EnumString.TUTORIAL_TOPIC.getValue().toLowerCase();
         for (Question question : questionList) {
@@ -258,7 +261,8 @@ public class Controller {
             count++;
             String answer = "";
             quiz.next();
-            Question question = quiz.getCurrentQuestion();
+            //Question question = quiz.getCurrentQuestion();
+            Question question = quiz.getCurrentQuestionRandomShuffle();
             printQuestion(question, count);
             while (true) {
                 System.out.print("Your choice: ");
@@ -292,7 +296,7 @@ public class Controller {
 
                 count = (count > 0 ? count - 1 : count);
                 System.out.println("You correctly answer total " + count
-                        + (count < 2 ? "question" : "questions"));
+                        + (count < 2 ? "q uestion" : " questions"));
                 break;
             }
 
@@ -306,5 +310,24 @@ public class Controller {
                 + "\n\t(" + EnumString.C.getValue() + ") " + question.getAnswer2()
                 + "\n\t(" + EnumString.D.getValue() + ") " + question.getAnswer3();
         System.out.println(s + "\n");
+    }
+
+    private static void test4() {
+        String[] set = {"a","b","c","d"};
+        shuffleArray(set);
+        for (int i = 0; i < set.length; i++) {
+            System.out.print(set[i] + " ");
+        }
+    }
+    // Implementing Fisher–Yates shuffle. From http://stackoverflow.com/
+    static void shuffleArray(String[] ar) {
+        Random rnd = new Random();
+        for (int i = ar.length - 1; i > 0; i--) {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            String a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
     }
 }

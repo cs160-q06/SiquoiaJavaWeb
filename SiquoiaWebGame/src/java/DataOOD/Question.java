@@ -17,6 +17,10 @@ import java.util.List;
  */
 public class Question {
 
+    
+
+    
+
     private int id;
     private Topic topic;
     private String correctAnswer;
@@ -129,7 +133,19 @@ public class Question {
 
     public static List<Question> doQueryGetAll(Connection conn) throws SQLException {
         String query = "SELECT * from QUESTION;";
-
+        return doQuery(conn, query);
+    }
+    public static List<Question> doQueryByTopic(Connection conn, Topic t) throws SQLException {
+        List<Topic> topicList = Topic.getAllSubTopicByID(conn,t.getId());
+        List<Question> list = new ArrayList<>();
+        for(Topic n : topicList)
+        {
+            String query = "SELECT * from QUESTION where TOPIC_ID = " + n.getId();
+            list.addAll(doQuery(conn,query));
+        }
+        return list;
+    }
+    public static List<Question> doQuery(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
 
@@ -151,7 +167,6 @@ public class Question {
         }
         return list;
     }
-
     @Override
     public String toString() {
         String s = "Question #" + id + " (" + topicID+ "): ";
@@ -159,4 +174,5 @@ public class Question {
                 + "\n\ta2: " + answer2 + "\n\ta3: " + answer3;
         return s; //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

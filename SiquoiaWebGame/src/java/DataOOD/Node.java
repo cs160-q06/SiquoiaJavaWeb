@@ -58,7 +58,7 @@ public class Node<Topic> {
         this.children = children;
     }
 
-    private void addChild(Node<Topic> child) {
+    public void addChild(Node<Topic> child) {
         if (children == null) {
             this.children = new ArrayList<>();
         }
@@ -106,5 +106,18 @@ public class Node<Topic> {
             }
         }
         return null;
+    }
+
+    public List<Topic> getAllSubObject() {
+        List<Topic> list = new ArrayList<>();
+        list.add(this.getData());
+        List<Node<Topic>> nodeList = this.getChildren();
+        if (nodeList == null || nodeList.isEmpty()) {
+            return list;
+        }
+        for (Node<Topic> n : nodeList) {
+            list.addAll(n.getAllSubObject());
+        }
+        return list;
     }
 }

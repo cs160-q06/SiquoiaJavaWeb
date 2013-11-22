@@ -1,8 +1,11 @@
+package Controller;
+
 
 import DataOOD.Node;
 import DataOOD.Question;
 import DataOOD.Quiz;
 import DataOOD.Topic;
+import DataOOD.User;
 import Miscellanea.EnumString;
 import Miscellanea.EnumValue;
 import java.io.BufferedWriter;
@@ -10,6 +13,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,13 +34,15 @@ public class Controller {
     private static ArrayList<Question> questionList;
     private static EnumString menuLevel;
 
+    
+
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
         //test2();
-        //test3("dataset1.txt");
+        test3("dataset1.txt");
         // test();
         //test4();
-        test_Create_SQLFile("dataset1.txt");
+      //  test_Create_SQLFile("dataset1.txt");
         //System.out.println("'");
 
     }
@@ -51,7 +58,7 @@ public class Controller {
             boolean isNew = true;
             if (children != null) {
                 for (Node<Topic> child : children) {
-                    if (child.getData().getTopic().equals(s)) {
+                    if (child.getData().getDescription().equals(s)) {
                         previousNode = child;
                         currentNode = child;
                         isNew = false;
@@ -247,7 +254,7 @@ public class Controller {
         List<Question> list = new ArrayList();
         String topic = EnumString.TUTORIAL_TOPIC.getValue().toLowerCase();
         for (Question question : questionList) {
-            if (question.getTopic().getTopic().toLowerCase().equals(topic)) {
+            if (question.getTopic().getDescription().toLowerCase().equals(topic)) {
                 list.add(question);
             }
             if (list.size() == EnumValue.TUTORIAL_QUESTION_NUMBER.getValue()) {
@@ -351,8 +358,8 @@ public class Controller {
         topic = "DMV";
         id = 8;
         for (Question q : questionList) {
-           //System.out.println(q.getTopic().getTopic());
-            if (q.getTopic().getTopic().equals(topic)) {
+           //System.out.println(q.getDescription().getDescription());
+            if (q.getTopic().getDescription().equals(topic)) {
                 s += (s.isEmpty()?"Select ":" UNION ALL Select ");
                 s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
                         + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
@@ -368,8 +375,8 @@ public class Controller {
         topic = "Capitals";
         id = 6;
         for (Question q : questionList) {
-           //System.out.println(q.getTopic().getTopic());
-            if (q.getTopic().getTopic().equals(topic)) {
+           //System.out.println(q.getDescription().getDescription());
+            if (q.getTopic().getDescription().equals(topic)) {
                 s += (s.isEmpty()?"Select ":" UNION ALL Select ");
                 s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
                         + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
@@ -385,8 +392,8 @@ public class Controller {
         topic = "Arithmetic";
         id = 10;
         for (Question q : questionList) {
-           //System.out.println(q.getTopic().getTopic());
-            if (q.getTopic().getTopic().equals(topic)) {
+           //System.out.println(q.getDescription().getDescription());
+            if (q.getTopic().getDescription().equals(topic)) {
                 s += (s.isEmpty()?"Select ":" UNION ALL Select ");
                 s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
                         + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
@@ -402,8 +409,8 @@ public class Controller {
         topic = "Algebra";
         id = 11;
         for (Question q : questionList) {
-           //System.out.println(q.getTopic().getTopic());
-            if (q.getTopic().getTopic().equals(topic)) {
+           //System.out.println(q.getDescription().getDescription());
+            if (q.getTopic().getDescription().equals(topic)) {
                 s += (s.isEmpty()?"Select ":" UNION ALL Select ");
                 s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
                         + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
@@ -419,8 +426,8 @@ public class Controller {
         topic = "Botany";
         id = 13;
         for (Question q : questionList) {
-           //System.out.println(q.getTopic().getTopic());
-            if (q.getTopic().getTopic().equals(topic)) {
+           //System.out.println(q.getDescription().getDescription());
+            if (q.getTopic().getDescription().equals(topic)) {
                 s += (s.isEmpty()?"Select ":" UNION ALL Select ");
                 s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
                         + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
@@ -437,5 +444,21 @@ public class Controller {
         output.write(s);
         output.close();
 
+    }
+
+    public static boolean isLogin(String user1, String pass1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    public static User login(Connection conn, String name, String pass) throws SQLException {
+        List<User> list = User.doQueryGetAll(conn);
+        User user = null;
+        for(User i : list)
+        {
+            if(i.getName().equals(name) && i.getPassword().equals(pass))
+                user = i;
+        }
+        return user;
     }
 }

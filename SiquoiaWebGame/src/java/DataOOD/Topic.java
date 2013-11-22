@@ -18,34 +18,34 @@ import java.util.List;
 public class Topic {
 
     private int id;
-    private String topic;
+    private String description;
     private int parent;
     private int level;
 
     public Topic(int id, String topic) {
         this.id = id;
-        this.topic = topic;
+        this.description = topic;
     }
 
     public Topic(int id, String topic, int parent) {
         this.id = id;
-        this.topic = topic;
+        this.description = topic;
         this.parent = parent;
     }
 
-    public Topic(int id, String topic, int parent, int level) {
+    public Topic(int id, String description, int parent, int level) {
         this.id = id;
-        this.topic = topic;
+        this.description = description;
         this.parent = parent;
         this.level = level;
     }
 
-    public String getTopic() {
-        return topic;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setDescription(String topic) {
+        this.description = topic;
     }
 
     public int getId() {
@@ -74,11 +74,12 @@ public class Topic {
 
     @Override
     public String toString() {
-        return "[[id:" + id + "],[topic:" + topic + "]]" + parent + " " +level;
+        return "[(id : " + id + "),(topic : " + description 
+                + "),(parent : " + parent + "),(level : " + level+")]";
     }
 
     String toSimpleString() {
-        return topic;
+        return description;
     }
 
     public static List<Topic> doQueryGetAll(Connection conn) throws SQLException {
@@ -92,12 +93,38 @@ public class Topic {
             int id = rs.getInt("ID");
             String descr = rs.getString("DESCRIPTION");
             int parent_id = rs.getInt("PARENT_ID");
-            if(rs.wasNull()) parent_id=-1;
+            if (rs.wasNull()) {
+                parent_id = 0;
+            }
             int level = rs.getInt("LEVEL");
 
             Topic i = new Topic(id, descr, parent_id, level);
             list.add(i);
         }
         return list;
+    }
+
+    public static Node<Topic> createRootNode(Connection conn) throws SQLException {
+        List<Topic> list = doQueryGetAll(conn);
+        Node<Topic> root = new Node<Topic>(0, new Topic(0, "root", 0, 0));
+        try {
+            for (Topic t : list) {
+                int parent_id = t.getParent();
+                Node<Topic> node = root.getChildByID(parent_id);
+                node.addChild(new Node<Topic>(t.getId(), t));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return root;
+
+    }
+
+    public static List<Topic> getAllSubTopicByID(Connection conn, int id) throws SQLException {
+        Node<Topic> root = createRootNode(conn);
+        root = root.getChildByID(id);
+        List<Topic> list = root.getAllSubObject();
+        return list;
+        
     }
 }

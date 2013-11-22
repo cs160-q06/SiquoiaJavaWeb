@@ -5,8 +5,11 @@ import DataOOD.Quiz;
 import DataOOD.Topic;
 import Miscellanea.EnumString;
 import Miscellanea.EnumValue;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -26,12 +29,14 @@ public class Controller {
     private static ArrayList<Question> questionList;
     private static EnumString menuLevel;
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
 
         //test2();
-//        test3("dataset1.txt");
-         test();
+        //test3("dataset1.txt");
+        // test();
         //test4();
+        test_Create_SQLFile("dataset1.txt");
+        //System.out.println("'");
 
     }
 
@@ -138,10 +143,8 @@ public class Controller {
     private static void test3(String dataset) throws FileNotFoundException {
         File file = new File(dataset);
         Scanner scLine = new Scanner(file);
-        System.out.println(scLine.nextLine());
-        System.out.println(scLine.nextLine());
-        System.out.println(scLine.nextLine());
-        System.out.println(scLine.nextLine());
+        loadData(dataset);
+        System.out.println(root.toString());
 
     }
 
@@ -313,13 +316,14 @@ public class Controller {
     }
 
     private static void test4() {
-        String[] set = {"a","b","c","d"};
+        String[] set = {"a", "b", "c", "d"};
         shuffleArray(set);
         for (int i = 0; i < set.length; i++) {
             System.out.print(set[i] + " ");
         }
     }
     // Implementing Fisher–Yates shuffle. From http://stackoverflow.com/
+
     static void shuffleArray(String[] ar) {
         Random rnd = new Random();
         for (int i = ar.length - 1; i > 0; i--) {
@@ -329,5 +333,109 @@ public class Controller {
             ar[index] = ar[i];
             ar[i] = a;
         }
+    }
+
+    private static void test_Create_SQLFile(String dataset1txt) throws FileNotFoundException, IOException {
+        loadData(dataset1txt);
+        File file = new File("SQLouput.txt");
+        if (!file.exists()) {
+				file.createNewFile();
+			}
+ 
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        BufferedWriter output = new BufferedWriter(fw);
+        String s = "";
+        String topic;
+        int id;
+        //DMV
+        topic = "DMV";
+        id = 8;
+        for (Question q : questionList) {
+           //System.out.println(q.getTopic().getTopic());
+            if (q.getTopic().getTopic().equals(topic)) {
+                s += (s.isEmpty()?"Select ":" UNION ALL Select ");
+                s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
+                        + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer1().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer2().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer3().replaceAll("'", "''") + "'" + ","
+                        + 0
+                        + "\n";
+
+            }
+        }
+        //Capitals
+        topic = "Capitals";
+        id = 6;
+        for (Question q : questionList) {
+           //System.out.println(q.getTopic().getTopic());
+            if (q.getTopic().getTopic().equals(topic)) {
+                s += (s.isEmpty()?"Select ":" UNION ALL Select ");
+                s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
+                        + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer1().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer2().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer3().replaceAll("'", "''") + "'" + ","
+                        + 0
+                        + "\n";
+
+            }
+        }
+         //Arithmetic
+        topic = "Arithmetic";
+        id = 10;
+        for (Question q : questionList) {
+           //System.out.println(q.getTopic().getTopic());
+            if (q.getTopic().getTopic().equals(topic)) {
+                s += (s.isEmpty()?"Select ":" UNION ALL Select ");
+                s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
+                        + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer1().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer2().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer3().replaceAll("'", "''") + "'" + ","
+                        + 0
+                        + "\n";
+
+            }
+        }
+         //Algebra
+        topic = "Algebra";
+        id = 11;
+        for (Question q : questionList) {
+           //System.out.println(q.getTopic().getTopic());
+            if (q.getTopic().getTopic().equals(topic)) {
+                s += (s.isEmpty()?"Select ":" UNION ALL Select ");
+                s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
+                        + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer1().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer2().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer3().replaceAll("'", "''") + "'" + ","
+                        + 0
+                        + "\n";
+
+            }
+        }
+         //Botany
+        topic = "Botany";
+        id = 13;
+        for (Question q : questionList) {
+           //System.out.println(q.getTopic().getTopic());
+            if (q.getTopic().getTopic().equals(topic)) {
+                s += (s.isEmpty()?"Select ":" UNION ALL Select ");
+                s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
+                        + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer1().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer2().replaceAll("'", "''") + "'" + ",'"
+                        + q.getAnswer3().replaceAll("'", "''") + "'" + ","
+                        + 0
+                        + "\n";
+
+            }
+        }
+       s+=";";
+       
+        output.write(s);
+        output.close();
+
     }
 }

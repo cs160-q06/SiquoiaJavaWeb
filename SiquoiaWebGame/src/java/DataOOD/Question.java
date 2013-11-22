@@ -4,6 +4,13 @@
  */
 package DataOOD;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author mr.nam
@@ -17,9 +24,11 @@ public class Question {
     private String answer2;
     private String answer3;
     private int ranking;
-    private  String question;
+    private String question;
+    private int topicID;
+    private int media;
 
-    public Question(int id, Topic topic,String question, String correctAnswer, String answer1, String answer2, String answer3, int ranking) {
+    public Question(int id, Topic topic, String question, String correctAnswer, String answer1, String answer2, String answer3, int ranking) {
         this.id = id;
         this.topic = topic;
         this.question = question;
@@ -28,6 +37,18 @@ public class Question {
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.ranking = ranking;
+    }
+
+    public Question(int id, int topicID, String question, String correctAnswer, String answer1, String answer2, String answer3, int ranking, int media) {
+        this.id = id;
+        this.topicID = topicID;
+        this.question = question;
+        this.correctAnswer = correctAnswer;
+        this.answer1 = answer1;
+        this.answer2 = answer2;
+        this.answer3 = answer3;
+        this.ranking = ranking;
+        this.media = media;
     }
 
     public String getQuestion() {
@@ -42,7 +63,6 @@ public class Question {
         return id;
     }
 
-    
     public Topic getTopic() {
         return topic;
     }
@@ -87,17 +107,56 @@ public class Question {
         return ranking;
     }
 
+    public int getTopicID() {
+        return topicID;
+    }
+
+    public void setTopicID(int topicID) {
+        this.topicID = topicID;
+    }
+
+    public int getMedia() {
+        return media;
+    }
+
+    public void setMedia(int media) {
+        this.media = media;
+    }
+
     public void incrementRanking() {
         ranking++;
     }
 
+    public static List<Question> doQueryGetAll(Connection conn) throws SQLException {
+        String query = "SELECT * from QUESTION;";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+
+        List<Question> list = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt("ID");
+            int topicID = rs.getInt("TOPIC_ID");
+            String question = rs.getString("DESCRIPTION");
+            String correctAnswer = rs.getString("ANSWER_C");
+            String answer1 = rs.getString("ANSWER_W1");
+            String answer2 = rs.getString("ANSWER_W2");
+            String answer3 = rs.getString("ANSWER_W3");
+            int ranking = rs.getInt("RANKING");
+            int media = rs.getInt("MULTIMEDIA_ID");
+            if(rs.wasNull()) media = -1;
+
+            Question i = new Question(id, topicID, question, correctAnswer, answer1, answer2, answer3, ranking, media);
+            list.add(i);
+        }
+        return list;
+    }
+
     @Override
     public String toString() {
-        String s = "Question #" + id + " (" + topic.toSimpleString()+"): ";
-        s+=question+"\n\tc: "+correctAnswer+"\n\ta1: "+answer1
-                +"\n\ta2: " + answer2 +"\n\ta3: " +answer3;
+        String s = "Question #" + id + " (" + topicID+ "): ";
+        s += question + "\n\tc: " + correctAnswer + "\n\ta1: " + answer1
+                + "\n\ta2: " + answer2 + "\n\ta3: " + answer3;
         return s; //To change body of generated methods, choose Tools | Templates.
     }
-  
-    
 }

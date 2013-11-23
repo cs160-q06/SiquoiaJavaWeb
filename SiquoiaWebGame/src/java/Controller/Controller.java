@@ -37,12 +37,12 @@ public class Controller {
     
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-
+        test();
         //test2();
-        test3("dataset1.txt");
+      //  test3("dataset1.txt");
         // test();
         //test4();
-      //  test_Create_SQLFile("dataset1.txt");
+        //test_Create_SQLFile("dataset1.txt");
         //System.out.println("'");
 
     }
@@ -460,5 +460,18 @@ public class Controller {
                 user = i;
         }
         return user;
+    }
+
+    public static boolean registerUser(Connection conn, String name, String pass) throws SQLException {
+        if(User.doQueryAddUser(conn, name, pass))
+        {
+            System.out.println("user " + name + " is sucessfully registered");
+            return true;
+        }
+        else
+        {
+            System.out.println("user " + name + " is already registered");
+            return true;
+        }
     }
 }

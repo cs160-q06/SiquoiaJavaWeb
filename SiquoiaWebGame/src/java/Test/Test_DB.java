@@ -29,9 +29,10 @@ public class Test_DB {
             Connection conn = ctrl.connect();
             //test_Topic(conn);
             //test_Question(conn);
-            test_User(conn);            
+            //test_User(conn);            
             //test_QuestionOfTopic(conn);
-            testLog_In(conn);
+            //testLog_In(conn);
+            test_addUser(conn);
             conn.close();
 
         } catch (Exception ex) {
@@ -125,5 +126,16 @@ public class Test_DB {
         }
         else
             System.out.println("Log in failed!");
+    }
+
+    private static void test_addUser(Connection conn) throws SQLException {
+        String user1, pass1, user2, pass2;
+        user1 = "user3";
+        pass1 = user1;
+        user2 = "user1";
+        pass2 = user2;
+        Controller.registerUser(conn,user1,pass1);
+        Controller.registerUser(conn,user1,pass1);
+        
     }
 }

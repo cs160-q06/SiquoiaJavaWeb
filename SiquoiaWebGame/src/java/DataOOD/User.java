@@ -16,11 +16,25 @@ import java.util.List;
  * @author mr.nam
  */
 public class User {
-    private  int id;
-    private  String name;
-    private  String password;
-    private  String type;
-    private  int point;
+
+    public static boolean doQueryAddUser(Connection conn, String name, String pass) throws SQLException {
+        List<User> list = doQueryGetAll(conn);
+        for (User i : list) {
+            if (i.getName().trim().equals(name.trim())) {
+                return false;
+            }
+        }
+        String query = "Insert into USER (USERNAME, PASSWORD, TYPE) VALUES"
+                + "(" + name + "," + pass + ",user);";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        return true;
+    }
+    private int id;
+    private String name;
+    private String password;
+    private String type;
+    private int point;
 
     public User(int id, String name, String password, String type, int point) {
         this.id = id;
@@ -69,7 +83,7 @@ public class User {
     public void setPoint(int point) {
         this.point = point;
     }
-    
+
     public static List<User> doQueryGetAll(Connection conn) throws SQLException {
         String query = "SELECT * from USER;";
 
@@ -83,8 +97,8 @@ public class User {
             String password = rs.getString("PASSWORD");
             String type = rs.getString("TYPE");
             int point = rs.getInt("POINT");
-            
-            User i = new User( id,  name,  password,  type,  point);
+
+            User i = new User(id, name, password, type, point);
             list.add(i);
         }
         return list;
@@ -92,9 +106,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "["+id+"|"+name+" : " +password+", "+type+", "+point+"]";
+        return "[" + id + "|" + name + " : " + password + ", " + type + ", " + point + "]";
     }
-    
-    
-    
 }

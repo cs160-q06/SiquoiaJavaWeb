@@ -33,6 +33,7 @@ public class Test_DB {
             //test_QuestionOfTopic(conn);
             //testLog_In(conn);
             test_addUser(conn);
+            //test_Quiz_QuestionHas1C3W(conn);
             conn.close();
 
         } catch (Exception ex) {
@@ -73,21 +74,21 @@ public class Test_DB {
     private static void test_QuestionOfTopic(Connection conn) throws SQLException {
         List<Topic> listTopic;
         System.out.println("\nAll topic: ");
-        listTopic = Topic.getAllSubTopicByID(conn, 0);
+        listTopic = Topic.getTopicAndAllSubTopicByID(conn, 0);
         System.out.println(Arrays.toString(listTopic.toArray()));
         System.out.println(listTopic.size() - 1 + " subTopic under " + listTopic.get(0).getDescription());
         System.out.println("\nAll topic under id 1: ");
-        listTopic = Topic.getAllSubTopicByID(conn, 1);
+        listTopic = Topic.getTopicAndAllSubTopicByID(conn, 1);
         System.out.println(Arrays.toString(listTopic.toArray()));
         System.out.println(listTopic.size() - 1 + " subTopic under " + listTopic.get(0).getDescription());
 
         System.out.println("\nAll topic under id 2: ");
-        listTopic = Topic.getAllSubTopicByID(conn, 2);
+        listTopic = Topic.getTopicAndAllSubTopicByID(conn, 2);
         System.out.println(Arrays.toString(listTopic.toArray()));
         System.out.println(listTopic.size() - 1 + " subTopic under " + listTopic.get(0).getDescription());
 
         System.out.println("\nAll topic under id 3: ");
-        listTopic = Topic.getAllSubTopicByID(conn, 3);
+        listTopic = Topic.getTopicAndAllSubTopicByID(conn, 3);
         System.out.println(Arrays.toString(listTopic.toArray()));
         System.out.println(listTopic.size() - 1 + " subTopic under " + listTopic.get(0).getDescription());
 
@@ -135,7 +136,11 @@ public class Test_DB {
         user2 = "user1";
         pass2 = user2;
         Controller.registerUser(conn,user1,pass1);
-        Controller.registerUser(conn,user1,pass1);
+        Controller.registerUser(conn,user2,pass2);
         
+    }
+
+    private static void test_Quiz_QuestionHas1C3W(Connection conn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

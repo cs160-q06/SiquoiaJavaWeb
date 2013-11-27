@@ -465,7 +465,7 @@ public class Controller {
     public static boolean registerUser(Connection conn, String name, String pass) throws SQLException {
         if(User.doQueryAddUser(conn, name, pass))
         {
-            System.out.println("user " + name + " is sucessfully registered");
+            System.out.println("user " + name + " is successfully registered");
             return true;
         }
         else

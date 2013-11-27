@@ -136,7 +136,7 @@ public class Question {
         return doQuery(conn, query);
     }
     public static List<Question> doQueryByTopic(Connection conn, Topic t) throws SQLException {
-        List<Topic> topicList = Topic.getAllSubTopicByID(conn,t.getId());
+        List<Topic> topicList = Topic.getTopicAndAllSubTopicByID(conn,t.getId());
         List<Question> list = new ArrayList<>();
         for(Topic n : topicList)
         {

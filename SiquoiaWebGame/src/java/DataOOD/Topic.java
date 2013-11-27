@@ -74,8 +74,8 @@ public class Topic {
 
     @Override
     public String toString() {
-        return "[(id : " + id + "),(topic : " + description 
-                + "),(parent : " + parent + "),(level : " + level+")]";
+        return "[(id : " + id + "),(topic : " + description
+                + "),(parent : " + parent + "),(level : " + level + ")]";
     }
 
     String toSimpleString() {
@@ -120,11 +120,18 @@ public class Topic {
 
     }
 
-    public static List<Topic> getAllSubTopicByID(Connection conn, int id) throws SQLException {
+    public static List<Topic> getTopicAndAllSubTopicByID(Connection conn, int id) throws SQLException {
         Node<Topic> root = createRootNode(conn);
         root = root.getChildByID(id);
-        List<Topic> list = root.getAllSubObject();
+        List<Topic> list = root.getFatherAndAllChildren();
         return list;
-        
+
+    }
+
+    public static List<Topic> getSubTopicByID(Connection conn, int id) throws SQLException {
+        Node<Topic> root = createRootNode(conn);
+        root = root.getChildByID(id);
+        List<Topic> list = root.getChildrenOfFather();
+        return list;
     }
 }

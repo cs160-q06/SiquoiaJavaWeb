@@ -4,6 +4,7 @@
  */
 package DataOOD;
 
+import Miscellanea.EnumValue;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,10 +25,12 @@ public class User {
                 return false;
             }
         }
-        String query = "Insert into USER (USERNAME, PASSWORD, TYPE) VALUES"
-                + "(" + name + "," + pass + ",user);";
+        String query = "Insert into USER (USERNAME, PASSWORD, TYPE, POINT) VALUES"
+                + "('" + name + "','" + pass + "','user',"+ EnumValue.INITIAL_POINT.getValue()+");";
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
+        System.out.println("Insert into User table");
+        stmt.executeUpdate(query);
+        stmt.close();
         return true;
     }
     private int id;

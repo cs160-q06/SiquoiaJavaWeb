@@ -28,7 +28,8 @@ public class Test_App {
         MySqlController ctrl = new MySqlController();
         try {
             Connection conn = ctrl.connect();
-            test_SelectTopicAndSubTopic(conn);
+            //test_SelectTopicAndSubTopic(conn);
+            test_ShoppingStore(conn);
             conn.close();
 
         } catch (Exception ex) {
@@ -92,5 +93,9 @@ public class Test_App {
                 }
             }
         }
+    }
+
+    private static void test_ShoppingStore(Connection conn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.s
     }
 }

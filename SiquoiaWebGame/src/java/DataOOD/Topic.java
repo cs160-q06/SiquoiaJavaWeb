@@ -17,6 +17,10 @@ import java.util.List;
  */
 public class Topic {
 
+   
+
+    
+
     private int id;
     private String description;
     private int parent;
@@ -104,6 +108,42 @@ public class Topic {
         return list;
     }
 
+    private static Topic doQuerySearchByName(Connection conn, String name) throws SQLException {
+        String query = "SELECT * from TOPIC where DESCRIPTION ='" + name + "';";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+
+        if (rs.next()) {
+            int id = rs.getInt("ID");
+            String descr = rs.getString("DESCRIPTION");
+            int parent_id = rs.getInt("PARENT_ID");
+            int level = rs.getInt("LEVEL");
+
+            Topic topic = new Topic(id, descr, parent_id, level);
+
+            return topic;
+        }
+        return null;
+    }
+    private static Topic doQuerySearchByID(Connection conn, int i) throws SQLException {
+        String query = "SELECT * from TOPIC where ID ='" + i + "';";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+
+        if (rs.next()) {
+            int id = rs.getInt("ID");
+            String descr = rs.getString("DESCRIPTION");
+            int parent_id = rs.getInt("PARENT_ID");
+            int level = rs.getInt("LEVEL");
+
+            Topic topic = new Topic(id, descr, parent_id, level);
+
+            return topic;
+        }
+        return null;
+    }
     public static Node<Topic> createRootNode(Connection conn) throws SQLException {
         List<Topic> list = doQueryGetAll(conn);
         Node<Topic> root = new Node<Topic>(0, new Topic(0, "root", 0, 0));
@@ -133,5 +173,23 @@ public class Topic {
         root = root.getChildByID(id);
         List<Topic> list = root.getChildrenOfFather();
         return list;
+    }
+
+    public static List<Topic> getSubTopicByName(Connection conn, String name) throws SQLException {
+        Node<Topic> root = createRootNode(conn);
+        Topic topic = Topic.doQuerySearchByName(conn, name);
+        root = root.getChildByID(topic.getId());
+        List<Topic> list = root.getChildrenOfFather();
+        return list;
+    }
+    
+     public static Topic getParentByName(Connection conn, String name) throws SQLException {
+        Topic topic = Topic.doQuerySearchByName(conn, name);
+        if(topic.parent > 0)
+        {
+        topic = Topic.doQuerySearchByID(conn, topic.getParent());
+        return topic;
+        }
+        return null;
     }
 }

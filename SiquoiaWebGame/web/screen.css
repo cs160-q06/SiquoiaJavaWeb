@@ -40,6 +40,7 @@ body {
     transition: text-shadow 0.25s ease-out;
 }
 
+
 #login {
     width: 320px;
     margin: 48px auto;
@@ -98,11 +99,17 @@ body {
 .red { color: #870000; }
 .orange { color: #ff680d; }
 .red a { color: #870000; }
-
+.lightgreen { color: #cc9966;}
 .glow {
     padding: 16px;
     text-shadow: #555 0 0 3px, #000 0 1px 1px;
     transition: text-shadow ease-out 4s;
+}
+.glowCenter {
+    padding: 16px;
+    text-shadow: #555 0 0 3px, #000 0 1px 1px;
+    transition: text-shadow ease-out 4s;
+    text-align: center;
 }
 
 .glow:hover {

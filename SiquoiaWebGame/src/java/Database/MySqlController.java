@@ -5,6 +5,8 @@
 package Database;
 
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,8 +18,13 @@ public class MySqlController {
     public MySqlController() {
     }
     
-    public Connection connect() throws Exception {
-        return conn.connect();
+    public Connection connect() {
+        try {
+            return conn.connect();
+        } catch (Exception ex) {
+            Logger.getLogger(MySqlController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
    

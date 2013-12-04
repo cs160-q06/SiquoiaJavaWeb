@@ -90,7 +90,7 @@ public class Node<Topic> {
         return s;
     }
     
-    public Node<Topic> getChildByID(int countTopic) {
+    public Node<Topic> getChildNodeByID(int countTopic) {
         if (id == countTopic) {
             return this;
         } else {
@@ -98,7 +98,7 @@ public class Node<Topic> {
                 return null;
             } else {
                 for (Node<Topic> node : children) {
-                    Node<Topic> result = node.getChildByID(countTopic);
+                    Node<Topic> result = node.getChildNodeByID(countTopic);
                     if (result != null) {
                         return result;
                     }

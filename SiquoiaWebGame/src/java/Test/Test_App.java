@@ -5,7 +5,9 @@
 package Test;
 
 import Controller.Controller;
+import DataOOD.Node;
 import DataOOD.Question;
+import DataOOD.Quiz;
 import DataOOD.Topic;
 import DataOOD.User;
 import Database.MySqlController;
@@ -29,7 +31,9 @@ public class Test_App {
         try {
             Connection conn = ctrl.connect();
             //test_SelectTopicAndSubTopic(conn);
-            test_ShoppingStore(conn);
+            //test_ShoppingStore(conn);
+            //testGenerateNodeTopic(conn);
+            test_generateQuiz();
             conn.close();
 
         } catch (Exception ex) {
@@ -97,5 +101,21 @@ public class Test_App {
 
     private static void test_ShoppingStore(Connection conn) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.s
+    }
+
+    private static void testGenerateNodeTopic(Connection conn) {
+            Node<Topic> root = Controller.generateNodeTopic();
+            System.out.println(root.toString());
+    }
+
+    private static void test_generateQuiz() {
+        Node<Topic> root = Controller.generateNodeTopic();
+        Quiz q = Controller.generateQuizFromTopic(root.getChildren().get(0).getData());
+        q.next();
+        System.out.println(q.getCurrentQuestion());
+        System.out.println(q.getCurrentQuestionRandomShuffle());
+        q.next();
+        System.out.println(q.getCurrentQuestion());
+        System.out.println(q.getCurrentQuestionRandomShuffle());
     }
 }

@@ -8,7 +8,6 @@ import DataOOD.User;
 import Database.MySqlController;
 import Miscellanea.EnumString;
 import Miscellanea.EnumValue;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,10 +21,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 /*
  * To change this template, choose Tools | Templates
@@ -58,15 +54,50 @@ public class Controller {
         return Topic.getParentByName(conn,name);
     }
 
+    public static Node<Topic> generateNodeTopic() {
+        int countTopic = 0;
+        Node<Topic> root = new Node(countTopic, new Topic(countTopic, "root"));
+        try {
+            List<Topic> list = Topic.doQueryGetAll(conn);
+            for(Topic t : list)
+            {
+                Node<Topic> node = root.getChildNodeByID(t.getParent());
+                node.addChild(new Node<Topic>(t.getId(),t));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return root;
+    }
+
     public Controller() {
         this.conn = new MySqlController().connect();
     }
-
+    
     public static void main(String[] args) throws FileNotFoundException, IOException, NamingException, SQLException {
         test();
 
     }
-
+   
+    public static Quiz generateQuizFromTopic(Topic topic)
+    {
+            List<Question> list = new ArrayList<>();
+            List<Question> sublist = new ArrayList<>();
+        try {
+            list = Question.doQueryByTopic(conn, topic);
+            while(sublist.size()<EnumValue.PACKET_QUESTION_NUMBER.getValue())
+            {
+                int random = (int) (Math.random()*list.size());
+                sublist.add(list.get(random));
+                list.remove(random);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return new Quiz(sublist);
+        
+    }
     public static List<Topic> getSubTopicByID(int id) {
         List<Topic> list = new ArrayList<>();
         try {
@@ -144,7 +175,7 @@ public class Controller {
                         String a1 = scLine.nextLine().trim();
                         String a2 = scLine.nextLine().trim();
                         String a3 = scLine.nextLine().trim();
-                        Node<Topic> node = root.getChildByID(countTopic);
+                        Node<Topic> node = root.getChildNodeByID(countTopic);
                         Question question = new Question(countQuestion, node.getData(), q, c, a1, a2, a3, 0);
                         questionList.add(question);
                     }
@@ -426,6 +457,6 @@ public class Controller {
         Topic  parent = Controller.getTopicParentByName("Math");;
         System.out.println(parent.toString());
         parent = Controller.getTopicParentByName("Science");;
-        System.out.println(parent.toString());
+//        System.out.println(parent.toString());
     }
 }

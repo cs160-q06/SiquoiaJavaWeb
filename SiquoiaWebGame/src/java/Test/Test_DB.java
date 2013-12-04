@@ -29,10 +29,10 @@ public class Test_DB {
             Connection conn = ctrl.connect();
             //test_Topic(conn);
             //test_Question(conn);
-            //test_User(conn);            
+            test_User(conn);            
             //test_QuestionOfTopic(conn);
             //testLog_In(conn);
-            test_addUser(conn);
+            //test_addUser(conn);
             //test_Quiz_QuestionHas1C3W(conn);
             conn.close();
 

@@ -150,7 +150,7 @@ public class Topic {
         try {
             for (Topic t : list) {
                 int parent_id = t.getParent();
-                Node<Topic> node = root.getChildByID(parent_id);
+                Node<Topic> node = root.getChildNodeByID(parent_id);
                 node.addChild(new Node<Topic>(t.getId(), t));
             }
         } catch (Exception ex) {
@@ -162,7 +162,7 @@ public class Topic {
 
     public static List<Topic> getTopicAndAllSubTopicByID(Connection conn, int id) throws SQLException {
         Node<Topic> root = createRootNode(conn);
-        root = root.getChildByID(id);
+        root = root.getChildNodeByID(id);
         List<Topic> list = root.getFatherAndAllChildren();
         return list;
 
@@ -170,7 +170,7 @@ public class Topic {
 
     public static List<Topic> getSubTopicByID(Connection conn, int id) throws SQLException {
         Node<Topic> root = createRootNode(conn);
-        root = root.getChildByID(id);
+        root = root.getChildNodeByID(id);
         List<Topic> list = root.getChildrenOfFather();
         return list;
     }
@@ -178,7 +178,7 @@ public class Topic {
     public static List<Topic> getSubTopicByName(Connection conn, String name) throws SQLException {
         Node<Topic> root = createRootNode(conn);
         Topic topic = Topic.doQuerySearchByName(conn, name);
-        root = root.getChildByID(topic.getId());
+        root = root.getChildNodeByID(topic.getId());
         List<Topic> list = root.getChildrenOfFather();
         return list;
     }

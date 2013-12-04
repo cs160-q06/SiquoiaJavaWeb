@@ -39,9 +39,9 @@ public class Quiz {
         String[] set= {question.getCorrectAnswer(), question.getAnswer1()
                 , question.getAnswer2() ,question.getAnswer3()};
         shuffleArray(set);
-        question = new Question(question.getId(), question.getTopic()
+        Question next = new Question(question.getId(), question.getTopic()
                 ,question.getQuestion(),set[0] ,set[1], set[2],set[3], question.getRanking());
-        return question;
+        return next;
     }
     public void next() {
         currentQuestionIndex++;

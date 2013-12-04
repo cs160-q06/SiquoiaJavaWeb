@@ -1,9 +1,12 @@
 <%-- 
-    Document   : shop
-    Created on : Oct 20, 2013, 2:42:09 AM
+    Document   : quiz
+    Created on : Dec 3, 2013, 10:43:50 AM
     Author     : mr.nam
 --%>
 
+<%@page import="DataOOD.Node"%>
+<%@page import="DataOOD.Quiz"%>
+<%@page import="DataOOD.Question"%>
 <%@page import="javax.swing.text.Document"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -39,27 +42,37 @@
 
             <div id="login"> 
                 
-                <div class="green glowCenter" style="font-size: 30px">Shop</div>
+                <div class="green glowCenter" style="font-size: 30px">Quiz</div>
                 
-                <form action="shop1.jsp" class="loginfield" action="#" method="post">
                     <div class="blue glow">Point: <%= (session.getAttribute("userPoint")!=null
                             ?(String)session.getAttribute("userPoint"):(100+""))%></div>
                     <p>
                         <div class="text" style="background-color: white;height: 200px">
                             <%
+                                Node<Topic> root = Controller.generateNodeTopic();
+                                Quiz quiz = Controller.generateQuizFromTopic(root.getChildren().get(0).getData());
                                 String entire = (String) session.getAttribute("entire");
                                 if (entire == null) {
                                     list = Controller.getSubTopicByID(0);
                                 } else {
                                     list = Controller.getSubTopicByName(entire);
                                 }
-                                for (Topic t : list) {
-                                    String name = t.getDescription();
-                                    
-
+                                   
+                                quiz.next();
+                                Question q = quiz.getCurrentQuestionRandomShuffle();
+                                String des = q.getQuestion();
+                                String a1 = q.getAnswer1();
+                                String a2 = q.getAnswer2();
+                                String a3 = q.getAnswer3();
+                                String a4 = q.getCorrectAnswer();
                             %>
-                            <input id="button" type="submit" name="topic" value="<%=name%>"  />
-                            <%                    }%>                            
+                            <label><%=des%></label><br />
+                            <form action="">
+                            <input type="radio" name="1" id="1" value="1"><%=a1%><br />
+                            <input type="radio" name="1" id="2" value="2"><%=a2%><br />
+                            <input type="radio" name="1" id="3" value="3"><%=a3%><br />
+                            <input type="radio" name="1" id="4" value="4"><%=a4%><br />
+                                    </form>
                         </div>
                         <div>
                             Selected: <%= (session.getAttribute("select") != null
@@ -70,6 +83,8 @@
                                     ? "Error: " + (String) session.getAttribute("error") : "")%>
                         </div>   
                     </p>
+            <form action="quiz1.jsp" class="loginfield" action="#" method="post">
+
                     <input id="button" type="submit" value="Expand" name="expand" />
                     <input id="button" type="submit" value="Back" name="back" />                    
                     <input id="button" type="submit" value="Buy" name="" />    

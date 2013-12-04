@@ -176,7 +176,7 @@ public class Controller {
                         String a2 = scLine.nextLine().trim();
                         String a3 = scLine.nextLine().trim();
                         Node<Topic> node = root.getChildNodeByID(countTopic);
-                        Question question = new Question(countQuestion, node.getData(), q, c, a1, a2, a3, 0);
+                        Question question = new Question(countQuestion, node.getData().getId(), q, c, a1, a2, a3, 0,0);
                         questionList.add(question);
                     }
                 }
@@ -239,20 +239,7 @@ public class Controller {
 
     }
 
-    private static void tutorial(Scanner scLine) {
-        System.out.println("---Start Tutorial Quiz---");
-        List<Question> list = new ArrayList();
-        String topic = EnumString.TUTORIAL_TOPIC.getValue().toLowerCase();
-        for (Question question : questionList) {
-            if (question.getTopic().getDescription().toLowerCase().equals(topic)) {
-                list.add(question);
-            }
-            if (list.size() == EnumValue.TUTORIAL_QUESTION_NUMBER.getValue()) {
-                break;
-            }
-        }
-        startQuiz(list, scLine);
-    }
+    
 
     private static void startQuiz(List<Question> questionList, Scanner scLine) {
         int count = 0;
@@ -321,110 +308,6 @@ public class Controller {
             ar[index] = ar[i];
             ar[i] = a;
         }
-    }
-
-    private static void test_Create_SQLFile(String dataset1txt) throws FileNotFoundException, IOException {
-        loadData(dataset1txt);
-        File file = new File("SQLouput.txt");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        FileWriter fw = new FileWriter(file.getAbsoluteFile());
-        BufferedWriter output = new BufferedWriter(fw);
-        String s = "";
-        String topic;
-        int id;
-        //DMV
-        topic = "DMV";
-        id = 8;
-        for (Question q : questionList) {
-            //System.out.println(q.getDescription().getDescription());
-            if (q.getTopic().getDescription().equals(topic)) {
-                s += (s.isEmpty() ? "Select " : " UNION ALL Select ");
-                s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
-                        + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer1().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer2().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer3().replaceAll("'", "''") + "'" + ","
-                        + 0
-                        + "\n";
-
-            }
-        }
-        //Capitals
-        topic = "Capitals";
-        id = 6;
-        for (Question q : questionList) {
-            //System.out.println(q.getDescription().getDescription());
-            if (q.getTopic().getDescription().equals(topic)) {
-                s += (s.isEmpty() ? "Select " : " UNION ALL Select ");
-                s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
-                        + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer1().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer2().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer3().replaceAll("'", "''") + "'" + ","
-                        + 0
-                        + "\n";
-
-            }
-        }
-        //Arithmetic
-        topic = "Arithmetic";
-        id = 10;
-        for (Question q : questionList) {
-            //System.out.println(q.getDescription().getDescription());
-            if (q.getTopic().getDescription().equals(topic)) {
-                s += (s.isEmpty() ? "Select " : " UNION ALL Select ");
-                s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
-                        + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer1().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer2().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer3().replaceAll("'", "''") + "'" + ","
-                        + 0
-                        + "\n";
-
-            }
-        }
-        //Algebra
-        topic = "Algebra";
-        id = 11;
-        for (Question q : questionList) {
-            //System.out.println(q.getDescription().getDescription());
-            if (q.getTopic().getDescription().equals(topic)) {
-                s += (s.isEmpty() ? "Select " : " UNION ALL Select ");
-                s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
-                        + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer1().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer2().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer3().replaceAll("'", "''") + "'" + ","
-                        + 0
-                        + "\n";
-
-            }
-        }
-        //Botany
-        topic = "Botany";
-        id = 13;
-        for (Question q : questionList) {
-            //System.out.println(q.getDescription().getDescription());
-            if (q.getTopic().getDescription().equals(topic)) {
-                s += (s.isEmpty() ? "Select " : " UNION ALL Select ");
-                s += id + ",'" + q.getQuestion().replaceAll("'", "''") + "'" + ",'"
-                        + q.getCorrectAnswer().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer1().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer2().replaceAll("'", "''") + "'" + ",'"
-                        + q.getAnswer3().replaceAll("'", "''") + "'" + ","
-                        + 0
-                        + "\n";
-
-            }
-        }
-        s += ";";
-
-        output.write(s);
-        output.close();
-
     }
 
     public static boolean isLogin(String user1, String pass1) {

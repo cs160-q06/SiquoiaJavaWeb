@@ -22,7 +22,6 @@ public class Question {
     
 
     private int id;
-    private Topic topic;
     private String correctAnswer;
     private String answer1;
     private String answer2;
@@ -32,18 +31,7 @@ public class Question {
     private int topicID;
     private int media;
 
-    public Question(int id, Topic topic, String question, String correctAnswer, String answer1, String answer2, String answer3, int ranking) {
-        this.id = id;
-        this.topic = topic;
-        this.question = question;
-        this.correctAnswer = correctAnswer;
-        this.answer1 = answer1;
-        this.answer2 = answer2;
-        this.answer3 = answer3;
-        this.ranking = ranking;
-    }
-
-    public Question(int id, int topicID, String question, String correctAnswer, String answer1, String answer2, String answer3, int ranking, int media) {
+       public Question(int id, int topicID, String question, String correctAnswer, String answer1, String answer2, String answer3, int ranking, int media) {
         this.id = id;
         this.topicID = topicID;
         this.question = question;
@@ -67,15 +55,7 @@ public class Question {
         return id;
     }
 
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
-    }
-
-    public String getCorrectAnswer() {
+        public String getCorrectAnswer() {
         return correctAnswer;
     }
 
@@ -169,8 +149,9 @@ public class Question {
     }
     @Override
     public String toString() {
-        String s = "Question #" + id + " (" + topicID+ "): ";
-        s += question + "\n\tc: " + correctAnswer + "\n\ta1: " + answer1
+        String s = "Question #" + id + " (" + topicID+ "): " + question + "\n";
+        s += "media: " + media + "\nRanking # " + ranking
+                + "\n\tc: " + correctAnswer + "\n\ta1: " + answer1
                 + "\n\ta2: " + answer2 + "\n\ta3: " + answer3;
         return s; //To change body of generated methods, choose Tools | Templates.
     }

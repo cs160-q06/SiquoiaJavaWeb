@@ -20,6 +20,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"> 
     <%!        
         private List<Topic> list;
+        private Quiz quiz = generateQuiz();
+        private Quiz generateQuiz()
+        {
+            Node<Topic> root = Controller.generateNodeTopic();
+            Quiz quiz = Controller.generateQuizFromTopic(root.getChildren().get(0).getData());
+            return quiz;
+        }
+        
     %>
     <head>
         <title>Siquoia login mockup</title>
@@ -47,32 +55,32 @@
                     <div class="blue glow">Point: <%= (session.getAttribute("userPoint")!=null
                             ?(String)session.getAttribute("userPoint"):(100+""))%></div>
                     <p>
+                        <form action="quiz1.jsp" class="loginfield" action="#" method="post">
+
                         <div class="text" style="background-color: white;height: 200px">
                             <%
-                                Node<Topic> root = Controller.generateNodeTopic();
-                                Quiz quiz = Controller.generateQuizFromTopic(root.getChildren().get(0).getData());
-                                String entire = (String) session.getAttribute("entire");
-                                if (entire == null) {
-                                    list = Controller.getSubTopicByID(0);
-                                } else {
-                                    list = Controller.getSubTopicByName(entire);
+                               
+                                if(session.getAttribute("next")!=null)   
+                                {
+                                    quiz.next();
+                                    session.setAttribute("next", null);
                                 }
-                                   
-                                quiz.next();
-                                Question q = quiz.getCurrentQuestionRandomShuffle();
+                                int count = quiz.getCurrentNumber();
+                                Question q = quiz.getCurrentQuestion();
                                 String des = q.getQuestion();
                                 String a1 = q.getAnswer1();
                                 String a2 = q.getAnswer2();
                                 String a3 = q.getAnswer3();
                                 String a4 = q.getCorrectAnswer();
+                                
+                                session.setAttribute("quiz", quiz);
                             %>
+                            <label>Question #<%=count%></label><br />                            
                             <label><%=des%></label><br />
-                            <form action="">
-                            <input type="radio" name="1" id="1" value="1"><%=a1%><br />
-                            <input type="radio" name="1" id="2" value="2"><%=a2%><br />
-                            <input type="radio" name="1" id="3" value="3"><%=a3%><br />
-                            <input type="radio" name="1" id="4" value="4"><%=a4%><br />
-                                    </form>
+                            <input type="radio" name="answer" id="1" value="<%=a1%>"><%=a1%><br />
+                            <input type="radio" name="answer" id="2" value="<%=a2%>"><%=a2%><br />
+                            <input type="radio" name="answer" id="3" value="<%=a3%>"><%=a3%><br />
+                            <input type="radio" name="answer" id="4" value="<%=a4%>"><%=a4%><br />
                         </div>
                         <div>
                             Selected: <%= (session.getAttribute("select") != null
@@ -83,11 +91,8 @@
                                     ? "Error: " + (String) session.getAttribute("error") : "")%>
                         </div>   
                     </p>
-            <form action="quiz1.jsp" class="loginfield" action="#" method="post">
 
-                    <input id="button" type="submit" value="Expand" name="expand" />
-                    <input id="button" type="submit" value="Back" name="back" />                    
-                    <input id="button" type="submit" value="Buy" name="" />    
+                    <input id="button" type="submit" value="Next" name="next" />                    
                 </form>
 
 

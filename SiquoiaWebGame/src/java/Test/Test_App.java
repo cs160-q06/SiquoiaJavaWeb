@@ -110,7 +110,7 @@ public class Test_App {
 
     private static void test_generateQuiz() {
         Node<Topic> root = Controller.generateNodeTopic();
-        Quiz q = Controller.generateQuizFromTopic(root.getChildren().get(0).getData());
+        Quiz q = Controller.generateQuizFromTopic(root.getChildren().get(2).getData());
         q.next();
         System.out.println(q.getCurrentQuestion());
         System.out.println(q.getCurrentQuestionRandomShuffle());

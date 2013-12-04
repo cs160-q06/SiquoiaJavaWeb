@@ -4,6 +4,7 @@
  */
 package DataOOD;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -14,9 +15,15 @@ import java.util.Random;
 public class Quiz {
     private  List<Question> questionList;
     private int currentQuestionIndex;
+    private List<Question> correctQuestionList;
     public Quiz(List<Question> questionList) {
-        this.questionList = questionList;
+        this.correctQuestionList = questionList;
+        this.questionList = this.suffleAllAnswer(questionList);
         currentQuestionIndex = 0;
+    }
+
+    public int getCurrentNumber() {
+        return currentQuestionIndex + 1;
     }
 
     public List<Question> getQuestionList() {
@@ -39,8 +46,8 @@ public class Quiz {
         String[] set= {question.getCorrectAnswer(), question.getAnswer1()
                 , question.getAnswer2() ,question.getAnswer3()};
         shuffleArray(set);
-        Question next = new Question(question.getId(), question.getTopic()
-                ,question.getQuestion(),set[0] ,set[1], set[2],set[3], question.getRanking());
+        Question next = new Question(question.getId(), question.getTopicID()
+                ,question.getQuestion(),set[0] ,set[1], set[2],set[3], question.getRanking(),question.getMedia());
         return next;
     }
     public void next() {
@@ -49,7 +56,7 @@ public class Quiz {
 
     
     public boolean isCurrentCorrect(String answer) {
-        return getCurrentQuestion().getCorrectAnswer().toLowerCase().equals(answer.toLowerCase());
+        return correctQuestionList.get(currentQuestionIndex).getCorrectAnswer().toLowerCase().equals(answer.toLowerCase());
     }
     
     // Implementing Fisher–Yates shuffle. From http://stackoverflow.com/
@@ -63,6 +70,20 @@ public class Quiz {
             ar[index] = ar[i];
             ar[i] = a;
         }
+    }
+
+    private List<Question> suffleAllAnswer(List<Question> questionList) {
+        List<Question> list = new ArrayList<>();
+        for(Question q : questionList)
+        {
+            String[] set= {q.getCorrectAnswer(), q.getAnswer1()
+                , q.getAnswer2() ,q.getAnswer3()};
+        shuffleArray(set);
+        Question next = new Question(q.getId(), q.getTopicID()
+                ,q.getQuestion(),set[0] ,set[1], set[2],set[3], q.getRanking(), q.getMedia());
+        list.add(next);
+        }
+        return list;
     }
 
     

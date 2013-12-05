@@ -7,16 +7,19 @@ body {
     height: 100%;
     font-family: "Linux_Libertine_O_C";
 }
-
+#error
+{
+    color: red;
+}
 #wallpaper {
     position: absolute;
     background-image: url(carbon-texture-alpha.png);
     margin: 0 auto;
     min-width: 480px;
-    min-height: 100%;
-    height: auto !important;
     height: 100%;
     width: 100%;
+    height: auto !important; 
+    min-height: 100%
 }
 
 #logo {
@@ -39,7 +42,6 @@ body {
     text-shadow: #fff 0 0 2px, #fff 0 0 8px;
     transition: text-shadow 0.25s ease-out;
 }
-
 
 #login {
     width: 320px;
@@ -99,17 +101,11 @@ body {
 .red { color: #870000; }
 .orange { color: #ff680d; }
 .red a { color: #870000; }
-.lightgreen { color: #cc9966;}
+
 .glow {
     padding: 16px;
     text-shadow: #555 0 0 3px, #000 0 1px 1px;
     transition: text-shadow ease-out 4s;
-}
-.glowCenter {
-    padding: 16px;
-    text-shadow: #555 0 0 3px, #000 0 1px 1px;
-    transition: text-shadow ease-out 4s;
-    text-align: center;
 }
 
 .glow:hover {

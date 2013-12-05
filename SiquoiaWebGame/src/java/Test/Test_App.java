@@ -33,7 +33,8 @@ public class Test_App {
             //test_SelectTopicAndSubTopic(conn);
             //test_ShoppingStore(conn);
             //testGenerateNodeTopic(conn);
-            test_generateQuiz();
+            //test_generateQuiz();
+            test_login();
             conn.close();
 
         } catch (Exception ex) {
@@ -117,5 +118,9 @@ public class Test_App {
         q.next();
         System.out.println(q.getCurrentQuestion());
         System.out.println(q.getCurrentQuestionRandomShuffle());
+    }
+
+    private static void test_login() {
+        System.out.println(Controller.isLogin("user1", "user1",111));
     }
 }

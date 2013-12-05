@@ -37,8 +37,9 @@ public class Controller {
     private static ArrayList<Question> questionList;
     private static EnumString menuLevel;
     private static Connection conn = new MySqlController().connect();;
-
-
+    private static List<User> loginUserList = new ArrayList<User>();
+    private static List<Integer> ipList = new ArrayList<Integer>();
+    
     public static List<Topic> getSubTopicByName(String name) {
         List<Topic> list = new ArrayList<>();
         try {
@@ -108,210 +109,22 @@ public class Controller {
         return list;
     }
 
-    private static int addTopic(Node<Topic> currentNode, Node<Topic> previousNode, String line, int count) {
-        Node root = previousNode;
-        Scanner sc = new Scanner(line);
-        sc.useDelimiter(">");
-
-        while (sc.hasNext()) {
-            String s = sc.next();
-            List<Node<Topic>> children = currentNode.getChildren();
-            boolean isNew = true;
-            if (children != null) {
-                for (Node<Topic> child : children) {
-                    if (child.getData().getDescription().equals(s)) {
-                        previousNode = child;
-                        currentNode = child;
-                        isNew = false;
-                        //count = currentNode.getData().getId();
-                        break;
-                    }
-
-                }
-            }
-            if (children == null || isNew) {
-                count++;
-                Topic topic = new Topic(count, s);
-                previousNode = currentNode;
-                currentNode = new Node(count, topic);
-                currentNode.setParent(previousNode);
-            }
+   
+    public static boolean isLogin(String username, String pass, int ip) {
+        List<User> list = new ArrayList<>();
+        try {
+            list = User.doQueryGetAll(conn);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // System.out.println(currentNode.toString());
-
-        return count;
-    }
-
-    private static void loadData(String dataset) throws FileNotFoundException {
-        System.out.println("--------------------------------");
-        System.out.println("Data is loading from " + dataset);
-
-        File file = new File(dataset);
-        Scanner scLine = new Scanner(file);
-        questionList = new ArrayList();
-        int countTopic = 0;
-        int countQuestion = 0;
-        root = new Node(countTopic, new Topic(countTopic, "root"));
-        Node<Topic> currentNode;
-        Node<Topic> previousNode;
-        boolean isTopic = true;
-        while (scLine.hasNextLine()) {
-            String line = scLine.nextLine().trim();
-            if (isTopic) {
-                currentNode = root;
-                previousNode = root;
-                countTopic = addTopic(currentNode, previousNode, line, countTopic);
-                isTopic = false;
-                //System.out.println(currentNode.toString());
-            } else if (line.isEmpty()) {
-                if (scLine.hasNextLine()) {
-                    line = scLine.nextLine();
-                    if (line.isEmpty()) {
-                        isTopic = true;
-                    } else {
-                        countQuestion++;
-                        String q = line;
-                        String c = scLine.nextLine().trim();
-                        String a1 = scLine.nextLine().trim();
-                        String a2 = scLine.nextLine().trim();
-                        String a3 = scLine.nextLine().trim();
-                        Node<Topic> node = root.getChildNodeByID(countTopic);
-                        Question question = new Question(countQuestion, node.getData().getId(), q, c, a1, a2, a3, 0,0);
-                        questionList.add(question);
-                    }
-                }
+        for(User u : list)
+            if(u.getName().equals(username) && u.getPassword().equals(pass))
+            {
+                Controller.loginUserList.add(u);
+                Controller.ipList.add(ip);
+                return true;
             }
-
-        }
-        System.out.println("Data is loaded from " + dataset);
-        System.out.println("--------------------------------");
-
-    }
-
-    private static void printQuestionList(ArrayList<Question> questionList) {
-        for (Question q : questionList) {
-            System.out.println(q.toString());
-        }
-    }
-
-    private static void printMenu(String t) {
-        String s = "";
-        if (t.equals("main")) {
-            s += "---Menu---\n";
-            s += EnumString.LOGIN.getValue() + " (" + EnumString.LOGIN_C.getValue() + ")\n";
-            s += EnumString.TUTORIAL.getValue() + " (" + EnumString.TUTORIAL_C.getValue() + ")\n";
-            s += EnumString.OPTION.getValue() + " (" + EnumString.OPTION_C.getValue() + ")\n";
-            s += EnumString.EXIT.getValue() + " (" + EnumString.EXIT_C.getValue() + ")\n";
-
-        } else if (t.equals(EnumString.LOGIN_C.getValue())) {
-            s += "---Menu > " + EnumString.LOGIN.getValue() + "---\n";
-            s += EnumString.BACK.getValue() + " (" + EnumString.BACK_C.getValue() + ")\n";
-
-            menuLevel = EnumString.LOGIN;
-
-        } else if (t.equals(EnumString.TUTORIAL_C.getValue())) {
-            s += "---Menu > " + EnumString.TUTORIAL.getValue() + "---\n";
-            s += EnumString.START.getValue() + " (" + EnumString.START_C.getValue() + ")\n";
-
-            s += EnumString.BACK.getValue() + " (" + EnumString.BACK_C.getValue() + ")\n";
-
-            menuLevel = EnumString.TUTORIAL;
-
-        } else if (t.equals(EnumString.OPTION_C.getValue())) {
-            s += "---Menu > " + EnumString.OPTION.getValue() + "---\n";
-            s += EnumString.BACK.getValue() + " (" + EnumString.BACK_C.getValue() + ")\n";
-
-            menuLevel = EnumString.OPTION;
-        } else { // wrong input, print the menu again
-            if (menuLevel == EnumString.MAIN) {
-                printMenu("main");
-            } else {
-                printMenu(menuLevel.getValue().substring(0, 1).toLowerCase());
-            }
-        }
-        System.out.println(s);
-
-    }
-
-    private static void backMainMenu() {
-        menuLevel = EnumString.MAIN;
-        printMenu("");
-
-    }
-
-    
-
-    private static void startQuiz(List<Question> questionList, Scanner scLine) {
-        int count = 0;
-        Quiz quiz = new Quiz(questionList);
-        while (quiz.hasNext()) {
-            count++;
-            String answer = "";
-            quiz.next();
-            //Question question = quiz.getCurrentQuestion();
-            Question question = quiz.getCurrentQuestionRandomShuffle();
-            printQuestion(question, count);
-            while (true) {
-                System.out.print("Your choice: ");
-                scLine = new Scanner(System.in);
-                answer = scLine.nextLine().toLowerCase().trim();
-
-                if (answer.equals(EnumString.A.getValue())) {
-                    answer = question.getCorrectAnswer();
-                    break;
-                } else if (answer.equals(EnumString.B.getValue())) {
-                    answer = question.getAnswer1();
-
-                    break;
-                } else if (answer.equals(EnumString.C.getValue())) {
-                    answer = question.getAnswer2();
-
-                    break;
-                } else if (answer.equals(EnumString.D.getValue())) {
-                    answer = question.getAnswer3();
-
-                    break;
-                } else {
-                    System.out.println("WRONG INPUT!");
-                }
-            }
-
-            if (quiz.isCurrentCorrect(answer)) {
-                System.out.println("Your answer for #" + count + " is correct!\n");
-            } else {
-                System.out.println("Your answer for #" + count + " is incorrect!\n");
-
-                count = (count > 0 ? count - 1 : count);
-                System.out.println("You correctly answer total " + count
-                        + (count < 2 ? "q uestion" : " questions"));
-                break;
-            }
-
-        }
-    }
-
-    private static void printQuestion(Question question, int count) {
-        String s = "Question #" + count + ": ";
-        s += question.getQuestion() + "\n\t(" + EnumString.A.getValue() + ") " + question.getCorrectAnswer()
-                + "\n\t(" + EnumString.B.getValue() + ") " + question.getAnswer1()
-                + "\n\t(" + EnumString.C.getValue() + ") " + question.getAnswer2()
-                + "\n\t(" + EnumString.D.getValue() + ") " + question.getAnswer3();
-        System.out.println(s + "\n");
-    }
-
-    static void shuffleArray(String[] ar) {
-        Random rnd = new Random();
-        for (int i = ar.length - 1; i > 0; i--) {
-            int index = rnd.nextInt(i + 1);
-            // Simple swap
-            String a = ar[index];
-            ar[index] = ar[i];
-            ar[i] = a;
-        }
-    }
-
-    public static boolean isLogin(String user1, String pass1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
     public static User login(Connection conn, String name, String pass) throws SQLException {
@@ -337,9 +150,6 @@ public class Controller {
 
     private static void test() throws NamingException, SQLException {
        
-        Topic  parent = Controller.getTopicParentByName("Math");;
-        System.out.println(parent.toString());
-        parent = Controller.getTopicParentByName("Science");;
-//        System.out.println(parent.toString());
+        System.out.println(Controller.isLogin("user1", "user1", 111));
     }
 }

@@ -8,24 +8,27 @@
         session.setAttribute("username_error", null);
         session.setAttribute("password_error", null);
         session.setAttribute("error", null);
+        //
     if (request.getParameter("login") != null) {
+        boolean checkInput = true;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         //check null
         if (username == null || username.isEmpty()) {
             session.setAttribute("username_error", " cannot be blank!");
+            checkInput = false;
         } 
         if (password == null || password.isEmpty()) {
             session.setAttribute("password_error", " cannot be blank!");
+            checkInput = false;
         } 
         //if both not null
-        if (username != null && password != null && !username.isEmpty() && !password.isEmpty() ) {
+        if (checkInput) {
             {
                 //check user
-                if(!Controller.Controller.isLogin(username, password, 11))
+                if (!Controller.Controller.isLogin(username, password, 11)) {
                     session.setAttribute("error", "Username or password is incorrect!");
-                else
-                {
+                } else {
                     session.setAttribute("error", "Username and password are correct!");
 
                 }
@@ -37,6 +40,7 @@
 
 <%
     String strViewPage = "login.jsp";
+    
     RequestDispatcher dispatcher = request.getRequestDispatcher(strViewPage);
     if (dispatcher != null) {
         dispatcher.forward(request, response);

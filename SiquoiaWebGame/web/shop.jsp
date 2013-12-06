@@ -19,7 +19,7 @@
         private List<Topic> list;
     %>
     <head>
-        <title>Siquoia login mockup</title>
+        <title>Siquoia Shop</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="style.css" type="text/css" media="handheld,all" />
     </head>

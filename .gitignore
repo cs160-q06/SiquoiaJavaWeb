@@ -29,11 +29,7 @@ local.properties
 .buildpath
 
 # Netbeans specific #
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
+SiquoiaWebGame/nbproject/private/
 
 # Class Files #
 *.class

@@ -3,15 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/mr.nam/Documents/GitHub/SiquoiaJavaWeb/SiquoiaWebGame/web/quiz.jsp</file>
-            <file>file:/C:/Users/mr.nam/Documents/GitHub/SiquoiaJavaWeb/SiquoiaWebGame/web/shop.jsp</file>
-            <file>file:/C:/Users/mr.nam/Documents/GitHub/SiquoiaJavaWeb/SiquoiaWebGame/web/login1.jsp</file>
-            <file>file:/C:/Users/mr.nam/Documents/GitHub/SiquoiaJavaWeb/SiquoiaWebGame/src/java/Test/Test_App.java</file>
-            <file>file:/C:/Users/mr.nam/Documents/GitHub/SiquoiaJavaWeb/SiquoiaWebGame/web/quiz1.jsp</file>
-            <file>file:/C:/Users/mr.nam/Documents/GitHub/SiquoiaJavaWeb/SiquoiaWebGame/web/shop1.jsp</file>
-            <file>file:/C:/Users/mr.nam/Documents/GitHub/SiquoiaJavaWeb/SiquoiaWebGame/web/screen.css</file>
-            <file>file:/C:/Users/mr.nam/Documents/GitHub/SiquoiaJavaWeb/SiquoiaWebGame/web/login.jsp</file>
-            <file>file:/C:/Users/mr.nam/Documents/GitHub/SiquoiaJavaWeb/SiquoiaWebGame/src/java/Test/Test_DB.java</file>
+            <file>file:/C:/Users/Shivalik/Documents/Github/SiquoiaJavaWeb/SiquoiaWebGame/src/java/Database/MySqlController.java</file>
+            <file>file:/C:/Users/Shivalik/Documents/Github/SiquoiaJavaWeb/SiquoiaWebGame/web/carbon-texture.png</file>
+            <file>file:/C:/Users/Shivalik/Documents/Github/SiquoiaJavaWeb/SiquoiaWebGame/src/java/Shop/Packet.java</file>
+            <file>file:/C:/Users/Shivalik/Documents/Github/SiquoiaJavaWeb/SiquoiaWebGame/src/java/DataOOD/Node.java</file>
+            <file>file:/C:/Users/Shivalik/Documents/Github/SiquoiaJavaWeb/SiquoiaWebGame/src/java/Controller/Controller.java</file>
+            <file>file:/C:/Users/Shivalik/Documents/Github/SiquoiaJavaWeb/SiquoiaWebGame/src/java/Database/MySqlConnection.java</file>
+            <file>file:/C:/Users/Shivalik/Documents/Github/SiquoiaJavaWeb/SiquoiaWebGame/web/shop.jsp</file>
+            <file>file:/C:/Users/Shivalik/Documents/Github/SiquoiaJavaWeb/SiquoiaWebGame/web/screen.css</file>
         </group>
     </open-files>
 </project-private>

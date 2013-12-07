@@ -1026,6 +1026,8 @@ pre code {
 
 form {
   margin: 0 0 20px;
+  align-content: center;
+  align-items: center;
 }
 
 fieldset {

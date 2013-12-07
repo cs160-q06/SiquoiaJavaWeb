@@ -12,7 +12,10 @@
         <title>Index</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
-        
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <script src="js/jquery-latest.min.js"   type="text/javascript"></script>
+        <script src="js/bootstrap.js"></script>		
+        <script src="js/bootstrap-responsive.js"></script>	
     </head>
     <body>
         <div class="navbar navbar-inverse">
@@ -28,7 +31,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-center">
                             <li>
-                                <h2>Registration</h2>
+                                <h2>Home</h2>
                             </li>
                         </ul>
                         <ul class="nav pull-right">
@@ -38,44 +41,74 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="login">
 
-                <div class="small-link">
-                    <a href="#">Create account</a>
-                </div>
-
-                <form class="loginfield" action="login1.jsp" method="post">
-                    <div>
-                        <%= (session.getAttribute("error") != null
-                                ? (String) session.getAttribute("error") : "")%>
-                    </div>   
-                    <p>
-                        <label for="username">Username:</label>
-                        <label id="error"> <%= (session.getAttribute("username_error") != null
-                                ? (String) session.getAttribute("username_error") : "")%>
-                        </label>
-                        <input class="text" type="text" id="username" name="username" />
+            <form class="loginfield" action="login1.jsp" method="post">
+                <div>
+                    <%= (session.getAttribute("error") != null
+                            ? (String) session.getAttribute("error") : "")%>
+                </div>   
+                <p>
+                    <label for="username">Username:</label>
+                    <label id="error"> <%= (session.getAttribute("username_error") != null
+                            ? (String) session.getAttribute("username_error") : "")%>
+                    </label>
+                    <input class="text" type="text" id="username" name="username" />
 
 
-                        <label for="password">Password:</label>
-                        <label id="error">
-                            <%= (session.getAttribute("password_error") != null
+                    <label for="password">Password:</label>
+                    <label id="error">
+                        <%= (session.getAttribute("password_error") != null
                                 ? (String) session.getAttribute("password_error") : "")%>
-                        </label>
-                        <input class="text" type="text" id="password" name="password"/>
+                    </label>
+                    <input class="text" type="text" id="password" name="password"/>
+                    
+                </p>
+                <label class="checkbox">
+                    <input type="checkbox"> Remember me
+                </label>
 
-                    </p>
+                <input id="button" type="submit" value="Sign in" name="login" />
+                <br /> <br />
 
-                    <input id="button" type="submit" value="Sign in" name="login" />
+                <button type="submit" class="btn btn-warning">Register</button>
+                <button type="submit" class="btn-success">Guest Login</button>
+                <button type="submit" class="btn btn-warning">Branded Login</button>
+                <br />
+                <br />
+                <br />
+                <!--Advertise -->
+                <div class="span4">									
+                    <div id="myCarousel" class="carousel slide">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                            <li data-target="#myCarousel" data-slide-to="4"></li>
+                            <li data-target="#myCarousel" data-slide-to="5"></li>
+                            <li data-target="#myCarousel" data-slide-to="6"></li>
+                        </ol>
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                            <div class="active item"><img class="centre" border="0" src="img/SiQuoia mug.PNG"></div>
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia bag.PNG"></div>
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia sweatshirt.PNG"></div>							
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia T shirt.PNG"></div>
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia water bottle.PNG"></div>
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia iphone 5 case.PNG"></div>
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia travelmug.PNG"></div>							
+                        </div>
+                        <!-- Carousel nav -->
+                        <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
+                        <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
+                    </div>									
+                </div>
+            </form>
 
-                    <div class="small-link red">
-                        <a href="#">Guest sign-in</a>
-                    </div>
-                </form>
+        </div> <!-- END login -->
 
-            </div> <!-- END login -->
-        
         <footer style="text-align: right">
             <small >© Copyright 2013, SQ06 Sequoia Inc.</small>
         </footer>

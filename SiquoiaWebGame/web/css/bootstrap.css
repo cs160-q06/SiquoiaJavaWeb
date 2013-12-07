@@ -1073,6 +1073,7 @@ textarea {
 label {
   display: block;
   margin-bottom: 5px;
+  
 }
 
 select,
@@ -3141,6 +3142,7 @@ table th[class*="span"],
   -webkit-border-radius: 3px;
      -moz-border-radius: 3px;
           border-radius: 3px;
+          
 }
 
 .fade {

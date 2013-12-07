@@ -7,6 +7,7 @@ body {
     height: 100%;
     font-family: "Linux_Libertine_O_C";
 }
+
 #error
 {
     color: red;
@@ -69,7 +70,7 @@ body {
 }
 
 .loginfield input:focus {
-    width: 110%;
+    
     box-shadow: #004f70 0 0 10px inset;
     transition: box-shadow ease-out 1s;
     transition: width ease-out 0.25s;

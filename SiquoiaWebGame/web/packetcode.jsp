@@ -1,6 +1,6 @@
 <%-- 
-    Document   : signsignup_success
-    Created on : Dec 5, 2013, 10:48:30 PM
+    Document   : packetcode
+    Created on : Dec 6, 2013, 7:21:15 PM
     Author     : mr.nam
 --%>
 
@@ -8,19 +8,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Siquoia Sign up Successfully</title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Packet Code</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
-        <META HTTP-EQUIV=Refresh CONTENT="2; URL=index.jsp">
-        <style>
-            #message {
-                margin-top: 16px;
-                text-align: center;
-                font-size: 32px;
-            }
-        </style>
     </head>
-
     <body>
         <div class="navbar navbar-inverse">
             <div class="navbar-inner">
@@ -35,7 +26,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-center">
                             <li>
-                                <h2>Successfully</h2>
+                                <h2>Packet Code</h2>
                             </li>
                         </ul>
 
@@ -43,19 +34,23 @@
                 </div>
             </div>
         </div>
+        <!-- -->
+        <div id="login">
+            <form >
+                <div class="well well-small" align="center">
+                    <label class="control-label" for="inputEmail">Packet Code</label>
+                    
+                    <input type="text" placeholder="Enter the 4-digit code" style="alignment-adjust: central">
+                    
+                </div>
 
-        <div>
-
-            <br />
-            <br />
-            <div id="message">
-                Congratulations! Your account is created!
-                <br />
-                <br />
-                Please sign in.
-            </div>
-
-        </div> <!-- END wallpaper -->
+                <div align="center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-danger">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!-- -->
         <footer style="text-align: right">
             <small >© Copyright 2013, SQ06 Sequoia Inc.</small>
         </footer>

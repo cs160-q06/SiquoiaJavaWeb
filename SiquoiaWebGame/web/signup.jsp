@@ -30,16 +30,15 @@
                                 <h2>Registration</h2>
                             </li>
                         </ul>
-                        <ul class="nav pull-right">
-                            <li><a href="home.html"><i class="icon-white icon-lock"></i> Logout</a>
-                            </li></ul>
+
                     </div>
                 </div>
             </div>
         </div>
         <div id="wallpaper">
 
-           
+
+
             <div id="login">
 
                 <form class="loginfield" action="signup1.jsp" method="post">
@@ -48,45 +47,45 @@
                                 ? (String) session.getAttribute("error") : "")%>
                     </div>   
                     <p>
-                        <label for="username" >Username:</label>
+                        <label for="username">Username:</label>
                         <label id="error"> <%= (session.getAttribute("username_error") != null
                                 ? (String) session.getAttribute("username_error") : "")%>
                         </label>
-                        <input class="text" type="text" id="username" placeholder="username" name="username" />
+                        <input class="text" type="text" id="username" name="username" />
 
 
-                        <label for="password" >Password:</label>
+                        <label for="password">Password:</label>
                         <label id="error">
                             <%= (session.getAttribute("password_error") != null
                                     ? (String) session.getAttribute("password_error") : "")%>
                         </label>
-                        <input class="text" type="password" id="password" placeholder="password" name="password"/>
+                        <input class="text" type="text" id="password" name="password"/>
 
-                        <label for="re-password" >Re-password:</label>
+                        <label for="re-password">Re-password:</label>
                         <label id="error">
                             <%= (session.getAttribute("re-password_error") != null
                                     ? (String) session.getAttribute("re-password_error") : "")%>
                         </label>
-                        <input class="text" type="password" id="re-password" placeholder="repassword" name="re-password"/>
+                        <input class="text" type="text" id="re-password" name="re-password"/>
 
                         <label for="email">Email:</label>
                         <label id="error">
                             <%= (session.getAttribute("email_error") != null
                                     ? (String) session.getAttribute("email_error") : "")%>
                         </label>
-                        <input class="text" type="email" id="email" placeholder="email" name="email"/>
+                        <input class="text" type="text" id="email" name="email"/>
 
                     </p>
 
-                    <input id="button" type="submit" value="registration" name="registration" />
+                    <input id="button" type="submit" value="Create account" name="create" />
 
                 </form>
 
             </div> <!-- END login -->
 
         </div> <!-- END wallpaper -->
-        <footer style="text-align: right">
-            <small >© Copyright 2013, SQ06 Sequoia Inc.</small>
+        <footer>
+            <small>© Copyright 2013, SQ06 Sequoia Inc.</small>
         </footer>
     </body>
 </html>

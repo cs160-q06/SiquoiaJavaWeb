@@ -16,12 +16,18 @@ public class Quiz {
     private  List<Question> questionList;
     private int currentQuestionIndex;
     private List<Question> correctQuestionList;
+    private int total;
     public Quiz(List<Question> questionList) {
+        this.total = questionList.size();
         this.correctQuestionList = questionList;
         this.questionList = this.suffleAllAnswer(questionList);
         currentQuestionIndex = 0;
     }
 
+    public int getTotal() {
+        return total;
+    }
+    
     public int getCurrentNumber() {
         return currentQuestionIndex + 1;
     }

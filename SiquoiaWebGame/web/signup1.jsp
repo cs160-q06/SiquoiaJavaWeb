@@ -5,6 +5,7 @@
 --%>
 
 <%
+    
     session.setAttribute("username_error", null);
     session.setAttribute("password_error", null);
     session.setAttribute("re-password_error", null);
@@ -60,6 +61,8 @@
     String strViewPage = "signup.jsp";
     if (session.getAttribute("checkInput")!=null) {
         strViewPage = "signup_success.jsp";
+        session.invalidate();
+        session = request.getSession();
     }
     RequestDispatcher dispatcher = request.getRequestDispatcher(strViewPage);
     if (dispatcher != null) {

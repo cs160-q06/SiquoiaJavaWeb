@@ -59,7 +59,7 @@
 <%
     String strViewPage = "signup.jsp";
     if (session.getAttribute("checkInput")!=null) {
-        strViewPage = "signsignup_success.jsp";
+        strViewPage = "signup_success.jsp";
     }
     RequestDispatcher dispatcher = request.getRequestDispatcher(strViewPage);
     if (dispatcher != null) {

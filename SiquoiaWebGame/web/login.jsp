@@ -10,12 +10,13 @@
     <head>
         <title>Siquoia login mockup</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <link rel="stylesheet" href="style.css" type="text/css" media="handheld,all" />
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
     </head>
 
     <body>
+        
         <div id="wallpaper">
-
+            
             <div id="logo">
                 <span class="green glow">S</span>
                 <span class="blue glow">i</span>

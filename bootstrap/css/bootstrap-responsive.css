@@ -126,6 +126,7 @@
     float: left;
     min-height: 1px;
     margin-left: 30px;
+    margin-right: 30px;
   }
   .container,
   .navbar-static-top .container,
@@ -153,7 +154,9 @@
   }
   .span6 {
     width: 570px;
-  }
+   
+  
+}
   .span5 {
     width: 470px;
   }

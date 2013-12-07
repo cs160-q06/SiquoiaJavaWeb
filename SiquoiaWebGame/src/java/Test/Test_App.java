@@ -34,7 +34,8 @@ public class Test_App {
             //test_ShoppingStore(conn);
             //testGenerateNodeTopic(conn);
             //test_generateQuiz();
-            test_login();
+            //test_login();
+            test_getMediaByID();
             conn.close();
 
         } catch (Exception ex) {
@@ -122,5 +123,9 @@ public class Test_App {
 
     private static void test_login() {
         System.out.println(Controller.isLogin("user1", "user1",111));
+    }
+
+    private static void test_getMediaByID() {
+        System.out.println(Controller.getMediaByID(1).toString());
     }
 }

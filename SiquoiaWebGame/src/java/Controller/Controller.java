@@ -1,5 +1,6 @@
 package Controller;
 
+import DataOOD.Media;
 import DataOOD.Node;
 import DataOOD.Question;
 import DataOOD.Quiz;
@@ -50,9 +51,14 @@ public class Controller {
         return list;
     }
 
-   
-    public static Topic getTopicParentByName(String name) throws SQLException {
-        return Topic.getParentByName(conn,name);
+    
+    public static Topic getTopicParentByName(String name) {
+        try {
+            return Topic.getParentByName(conn,name);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public static Node<Topic> generateNodeTopic() {
@@ -72,6 +78,24 @@ public class Controller {
         return root;
     }
 
+    public static Topic getTopicByName(String demo) {
+        try {
+            return Topic.doQuerySearchByName(conn, demo);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public static Media getMediaByID(int id) {
+        try {
+            return Media.doQueryByID(conn,id);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public Controller() {
         this.conn = new MySqlController().connect();
     }
@@ -87,7 +111,8 @@ public class Controller {
             List<Question> sublist = new ArrayList<>();
         try {
             list = Question.doQueryByTopic(conn, topic);
-            while(sublist.size()<EnumValue.PACKET_QUESTION_NUMBER.getValue())
+            while(sublist.size()<EnumValue.PACKET_QUESTION_NUMBER.getValue()
+                    && !list.isEmpty())
             {
                 int random = (int) (Math.random()*list.size());
                 sublist.add(list.get(random));

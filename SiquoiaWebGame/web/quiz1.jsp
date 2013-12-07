@@ -10,19 +10,20 @@
     session.setAttribute("error", null);
     //
     if (request.getParameter("answer") != null) {
-        
+
         if (request.getParameter("next") != null) {
             session.setAttribute("next", "next");
             Quiz quiz = (Quiz) session.getAttribute("quiz");
             String s = (String) request.getParameter("answer");
-            if(quiz.isCurrentCorrect(s))
+            if (quiz.isCurrentCorrect(s)) {
                 session.setAttribute("select", "correct");
-            else
+            } else {
                 session.setAttribute("select", "incorrect");
+            }
         }
-    }
-    else
+    } else {
         session.setAttribute("error", "no answer was chosen");
+    }
 
 
 %>

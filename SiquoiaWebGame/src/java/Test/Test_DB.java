@@ -5,6 +5,7 @@
 package Test;
 
 import Controller.Controller;
+import DataOOD.Media;
 import DataOOD.Question;
 import DataOOD.Topic;
 import DataOOD.User;
@@ -22,18 +23,20 @@ import java.util.logging.Logger;
  * @author mr.nam
  */
 public class Test_DB {
-
+    private static Connection conn;
     public static void main(String[] args) {
         MySqlController ctrl = new MySqlController();
         try {
-            Connection conn = ctrl.connect();
+            conn = ctrl.connect();
             //test_Topic(conn);
             //test_Question(conn);
-            test_User(conn);            
+            //test_User(conn);            
             //test_QuestionOfTopic(conn);
             //testLog_In(conn);
             //test_addUser(conn);
             //test_Quiz_QuestionHas1C3W(conn);
+            //test_getTopicByName();
+            test_Media();
             conn.close();
 
         } catch (Exception ex) {
@@ -142,5 +145,14 @@ public class Test_DB {
 
     private static void test_Quiz_QuestionHas1C3W(Connection conn) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static void test_getTopicByName() {
+        System.out.println(Controller.getTopicByName("Demo").toString());
+    }
+
+    private static void test_Media() throws SQLException {
+        List<Media> list = Media.doQueryGetAll(conn);
+        System.out.println(Arrays.toString(list.toArray()));
     }
 }

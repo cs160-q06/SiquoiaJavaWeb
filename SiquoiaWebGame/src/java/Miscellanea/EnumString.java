@@ -12,7 +12,8 @@ public enum EnumString {
 
     MAIN("main"), START("Start New Quiz"), OPTION("Option"), TUTORIAL("Tutorial"), EXIT("Exit"), LOGIN("Log in"),
     LOGIN_C("l"), TUTORIAL_C("t"), EXIT_C("e"), OPTION_C("o"), BACK("Back"), BACK_C("b"),
-    START_C("s"), A("a"), B("b"), C("c"), D("d"), TUTORIAL_TOPIC("Algebra"), STORE("Store"), STORE_C("st");
+    START_C("s"), A("a"), B("b"), C("c"), D("d"), TUTORIAL_TOPIC("Algebra"), STORE("Store"), STORE_C("st")
+    ,VIDEO("video"), IMAGE("image"), AUDIO("audio");
     private String s;
 
     private EnumString(String s) {

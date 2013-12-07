@@ -283,6 +283,7 @@ a:focus {
   float: left;
   min-height: 1px;
   margin-left: 20px;
+  margin-right: 20px;
 }
 
 .container,

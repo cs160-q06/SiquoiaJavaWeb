@@ -4,6 +4,7 @@
     Author     : mr.nam
 --%>
 
+<%@page import="Miscellanea.EnumString"%>
 <%@page import="DataOOD.Media"%>
 <%@page import="DataOOD.Node"%>
 <%@page import="DataOOD.Quiz"%>
@@ -21,7 +22,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"> 
     <%!
         private List<Topic> list;
-        private Quiz quiz = generateQuiz();
+        private Quiz quiz;
 
         private Quiz generateQuiz() {
             Node<Topic> root = Controller.generateNodeTopic();
@@ -74,10 +75,15 @@
         <div id="wallpaper">
 
             <form action="demoQuiz1.jsp" class="loginfield" action="#" method="post">
+                <div id="sink">
                 <%
+                    if (session.getAttribute("quiz") == null) {//generate quiz in beginning
+                        quiz = generateQuiz();
+                        session.setAttribute("userPoint",0);
+                    }
                     if (session.getAttribute("start") == null) {
                 %>
-                <div id="sink">
+                
                     <div class="well well-small">
                         <label><b>Instructions</b></label>
                         <ul>
@@ -86,7 +92,6 @@
                             <li>Click Submit at anytime to submit the quiz</li>
                         </ul>
                     </div>
-                </div>
                 <%
                 } else {
                     if (session.getAttribute("next") != null) {
@@ -101,15 +106,45 @@
                     String a2 = q.getAnswer2();
                     String a3 = q.getAnswer3();
                     String a4 = q.getCorrectAnswer();
-                    int med = q.getMedia();
+                    int mediaID = q.getMedia();
                     session.setAttribute("quiz", quiz);
-                    //Media media = Controller.get
                 %>
-
-                <div id="sink">
                     <div class="well well-small">
                         <label style="text-align: center">Question #<%=count%>/<%=total%></label> 
                     </div>
+                    <%
+                        if (mediaID > 0) {
+                    %>
+
+
+                    <div class="well well-small" align="center">
+                        <%
+                            Media media = Controller.getMediaByID(mediaID);
+                            String type = media.getType();
+                            String mediaDes = media.getDescription();
+                            if (type.equals(EnumString.IMAGE.getValue())) {
+                        %>
+                        <img border="0" src="<%=mediaDes%>" alt="Pulpit rock" width="100%"/>
+                        <%
+                        } else if (type.equals(EnumString.AUDIO.getValue())) {
+                        %>
+                        <embed  width="100%" src="<%=mediaDes%>" />
+                        <%
+                        } else if (type.equals(EnumString.VIDEO.getValue())) {
+                        %>
+                        <video width="100%" controls="" autoplay="" src="<%=mediaDes%>"></video>
+                        </video>
+                        <%
+                            }
+                        %>
+                    </div>
+
+                    <%
+                        }
+                    %>
+
+
+
                     <div class="well well-small">
                         <label><b><%=des%></b></label>
                         <hr />
@@ -120,27 +155,23 @@
                             <input type="radio" name="answer" id="4" value="<%=a4%>" /><%=a4%><br /><br />
                         </p>
                     </div>
-                </div>
 
-                <%
-                    }
-                %>
-                <div align="center">
-                    <div class="blue glow">
+
+
+                    <%
+                        }
+                    %>
+                    <div class="well well-small" align="center">
                         Point: <%= (session.getAttribute("userPoint") != null
-                                ? (String) session.getAttribute("userPoint") : (100 + ""))%>
-                    </div>
-                    <div style="text-align: center">
+                                ? (Integer) session.getAttribute("userPoint") : 0)%>
+                        <br />  
                         <%= (session.getAttribute("select") != null
                                 ? (String) session.getAttribute("select") : "")%>
                         <br />
-
                         <%= (session.getAttribute("error") != null
                                 ? "Error: " + (String) session.getAttribute("error") : "")%>
-                        <br />
-                        <br />
-                    </div>   
-                    <div>   
+                    </div>
+                    <div align="center">   
 
                         <button type="submit" class="btn btn-large" value="Next" name="next">Next</button>
                     </div>

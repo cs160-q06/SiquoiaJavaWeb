@@ -25,12 +25,22 @@
                     String s = (String) request.getParameter("answer");
                     if (quiz.isCurrentCorrect(s)) {
                         session.setAttribute("select", "correct");
+                        session.setAttribute("userPoint"
+                                ,(Integer)session.getAttribute("userPoint")+1);
                     } else {
                         session.setAttribute("select", "incorrect");
                     }
                 }
             } else {
                 session.setAttribute("error", "no answer was chosen");
+            }
+            //end of quiz
+            Quiz quiz = (Quiz) session.getAttribute("quiz");
+            if(!quiz.hasNext())
+            {
+                strViewPage = "report.html";
+                session.invalidate();
+                session = request.getSession();
             }
         }
     }

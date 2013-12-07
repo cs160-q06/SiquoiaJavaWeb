@@ -4,8 +4,10 @@
     Author     : mr.nam
 --%>
 
+<%@page import="Controller.Controller"%>
 <%
-    
+    String strViewPage = "signup.jsp";
+
     session.setAttribute("username_error", null);
     session.setAttribute("password_error", null);
     session.setAttribute("re-password_error", null);
@@ -48,8 +50,13 @@
         if (checkInput) {
             {
 
-                session.setAttribute("checkInput", true);
-                //response.sendRedirect("signsignup_success.html");
+                if (!Controller.registerUser(username, password)) {
+                    session.setAttribute("error", " User is already existed");
+                } else {
+                    strViewPage = "signup_success.jsp";
+                    session.invalidate();
+                    session = request.getSession();
+                }
 
             }
 
@@ -58,12 +65,6 @@
 %>
 
 <%
-    String strViewPage = "signup.jsp";
-    if (session.getAttribute("checkInput")!=null) {
-        strViewPage = "signup_success.jsp";
-        session.invalidate();
-        session = request.getSession();
-    }
     RequestDispatcher dispatcher = request.getRequestDispatcher(strViewPage);
     if (dispatcher != null) {
         dispatcher.forward(request, response);

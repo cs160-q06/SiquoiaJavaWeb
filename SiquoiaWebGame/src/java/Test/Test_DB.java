@@ -138,8 +138,8 @@ public class Test_DB {
         pass1 = user1;
         user2 = "user1";
         pass2 = user2;
-        Controller.registerUser(conn,user1,pass1);
-        Controller.registerUser(conn,user2,pass2);
+        Controller.registerUser(user1,pass1);
+        Controller.registerUser(user2,pass2);
         
     }
 

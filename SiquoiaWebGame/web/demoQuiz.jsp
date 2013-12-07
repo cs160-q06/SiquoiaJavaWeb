@@ -35,16 +35,7 @@
         <title>Demo Quiz</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
-        <style>
-            #sink {
-                position: relative;
-                margin: 0px auto;
-                width: 500px;
-                height: auto;
-                padding: 10px;
-            }
-
-        </style>
+        
     </head>
 
     <body>
@@ -54,7 +45,9 @@
                 <div class="container-fluid">
                     <ul class="nav pull-left">
                         <li>
-                            <img class="centre" id="topBar" border="0" src="img/SiQuoia logo.jpg">
+                            <a href="index.jsp">
+                            <img class="centre" id="topBar" border="0" src="img/SiQuoia logo.jpg" />
+                            </a>
                         </li>
                         <li class="divider-vertical"> </li>
 
@@ -62,7 +55,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-center">
                             <li>
-                                <h2>Quiz</h2>
+                                <h2>Demo Quiz</h2>
                             </li>
                         </ul>
                         <ul class="nav pull-right">

@@ -19,7 +19,9 @@
                 <div class="container-fluid">
                     <ul class="nav pull-left">
                         <li>
-                            <img class="centre" id="topBar" border="0" src="img/SiQuoia logo.jpg">
+                            <a href="index.jsp">
+                                <img class="centre" id="topBar" border="0" src="img/SiQuoia logo.jpg">
+                            </a>
                         </li>
                         <li class="divider-vertical"> </li>
 
@@ -39,14 +41,11 @@
 
 
 
-            <div id="login">
+            <div id="sink">
 
                 <form class="loginfield" action="signup1.jsp" method="post">
-                    <div>
-                        <%= (session.getAttribute("error") != null
-                                ? (String) session.getAttribute("error") : "")%>
-                    </div>   
-                    <p>
+
+                    <div style="margin: auto 10%;">
                         <label for="username">Username:</label>
                         <label id="error"> <%= (session.getAttribute("username_error") != null
                                 ? (String) session.getAttribute("username_error") : "")%>
@@ -73,12 +72,16 @@
                             <%= (session.getAttribute("email_error") != null
                                     ? (String) session.getAttribute("email_error") : "")%>
                         </label>
-                        <input class="text" type="text" id="email" name="email"/>
+                        <input class="text" type="email" id="email" name="email"/>
 
-                    </p>
-
-                    <input id="button" type="submit" value="Create account" name="create" />
-
+                    </div>
+                    <div align="center">
+                        <label id="error">
+                            <%= (session.getAttribute("error") != null
+                                ? (String) session.getAttribute("error") : "")%>
+                        </label>
+                        <button type="submit" name = "create" class="btn btn-large">Create account</button>
+                    </div>
                 </form>
 
             </div> <!-- END login -->

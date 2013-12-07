@@ -10,7 +10,7 @@
 
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         if (request.getParameter("forward") != null) {
-            strViewPage = "signup.jsp";
+            strViewPage = request.getParameter("forward");
             session.invalidate();
             session = request.getSession();
         } else {

@@ -24,7 +24,9 @@
                 <div class="container-fluid">
                     <ul class="nav pull-left">
                         <li>
-                            <img class="centre" id="topBar" border="0" src="img/SiQuoia logo.jpg">
+                            <a href="index.jsp">
+                            <img class="centre" id="topBar" border="0" src="img/SiQuoia logo.jpg" />
+                            </a>
                         </li>
                         <li class="divider-vertical"> </li>
 
@@ -35,20 +37,18 @@
                                 <h2>Home</h2>
                             </li>
                         </ul>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="login">
 
-            <form class="loginfield" action="login1.jsp" method="post">
-                <div>
-                    <%= (session.getAttribute("error") != null
-                            ? (String) session.getAttribute("error") : "")%>
-                </div>   
-                <p>
+
+        <form class="loginfield" action="login1.jsp" method="post">
+            <div id="sink">
+
+                <div class="" style="margin: auto 10%;">
                     <label for="username">Username:</label>
                     <label id="error"> <%= (session.getAttribute("username_error") != null
                             ? (String) session.getAttribute("username_error") : "")%>
@@ -63,55 +63,59 @@
                     </label>
                     <input class="text" type="text" id="password" name="password"/>
 
-                </p>
-                <label>
-                    <input type="checkbox"> Remember me
-                </label>
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <label id="error">
+                        <%= (session.getAttribute("error") != null
+                            ? (String) session.getAttribute("error") : "")%>
+                    </label>   
+                </div>
                 <br />
-                <div align="center">
+                <div accesskey="" align="center">
 
                     <button type="submit" name = "login" class="btn btn-large" value="Sign in">Sign In</button>
                     <br /> <br />
 
                     <button type="submit" name = "forward" class="btn btn-warning" value="signup.jsp">Register</button>
-                    <button type="submit" name = "forward" class="btn btn-success">Guest Login</button>
+                    <button type="submit" name = "forward" class="btn btn-success" value="demoQuiz.jsp">Guest Login</button>
                 </div>
-            </form>
-
-            <br />
-            <br />
-            <br />
-            <!--Advertise -->
-            <div class="span4">									
-                <div id="myCarousel" class="carousel slide">
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                        <li data-target="#myCarousel" data-slide-to="4"></li>
-                        <li data-target="#myCarousel" data-slide-to="5"></li>
-                        <li data-target="#myCarousel" data-slide-to="6"></li>
-                    </ol>
-                    <!-- Carousel items -->
-                    <div class="carousel-inner">
-                        <div class="active item"><img class="centre" border="0" src="img/SiQuoia mug.PNG"></div>
-                        <div class="item"><img class="centre" border="0" src="img/SiQuoia bag.PNG"></div>
-                        <div class="item"><img class="centre" border="0" src="img/SiQuoia sweatshirt.PNG"></div>							
-                        <div class="item"><img class="centre" border="0" src="img/SiQuoia T shirt.PNG"></div>
-                        <div class="item"><img class="centre" border="0" src="img/SiQuoia water bottle.PNG"></div>
-                        <div class="item"><img class="centre" border="0" src="img/SiQuoia iphone 5 case.PNG"></div>
-                        <div class="item"><img class="centre" border="0" src="img/SiQuoia travelmug.PNG"></div>							
-                    </div>
-                    <!-- Carousel nav -->
-                    <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
-                    <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
-                </div>									
-            </div>
 
 
-        </div> <!-- END login -->
+                <br />
+                <br />
+                <br />
+                <!--Advertise -->
+                <div class="well well-small" align="center">									
+                    <div id="myCarousel" class="carousel slide">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                            <li data-target="#myCarousel" data-slide-to="4"></li>
+                            <li data-target="#myCarousel" data-slide-to="5"></li>
+                            <li data-target="#myCarousel" data-slide-to="6"></li>
+                        </ol>
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                            <div class="active item"><img class="centre" border="0" src="img/SiQuoia mug.PNG"></div>
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia bag.PNG"></div>
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia sweatshirt.PNG"></div>							
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia T shirt.PNG"></div>
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia water bottle.PNG"></div>
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia iphone 5 case.PNG"></div>
+                            <div class="item"><img class="centre" border="0" src="img/SiQuoia travelmug.PNG"></div>							
+                        </div>
+                        <!-- Carousel nav -->
+                        <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
+                        <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
+                    </div>									
+                </div>
 
+
+            </div> <!-- END login -->
+        </form>
         <footer style="text-align: right">
             <small >© Copyright 2013, SQ06 Sequoia Inc.</small>
         </footer>

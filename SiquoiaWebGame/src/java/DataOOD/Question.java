@@ -12,14 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Question Object
  *
  * @author mr.nam
  */
 public class Question {
-
-    
-
-    
 
     private int id;
     private String correctAnswer;
@@ -31,7 +28,7 @@ public class Question {
     private int topicID;
     private int media;
 
-       public Question(int id, int topicID, String question, String correctAnswer, String answer1, String answer2, String answer3, int ranking, int media) {
+    public Question(int id, int topicID, String question, String correctAnswer, String answer1, String answer2, String answer3, int ranking, int media) {
         this.id = id;
         this.topicID = topicID;
         this.question = question;
@@ -55,7 +52,7 @@ public class Question {
         return id;
     }
 
-        public String getCorrectAnswer() {
+    public String getCorrectAnswer() {
         return correctAnswer;
     }
 
@@ -106,25 +103,35 @@ public class Question {
     public void setMedia(int media) {
         this.media = media;
     }
+    /*
+     increase the question's rank
+     */
 
     public void incrementRanking() {
         ranking++;
     }
+    /*
+     get all questions in database
+     */
 
     public static List<Question> doQueryGetAll(Connection conn) throws SQLException {
         String query = "SELECT * from QUESTION;";
         return doQuery(conn, query);
     }
+    /*
+     get all questions in database by topic
+     */
+
     public static List<Question> doQueryByTopic(Connection conn, Topic t) throws SQLException {
-        List<Topic> topicList = Topic.getTopicAndAllSubTopicByID(conn,t.getId());
+        List<Topic> topicList = Topic.getTopicAndAllSubTopicByID(conn, t.getId());
         List<Question> list = new ArrayList<>();
-        for(Topic n : topicList)
-        {
+        for (Topic n : topicList) {
             String query = "SELECT * from QUESTION where TOPIC_ID = " + n.getId();
-            list.addAll(doQuery(conn,query));
+            list.addAll(doQuery(conn, query));
         }
         return list;
     }
+
     public static List<Question> doQuery(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
@@ -140,20 +147,23 @@ public class Question {
             String answer3 = rs.getString("ANSWER_W3");
             int ranking = rs.getInt("RANKING");
             int media = rs.getInt("MULTIMEDIA_ID");
-            if(rs.wasNull()) media = -1;
+            if (rs.wasNull()) {
+                media = -1;
+            }
 
             Question i = new Question(id, topicID, question, correctAnswer, answer1, answer2, answer3, ranking, media);
             list.add(i);
         }
         return list;
     }
+
     @Override
     public String toString() {
-        String s = "Question #" + id + " (" + topicID+ "): " + question + "\n";
+        String s = "Question #" + id + " (" + topicID + "): " + question + "\n";
         s += "media: " + media + "\nRanking # " + ranking
                 + "\n\tc: " + correctAnswer + "\n\ta1: " + answer1
                 + "\n\ta2: " + answer2 + "\n\ta3: " + answer3;
         return s; //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

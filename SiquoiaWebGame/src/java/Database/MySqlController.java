@@ -17,7 +17,10 @@ public class MySqlController {
 
     public MySqlController() {
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public Connection connect() {
         try {
             return conn.connect();

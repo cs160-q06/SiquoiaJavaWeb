@@ -18,7 +18,7 @@ public class MySqlConnection  {
 
     public MySqlConnection() {
     }
-
+    
     public static String getDB_URL() {
         return DB_URL;
     }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Topic Object
  *
  * @author mr.nam
  */
@@ -72,16 +73,13 @@ public class Topic {
         this.level = level;
     }
 
-    @Override
-    public String toString() {
-        return "[(id : " + id + "),(topic : " + description
-                + "),(parent : " + parent + "),(level : " + level + ")]";
-    }
-
-    String toSimpleString() {
-        return description;
-    }
-
+    /**
+     * get all topics in database
+     *
+     * @param conn
+     * @return
+     * @throws SQLException
+     */
     public static List<Topic> doQueryGetAll(Connection conn) throws SQLException {
         String query = "SELECT * from TOPIC;";
 
@@ -104,6 +102,14 @@ public class Topic {
         return list;
     }
 
+    /**
+     * get topic by name
+     *
+     * @param conn
+     * @param name
+     * @return null if not found
+     * @throws SQLException
+     */
     public static Topic doQuerySearchByName(Connection conn, String name) throws SQLException {
         String query = "SELECT * from TOPIC where DESCRIPTION ='" + name + "';";
 
@@ -123,6 +129,14 @@ public class Topic {
         return null;
     }
 
+    /**
+     * get topic by ID
+     *
+     * @param conn
+     * @param i
+     * @return null if not found
+     * @throws SQLException
+     */
     private static Topic doQuerySearchByID(Connection conn, int i) throws SQLException {
         String query = "SELECT * from TOPIC where ID ='" + i + "';";
 
@@ -142,6 +156,13 @@ public class Topic {
         return null;
     }
 
+    /**
+     * create the tree node of topic
+     *
+     * @param conn
+     * @return the root node
+     * @throws SQLException
+     */
     public static Node<Topic> createRootNode(Connection conn) throws SQLException {
         List<Topic> list = doQueryGetAll(conn);
         Node<Topic> root = new Node<Topic>(0, new Topic(0, "root", 0, 0));
@@ -158,6 +179,14 @@ public class Topic {
 
     }
 
+    /**
+     * get the topic and all its sub-topic by its ID
+     *
+     * @param conn
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public static List<Topic> getTopicAndAllSubTopicByID(Connection conn, int id) throws SQLException {
         Node<Topic> root = createRootNode(conn);
         root = root.getChildNodeByID(id);
@@ -166,6 +195,14 @@ public class Topic {
 
     }
 
+    /**
+     * get all its sub topics by its ID
+     *
+     * @param conn
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public static List<Topic> getSubTopicByID(Connection conn, int id) throws SQLException {
         Node<Topic> root = createRootNode(conn);
         root = root.getChildNodeByID(id);
@@ -173,6 +210,14 @@ public class Topic {
         return list;
     }
 
+    /**
+     * get all its sub topics by its name
+     *
+     * @param conn
+     * @param name
+     * @return
+     * @throws SQLException
+     */
     public static List<Topic> getSubTopicByName(Connection conn, String name) throws SQLException {
         Node<Topic> root = createRootNode(conn);
         Topic topic = Topic.doQuerySearchByName(conn, name);
@@ -181,6 +226,14 @@ public class Topic {
         return list;
     }
 
+    /**
+     * get its up-topic by its name
+     *
+     * @param conn
+     * @param name
+     * @return
+     * @throws SQLException
+     */
     public static Topic getParentByName(Connection conn, String name) throws SQLException {
         Topic topic = Topic.doQuerySearchByName(conn, name);
         if (topic.parent > 0) {
@@ -188,5 +241,15 @@ public class Topic {
             return topic;
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "[(id : " + id + "),(topic : " + description
+                + "),(parent : " + parent + "),(level : " + level + ")]";
+    }
+
+    String toSimpleString() {
+        return description;
     }
 }

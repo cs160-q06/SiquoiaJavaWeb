@@ -9,14 +9,17 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * Quiz Object
  *
  * @author mr.nam
  */
 public class Quiz {
-    private  List<Question> questionList;
-    private int currentQuestionIndex;
-    private List<Question> correctQuestionList;
-    private int total;
+
+    private List<Question> questionList;//list of question after suffle answers
+    private int currentQuestionIndex;//index of the current question in the list
+    private List<Question> correctQuestionList;//list of question without suffle
+    private int total;//total of questions when the quiz is created
+
     public Quiz(List<Question> questionList) {
         this.total = questionList.size();
         this.correctQuestionList = questionList;
@@ -27,7 +30,7 @@ public class Quiz {
     public int getTotal() {
         return total;
     }
-    
+
     public int getCurrentNumber() {
         return currentQuestionIndex + 1;
     }
@@ -40,34 +43,59 @@ public class Quiz {
         this.questionList = questionList;
     }
 
+    /**
+     * check if the quiz still has next question
+     *
+     * @return true if has next
+     */
     public boolean hasNext() {
-        return currentQuestionIndex<questionList.size()-1;
+        return currentQuestionIndex < questionList.size() - 1;
     }
 
+    /**
+     *
+     * @return the Question in current index
+     */
     public Question getCurrentQuestion() {
         return questionList.get(currentQuestionIndex);
     }
+
+    /**
+     *
+     * @return the Question in current index and suffle the answer
+     */
     public Question getCurrentQuestionRandomShuffle() {
         Question question = questionList.get(currentQuestionIndex);
-        String[] set= {question.getCorrectAnswer(), question.getAnswer1()
-                , question.getAnswer2() ,question.getAnswer3()};
+        String[] set = {question.getCorrectAnswer(), question.getAnswer1(), question.getAnswer2(), question.getAnswer3()};
         shuffleArray(set);
-        Question next = new Question(question.getId(), question.getTopicID()
-                ,question.getQuestion(),set[0] ,set[1], set[2],set[3], question.getRanking(),question.getMedia());
+        Question next = new Question(question.getId(), question.getTopicID(), question.getQuestion(), set[0], set[1], set[2], set[3], question.getRanking(), question.getMedia());
         return next;
     }
+
+    /**
+     * increase the index
+     */
     public void next() {
         currentQuestionIndex++;
     }
 
-    
+    /**
+     * check if the answer is correct
+     *
+     * @param answer
+     * @return true if correct
+     */
     public boolean isCurrentCorrect(String answer) {
         return correctQuestionList.get(currentQuestionIndex).getCorrectAnswer().toLowerCase().equals(answer.toLowerCase());
     }
-    
-    // Implementing Fisher–Yates shuffle. From http://stackoverflow.com/
 
-    private void shuffleArray(String [] ar) {
+    /**
+     * shuffle the array of string Implementing Fisher–Yates shuffle. From
+     * http://stackoverflow.com/
+     *
+     * @param ar
+     */
+    private void shuffleArray(String[] ar) {
         Random rnd = new Random();
         for (int i = ar.length - 1; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
@@ -78,24 +106,21 @@ public class Quiz {
         }
     }
 
+    /**
+     * shuffle all answers of the question list
+     *
+     * @param questionList
+     * @return new question list with shuffled answers
+     */
     private List<Question> suffleAllAnswer(List<Question> questionList) {
         List<Question> list = new ArrayList<>();
-        for(Question q : questionList)
-        {
-            String[] set= {q.getCorrectAnswer(), q.getAnswer1()
-                , q.getAnswer2() ,q.getAnswer3()};
-        shuffleArray(set);
-        Question next = new Question(q.getId(), q.getTopicID()
-                ,q.getQuestion(),set[0] ,set[1], set[2],set[3], q.getRanking(), q.getMedia());
-        list.add(next);
+        for (Question q : questionList) {
+            String[] set = {q.getCorrectAnswer(), q.getAnswer1(), q.getAnswer2(), q.getAnswer3()};
+            shuffleArray(set);
+            Question next = new Question(q.getId(), q.getTopicID(), q.getQuestion(), set[0], set[1], set[2], set[3], q.getRanking(), q.getMedia());
+            list.add(next);
         }
         return list;
     }
 
-    
-
-    
-    
-    
-    
 }

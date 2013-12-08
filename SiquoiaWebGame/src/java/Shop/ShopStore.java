@@ -13,20 +13,29 @@ import java.util.List;
  * @author mr.nam
  */
 public class ShopStore {
+
     private List<Packet> packetList;
-    private  Node topicNode;
+    private Node topicNode;
+
     public ShopStore(Node topicNode) {
         this.topicNode = topicNode;
         makePacketList(topicNode);
     }
 
+    /**
+     *
+     * @param topicList
+     */
     private void makePacketList(Node topicList) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
+    /**
+     *
+     * @return
+     */
     public List<Packet> getPacketList() {
         return packetList;
     }
-    
+
 }

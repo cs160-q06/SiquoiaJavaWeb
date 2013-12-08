@@ -13,40 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * User Object
  *
  * @author mr.nam
  */
 public class User {
 
-    public static boolean doQueryAddUser(Connection conn, String name, String pass) throws SQLException {
-        List<User> list = doQueryGetAll(conn);
-        for (User i : list) {
-            if (i.getName().trim().equals(name.trim())) {
-                return false;
-            }
-        }
-        String query = "Insert into USER (USERNAME, PASSWORD, TYPE, POINT) VALUES"
-                + "('" + name + "','" + pass + "','user',"+ EnumValue.INITIAL_POINT.getValue()+");";
-        Statement stmt = conn.createStatement();
-        System.out.println("Insert into User table");
-        stmt.executeUpdate(query);
-        stmt.close();
-        return true;
-    }
-
-    public static String hashMD5(String md5) {
-        try {
-            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-            byte[] array = md.digest(md5.getBytes());
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < array.length; ++i) {
-                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
-            }
-            return sb.toString();
-        } catch (java.security.NoSuchAlgorithmException e) {
-        }
-        return null;
-    }
     private int id;
     private String name;
     private String password;
@@ -101,6 +73,55 @@ public class User {
         this.point = point;
     }
 
+    /**
+     *
+     * @param conn
+     * @param name
+     * @param pass
+     * @return
+     * @throws SQLException
+     */
+    public static boolean doQueryAddUser(Connection conn, String name, String pass) throws SQLException {
+        List<User> list = doQueryGetAll(conn);
+        for (User i : list) {
+            if (i.getName().trim().equals(name.trim())) {
+                return false;
+            }
+        }
+        String query = "Insert into USER (USERNAME, PASSWORD, TYPE, POINT) VALUES"
+                + "('" + name + "','" + pass + "','user'," + EnumValue.INITIAL_POINT.getValue() + ");";
+        Statement stmt = conn.createStatement();
+        System.out.println("Insert into User table");
+        stmt.executeUpdate(query);
+        stmt.close();
+        return true;
+    }
+
+    /**
+     *
+     * @param md5
+     * @return
+     */
+    public static String hashMD5(String md5) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(md5.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param conn
+     * @return
+     * @throws SQLException
+     */
     public static List<User> doQueryGetAll(Connection conn) throws SQLException {
         String query = "SELECT * from USER;";
 

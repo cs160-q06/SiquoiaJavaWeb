@@ -13,12 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Media Object
  *
  * @author mr.nam
  */
 public class Media {
-
-    
 
     private String type;
     private String description;
@@ -41,11 +40,22 @@ public class Media {
     public int getId() {
         return id;
     }
+    /*
+     get all Media in database
+     */
 
     public static List<Media> doQueryGetAll(Connection conn) throws SQLException {
         String query = "SELECT * from MULTIMEDIA;";
         return doQuery(conn, query);
 
+    }
+
+    /*
+     find media by  ID
+     */
+    public static Media doQueryByID(Connection conn, int id) throws SQLException {
+        String query = "SELECT * from MULTIMEDIA where id = " + id + ";";
+        return doQuery(conn, query).get(0);
     }
 
     private static List<Media> doQuery(Connection conn, String query) throws SQLException {
@@ -64,10 +74,6 @@ public class Media {
 
     @Override
     public String toString() {
-        return "[Media| id: "+id+"|Description: "+description+"|Type: "+type+"]";
-    }
-    public static Media doQueryByID(Connection conn, int id) throws SQLException {
-        String query = "SELECT * from MULTIMEDIA where id = " + id +";";
-        return doQuery(conn, query).get(0);
+        return "[Media| id: " + id + "|Description: " + description + "|Type: " + type + "]";
     }
 }

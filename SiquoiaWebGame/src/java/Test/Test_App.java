@@ -135,10 +135,10 @@ public class Test_App {
 
     private static void test_hashMD5() throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
-        System.out.println(MD5("admin"));
         System.out.println(MD5("admin1"));
-        System.out.println(MD5("admin"));
-        System.out.println(MD5("admin1"));
+        System.out.println(MD5("user1"));
+        System.out.println(MD5("user2"));
+        
 
     }
 

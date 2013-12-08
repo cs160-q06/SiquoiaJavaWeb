@@ -143,7 +143,7 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         for(User u : list)
-            if(u.getName().equals(username) && u.getPassword().equals(pass))
+            if(u.getName().equals(username) && u.getPassword().equals(User.hashMD5(pass)))
             {
                 Controller.loginUserList.add(u);
                 Controller.ipList.add(ip);
@@ -164,7 +164,7 @@ public class Controller {
     }
 
     public static boolean registerUser(String name, String pass) throws SQLException {
-        if (User.doQueryAddUser(conn, name, pass)) {
+        if (User.doQueryAddUser(conn, name, User.hashMD5(pass))) {
             System.out.println("user " + name + " is successfully registered");
             return true;
         } else {

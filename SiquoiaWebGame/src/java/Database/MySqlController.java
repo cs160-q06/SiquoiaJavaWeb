@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Connect to the MySQL database.
  * @author mr.nam
  */
 public class MySqlController {
@@ -18,7 +18,7 @@ public class MySqlController {
     public MySqlController() {
     }
     /**
-     * 
+     * Connect to the database or return an error.
      * @return 
      */
     public Connection connect() {

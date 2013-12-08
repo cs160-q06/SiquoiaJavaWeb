@@ -11,6 +11,9 @@ import DataOOD.Quiz;
 import DataOOD.Topic;
 import DataOOD.User;
 import Database.MySqlController;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,7 +38,8 @@ public class Test_App {
             //testGenerateNodeTopic(conn);
             //test_generateQuiz();
             //test_login();
-            test_getMediaByID();
+            //test_getMediaByID();
+            test_hashMD5();
             conn.close();
 
         } catch (Exception ex) {
@@ -80,7 +84,7 @@ public class Test_App {
                     } else {
                         list = tmp;
                     }
-                    n=-1;
+                    n = -1;
                 } else if (s.equalsIgnoreCase("s")) {
                     if (n > 0) {
                         System.out.println(">Start quiz of " + list.get(n - 1).getDescription());
@@ -106,8 +110,8 @@ public class Test_App {
     }
 
     private static void testGenerateNodeTopic(Connection conn) {
-            Node<Topic> root = Controller.generateNodeTopic();
-            System.out.println(root.toString());
+        Node<Topic> root = Controller.generateNodeTopic();
+        System.out.println(root.toString());
     }
 
     private static void test_generateQuiz() {
@@ -122,10 +126,33 @@ public class Test_App {
     }
 
     private static void test_login() {
-        System.out.println(Controller.isLogin("user1", "user1",111));
+        System.out.println(Controller.isLogin("user1", "user1", 111));
     }
 
     private static void test_getMediaByID() {
         System.out.println(Controller.getMediaByID(1).toString());
+    }
+
+    private static void test_hashMD5() throws NoSuchAlgorithmException, UnsupportedEncodingException {
+
+        System.out.println(MD5("admin"));
+        System.out.println(MD5("admin1"));
+        System.out.println(MD5("admin"));
+        System.out.println(MD5("admin1"));
+
+    }
+
+    public static String MD5(String md5) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(md5.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+        }
+        return null;
     }
 }

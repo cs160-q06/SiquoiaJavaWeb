@@ -2,6 +2,7 @@ package Controller;
 
 import DataOOD.Media;
 import DataOOD.Node;
+import DataOOD.PurchaseHistory;
 import DataOOD.Question;
 import DataOOD.Quiz;
 import DataOOD.Topic;
@@ -35,8 +36,8 @@ public class Controller {
     /**
      * get children topics of a topic by its name
      *
-     * @param name name of the topic to get sub-topics
-     * @return a list of sub-topics
+     * @param name
+     * @return
      */
     public static List<Topic> getSubTopicByName(String name) {
         List<Topic> list = new ArrayList<>();
@@ -51,8 +52,8 @@ public class Controller {
     /**
      * get parent topic of a topic by its name
      *
-     * @param name name of topic used to find its parent topic
-     * @return the parent topic
+     * @param name
+     * @return
      */
     public static Topic getTopicParentByName(String name) {
         try {
@@ -216,5 +217,37 @@ public class Controller {
             return false;
         }
     }
+    /**
+     * 
+     * @return 
+     */
+    public static User getLoginUser() {
+        if(loginUserList.isEmpty())
+            return null;
+        return loginUserList.get(0);
+    }
+
+    public static List<PurchaseHistory> getPurchaseHistoryByUserID(int i) {
+        List<PurchaseHistory> list = new ArrayList<>();
+        try {
+            list = PurchaseHistory.doQueryByID(conn,i);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public static boolean logOut(String name) {
+        for(User u : loginUserList)
+        {
+            if(u.getName().equalsIgnoreCase(name))
+            {
+                loginUserList.remove(u);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }

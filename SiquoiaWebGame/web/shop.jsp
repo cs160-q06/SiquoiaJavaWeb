@@ -15,7 +15,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"> 
-    <%!        
+    <%!
         private List<Topic> list;
     %>
     <head>
@@ -38,38 +38,37 @@
             </div> <!-- END logo -->
 
             <div id="login"> 
-                
-                <div class="green glowCenter" style="font-size: 30px">Shop</div>
-                
-                <form action="shop1.jsp" class="loginfield" action="#" method="post">
-                    <div class="blue glow">Point: <%= (session.getAttribute("userPoint")!=null
-                            ?(String)session.getAttribute("userPoint"):(100+""))%></div>
-                    <p>
-                        <div class="text" style="background-color: white;height: 200px">
-                            <%
-                                String entire = (String) session.getAttribute("entire");
-                                if (entire == null) {
-                                    list = Controller.getSubTopicByID(0);
-                                } else {
-                                    list = Controller.getSubTopicByName(entire);
-                                }
-                                for (Topic t : list) {
-                                    String name = t.getDescription();
-                                    
 
-                            %>
-                            <input id="button" type="submit" name="topic" value="<%=name%>"  />
-                            <%                    }%>                            
-                        </div>
-                        <div>
-                            Selected: <%= (session.getAttribute("select") != null
+                <div class="green glowCenter" style="font-size: 30px">Shop</div>
+
+                <form action="shop1.jsp" class="loginfield" method="post">
+                    <div class="blue glow">Point: <%= (session.getAttribute("userPoint") != null
+                            ? (String) session.getAttribute("userPoint") : (100 + ""))%>
+                    </div>
+                    <div class="text" style="background-color: white;height: 200px">
+                        <%
+                            String entire = (String) session.getAttribute("entire");
+                            if (entire == null) {
+                                list = Controller.getSubTopicByID(0);
+                            } else {
+                                list = Controller.getSubTopicByName(entire);
+                            }
+                            for (Topic t : list) {
+                                String name = t.getDescription();
+
+
+                        %>
+                        <input id="button" type="submit" name="topic" value="<%=name%>"  />
+                        <%                    }%>                            
+                    </div>
+                    <div>
+                        Selected: <%= (session.getAttribute("select") != null
                                     ? (String) session.getAttribute("select") : "")%>
-                        </div>   
-                        <div>
-                            <%= (session.getAttribute("error") != null
+                    </div>   
+                    <div>
+                        <%= (session.getAttribute("error") != null
                                     ? "Error: " + (String) session.getAttribute("error") : "")%>
-                        </div>   
-                    </p>
+                    </div>   
                     <input id="button" type="submit" value="Expand" name="expand" />
                     <input id="button" type="submit" value="Back" name="back" />                    
                     <input id="button" type="submit" value="Buy" name="" />    

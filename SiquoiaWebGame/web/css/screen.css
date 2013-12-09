@@ -103,6 +103,11 @@ body {
     box-shadow: #000 0 0 4px, #fff 0 0 16px;
     transition: all ease-out 0.5s;
 }
+.button {
+position: absolute;
+width: 128px;
+text-align: center;
+}
 
 .green { color: #0b5f00; } 
 .blue { color: #004f70; }

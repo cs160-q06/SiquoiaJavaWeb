@@ -38,8 +38,10 @@
                         if (!Controller.Controller.isLogin(username, password, 11)) {
                             session.setAttribute("error", "Username or password is incorrect!");
                         } else {
-                            session.setAttribute("error", "Username and password are correct!");
-
+                            //session.setAttribute("error", "Username and password are correct!");
+                            strViewPage = "account.jsp";
+                            session.invalidate();
+                            session = request.getSession();
                         }
                     }
 

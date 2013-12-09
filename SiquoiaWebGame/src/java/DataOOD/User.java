@@ -98,8 +98,8 @@ public class User {
     }
 
     /**
-     *
-     * @param md5
+     * MD5 Hash
+     * @param md5 string to hash
      * @return
      */
     public static String hashMD5(String md5) {
@@ -117,7 +117,7 @@ public class User {
     }
 
     /**
-     *
+     * Returns a list of all attributes from the user table in the database.
      * @param conn
      * @return
      * @throws SQLException

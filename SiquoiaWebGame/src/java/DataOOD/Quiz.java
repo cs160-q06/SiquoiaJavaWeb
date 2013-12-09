@@ -53,7 +53,7 @@ public class Quiz {
     }
 
     /**
-     *
+     * Gets the current question from questionList
      * @return the Question in current index
      */
     public Question getCurrentQuestion() {
@@ -61,8 +61,8 @@ public class Quiz {
     }
 
     /**
-     *
-     * @return the Question in current index and suffle the answer
+     * Shuffle the order of the answers from the current question
+     * @return the Question in current index and shuffles the answer
      */
     public Question getCurrentQuestionRandomShuffle() {
         Question question = questionList.get(currentQuestionIndex);

@@ -35,8 +35,8 @@ public class Controller {
     /**
      * get children topics of a topic by its name
      *
-     * @param name
-     * @return
+     * @param name name of the topic to get sub-topics
+     * @return a list of sub-topics
      */
     public static List<Topic> getSubTopicByName(String name) {
         List<Topic> list = new ArrayList<>();
@@ -51,8 +51,8 @@ public class Controller {
     /**
      * get parent topic of a topic by its name
      *
-     * @param name
-     * @return
+     * @param name name of topic used to find its parent topic
+     * @return the parent topic
      */
     public static Topic getTopicParentByName(String name) {
         try {

@@ -1,13 +1,13 @@
 <%-- 
-    Document   : demoQuiz1
-    Created on : Dec 7, 2013, 1:59:10 AM
+    Document   : newQuiz1
+    Created on : Dec 8, 2013, 9:25:16 PM
     Author     : mr.nam
 --%>
 
 <%@page import="DataOOD.Quiz"%>
 <%
 
-    String strViewPage = "demoQuiz.jsp";
+    String strViewPage = "newQuiz.jsp";
     //initial
     session.setAttribute("select", null);
     session.setAttribute("error", null);
@@ -38,16 +38,15 @@
             Quiz quiz = (Quiz) session.getAttribute("quiz");
             if(!quiz.hasNext())
             {
-                strViewPage = "demoReport.jsp";
+                strViewPage = "newReport.jsp";
                 int point = (Integer)session.getAttribute("userPoint");
+                String t = (String) session.getAttribute("topic");
                 int total = quiz.getTotal();
                 session.invalidate();
-                session = request.getSession();
-                
+                session = request.getSession();                
                 session.setAttribute("correct", point);
-                session.setAttribute("topic", "Demo");                
+                session.setAttribute("topic", t); 
                 session.setAttribute("total", total);
-                
             }
         }
     }

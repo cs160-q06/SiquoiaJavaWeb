@@ -217,31 +217,31 @@ public class Controller {
             return false;
         }
     }
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public static User getLoginUser() {
-        if(loginUserList.isEmpty())
+        if (loginUserList.isEmpty()) {
             return null;
+        }
         return loginUserList.get(0);
     }
 
     public static List<PurchaseHistory> getPurchaseHistoryByUserID(int i) {
         List<PurchaseHistory> list = new ArrayList<>();
         try {
-            list = PurchaseHistory.doQueryByID(conn,i);
+            list = PurchaseHistory.doQueryByID(conn, i);
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
-    
+
     public static boolean logOut(String name) {
-        for(User u : loginUserList)
-        {
-            if(u.getName().equalsIgnoreCase(name))
-            {
+        for (User u : loginUserList) {
+            if (u.getName().equalsIgnoreCase(name)) {
                 loginUserList.remove(u);
                 return true;
             }
@@ -249,5 +249,21 @@ public class Controller {
         return false;
     }
 
+    public static void purchase(String demo, String dateTime) {
+        User user = loginUserList.get(0);
+        int price = EnumValue.PACKET_PRICE_BY_POINT.getValue();
+        if (user.getPoint() > price) {
+            User.doQueryUpdateUser(user);
+            user.setPoint(user.getPoint()-price);
+            Topic topic = getTopicByName(demo);
+            PurchaseHistory p = new PurchaseHistory(0, dateTime, 0, price, user.getId());
+
+            try {
+                PurchaseHistory.doQueryUpdatePurchase(conn, p);
+            } catch (SQLException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
 }

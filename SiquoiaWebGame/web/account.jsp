@@ -51,7 +51,7 @@
         <div id="sink">
 
             <div class="button" style="left:0;">
-                <a href="#"><img src="button_take_quiz.png" alt="take quiz"
+                <a href="selectpacket.jsp"><img src="button_take_quiz.png" alt="take quiz"
                                  style="width: 100px; height: auto;">Take a Quiz</a>
             </div>
 

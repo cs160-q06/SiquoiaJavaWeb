@@ -37,6 +37,7 @@ public class Test_DB {
             //test_Quiz_QuestionHas1C3W(conn);
             //test_getTopicByName();
             test_Media();
+            test_Purchase();
             conn.close();
 
         } catch (Exception ex) {
@@ -154,5 +155,10 @@ public class Test_DB {
     private static void test_Media() throws SQLException {
         List<Media> list = Media.doQueryGetAll(conn);
         System.out.println(Arrays.toString(list.toArray()));
+    }
+
+    private static void test_Purchase() {
+        Controller.purchase("Demo","2012-12-31 23:59:59");
+                
     }
 }

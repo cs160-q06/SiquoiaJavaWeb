@@ -8,11 +8,13 @@
 <%@page import="java.util.List"%>
 <%@page import="DataOOD.Topic"%>
 <%@page import="Controller.Controller"%>
-
+<%@ include file="controller.jsp" %> 
 
 <%    String name, expand;
+    String strViewPage = "selectpacket.jsp";
     session.setAttribute("error", null);
-    //if ("POST".equalsIgnoreCase(request.getMethod())) {
+    if ("POST".equalsIgnoreCase(request.getMethod())) {
+
         if (request.getParameter("topic") != null) {
             name = request.getParameter("topic");
             session.setAttribute("select", name);
@@ -49,13 +51,22 @@
             }
 
         }
-  //  }
+        if (request.getParameter("buy") != null) {
+            if (session.getAttribute("select") != null) {
+                String topic = (String) session.getAttribute("select");
+                session.invalidate();
+                session = request.getSession();
+                session.setAttribute("topic", topic);
+                strViewPage = "payment.jsp";
+            }
+        }
+
+    }
 
 
 %>
 
-<%    String strViewPage = "selectpacket.jsp";
-    RequestDispatcher dispatcher = request.getRequestDispatcher(strViewPage);
+<%    RequestDispatcher dispatcher = request.getRequestDispatcher(strViewPage);
     if (dispatcher != null) {
         dispatcher.forward(request, response);
     }

@@ -12,23 +12,19 @@ import java.util.List;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author mr.nam
  */
 public class PurchaseHistory {
 
-   
-
-    
     private int id;
     private String dateTime;
     private int earnedPoint;
     private int usedPoint;
     private int userID;
 
-    public PurchaseHistory(int id, String dateTime, int earnedPoint, int usedPoint,int userID ) {
+    public PurchaseHistory(int id, String dateTime, int earnedPoint, int usedPoint, int userID) {
         this.id = id;
         this.dateTime = dateTime;
         this.earnedPoint = earnedPoint;
@@ -55,32 +51,36 @@ public class PurchaseHistory {
     public int getUserID() {
         return userID;
     }
+
     /**
-     * 
+     *
      * @param conn
      * @param i
-     * @return 
+     * @return
      */
     public static List<PurchaseHistory> doQueryByID(Connection conn, int i) throws SQLException {
-        String query = "SELECT * from POINT_HISTORY where USER_ID = "+i;
+        String query = "SELECT * from POINT_HISTORY where USER_ID = " + i;
         return doQuery(conn, query);
-    }/**
-     * 
+    }
+
+    /**
+     *
      * @param conn
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public static List<PurchaseHistory> doQueryGetAll(Connection conn) throws SQLException {
         String query = "SELECT * from POINT_HISTORY;";
         return doQuery(conn, query);
     }
+
     /**
-     * 
+     *
      * @param conn
      * @param query
-     * @return 
+     * @return
      */
-     private static List<PurchaseHistory> doQuery(Connection conn, String query) throws SQLException {
+    private static List<PurchaseHistory> doQuery(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
 
@@ -90,17 +90,34 @@ public class PurchaseHistory {
             int userID = rs.getInt("USER_ID");
             String dateTime = rs.getString("DATETIME");
             int earnP = rs.getInt("POINTEARNED");
-            int useP=rs.getInt("POINTUSED");;
+            int useP = rs.getInt("POINTUSED");;
             PurchaseHistory i = new PurchaseHistory(id, dateTime, earnP, useP, userID);
             list.add(i);
         }
         return list;
     }
 
+    /**
+     *
+     * @param p
+     */
+    public static void doQueryUpdatePurchase(Connection conn,PurchaseHistory p) throws SQLException {
+        String query = "INSERT INTO Point_History \n"
+                + "			(DateTime\n"
+                + "			,PointEarned\n"
+                + "			,PointUsed\n"
+                + "			,User_ID)\n"
+                + "VALUES\n"
+                + "('2012-12-31 23:59:59', 0, 20, 2)";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+
+    }
+
     @Override
     public String toString() {
-        return "[id: "+id+"|dateTime: "+dateTime
-                +"|earn: "+earnedPoint+"|use: "+usedPoint+"|userID: "+userID+"]";
+        return "[id: " + id + "|dateTime: " + dateTime
+                + "|earn: " + earnedPoint + "|use: " + usedPoint + "|userID: " + userID + "]";
     }
-     
+
 }

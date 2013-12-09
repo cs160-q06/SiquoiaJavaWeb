@@ -71,7 +71,7 @@
                                     
 
                             %>
-                            <button type="submit" class="btn btn-block" name="topic" ><%=nameTopic%></button>
+                            <button type="submit" class="btn btn-block" name="topic" value="<%=nameTopic%>" ><%=nameTopic%></button>
                             <%                    }%>                            
                         </div>
                         <div>
@@ -87,9 +87,9 @@
                 </div>
                     
                 <div align="center">
-                    <button type="submit" class="btn btn-inverse" name="expand" >Expand</button>
-                    <button type="submit" class="btn btn-inverse" name="back">Back</button>
-                    <button type="submit" class="btn btn-inverse" name="">Buy Quiz Packet</button>
+                    <button type="submit" class="btn btn-inverse" name="expand" value="Expand">Expand</button>
+                    <button type="submit" class="btn btn-inverse" name="back" value="Back">Back</button>
+                    <button type="submit" class="btn btn-inverse" name="buy" value="buy">Buy Quiz Packet</button>
                 </div>
             </div>
         </form>

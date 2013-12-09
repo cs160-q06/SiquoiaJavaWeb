@@ -1,9 +1,10 @@
 <%-- 
-    Document   : quiz
-    Created on : Dec 3, 2013, 10:43:50 AM
+    Document   : newQuiz
+    Created on : Dec 8, 2013, 9:25:03 PM
     Author     : mr.nam
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Miscellanea.EnumString"%>
 <%@page import="DataOOD.Media"%>
 <%@page import="DataOOD.Node"%>
@@ -15,30 +16,27 @@
 <%@page import="Controller.Controller"%>
 <%@page import="DataOOD.Topic"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"> 
+<%@ include file="controller.jsp" %>
+<!DOCTYPE html>
+<html>
     <%!
         private List<Topic> list;
         private Quiz quiz;
 
-        private Quiz generateQuiz() {
+        private Quiz generateQuiz(String topic) {
             Node<Topic> root = Controller.generateNodeTopic();
-            Quiz quiz = Controller.generateQuizFromTopic(Controller.getTopicByName("Demo"));
+            Quiz quiz = Controller.generateQuizFromTopic(Controller.getTopicByName(topic));
             return quiz;
         }
 
     %>
     <head>
-        <title>Demo Quiz</title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+                <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
 
     </head>
-
-    <body>
+     <body>
 
         <div class="navbar navbar-inverse">
             <div class="navbar-inner">
@@ -46,7 +44,7 @@
                     <ul class="nav pull-left">
                         <li>
                             <a href="index.jsp">
-                                <img class="centre" id="topBar" src="img/SiQuoia logo.jpg" />
+                                <img class="centre" id="topBar" src="img/SiQuoia logo.jpg">
                             </a>
                         </li>
                         <li class="divider-vertical"> </li>
@@ -55,24 +53,30 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-center">
                             <li>
-                                <h2>Demo Quiz</h2>
+                                <h2>Account</h2>
                             </li>
                         </ul>
                         <ul class="nav pull-right">
-                            <li>
-                            </li></ul>
+                            <li>Welcome <b> <%=usernameLogin%></b>
+                                <form action="controller.jsp" method="post">
+                                    <i class="icon-white icon-lock"></i> 
+                                    <button type="submit" name="logout">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div id="wallpaper">
-
-            <form action="demoQuiz1.jsp" class="loginfield" method="post">
+        <form action="newQuiz1.jsp" class="loginfield" method="post">
                 <div id="sink">
                     <%
                         if (session.getAttribute("quiz") == null) {//generate quiz in beginning
-                            quiz = generateQuiz();
-                            session.setAttribute("userPoint", 0); //
+                            String t = (String)session.getAttribute("topic");
+//                            quiz = generateQuiz();
+                            quiz = generateQuiz(t);
+                            session.setAttribute("userPoint", 0);
                         }
                         if (session.getAttribute("start") == null) {
                     %>
@@ -155,7 +159,7 @@
                         }
                     %>
                     <div class="well well-small" align=""center>
-                       Total Correct: <%= (session.getAttribute("userPoint") != null
+                        Total Correct: <%= (session.getAttribute("userPoint") != null
                                 ? (Integer) session.getAttribute("userPoint") : 0)%>
                         <br />  
                         <%= (session.getAttribute("select") != null
@@ -171,11 +175,5 @@
                 </div>
 
             </form>
-
-
-
-        </div> <!-- END wallpaper -->
     </body>
-
-
 </html>

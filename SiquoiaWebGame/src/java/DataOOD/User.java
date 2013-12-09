@@ -99,6 +99,7 @@ public class User {
 
     /**
      * MD5 Hash
+     *
      * @param md5 string to hash
      * @return
      */
@@ -118,6 +119,7 @@ public class User {
 
     /**
      * Returns a list of all attributes from the user table in the database.
+     *
      * @param conn
      * @return
      * @throws SQLException
@@ -140,6 +142,14 @@ public class User {
             list.add(i);
         }
         return list;
+    }
+
+    /**
+     *
+     * @param user
+     */
+    public static void doQueryUpdateUser(User user) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

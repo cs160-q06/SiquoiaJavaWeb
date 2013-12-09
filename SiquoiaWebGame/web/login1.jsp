@@ -4,7 +4,7 @@
     Author     : mr.nam
 --%>
 
-
+<%@page import="Controller.Controller"%>
 <%
     String strViewPage = "index.jsp";
 
@@ -35,7 +35,7 @@
                 if (checkInput) {
                     {
                         //check user
-                        if (!Controller.Controller.isLogin(username, password, 11)) {
+                        if (!Controller.isLogin(username, password, 11)) {
                             session.setAttribute("error", "Username or password is incorrect!");
                         } else {
                             //session.setAttribute("error", "Username and password are correct!");

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Controller.Controller"%>
 <!DOCTYPE html>
 <html>
 
@@ -15,10 +16,18 @@
         <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <script src="js/jquery-latest.min.js"   type="text/javascript"></script>
         <script src="js/bootstrap.js"></script>		
-        <script src="js/bootstrap-responsive.js"></script>	
+        <script src="js/bootstrap-responsive.js"></script>
+        <%
+            if(Controller.getLoginUser()!=null)
+            {
+                %>
+                <META HTTP-EQUIV=Refresh CONTENT="0; URL=account.jsp">
+        <%
+            }
+        %>
     </head>
     <body>
-
+        
         <div class="navbar navbar-inverse">
             <div class="navbar-inner">
                 <div class="container-fluid">
@@ -61,7 +70,7 @@
                         <%= (session.getAttribute("password_error") != null
                                 ? (String) session.getAttribute("password_error") : "")%>
                     </label>
-                    <input class="text" type="text" id="password" name="password"/>
+                    <input class="text" type="password" id="password" name="password"/>
 
                     <label>
                         <input type="checkbox"> Remember me

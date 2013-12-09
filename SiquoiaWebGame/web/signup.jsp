@@ -58,14 +58,14 @@
                             <%= (session.getAttribute("password_error") != null
                                     ? (String) session.getAttribute("password_error") : "")%>
                         </label>
-                        <input class="text" type="text" id="password" name="password"/>
+                        <input class="text" type="password" id="password" name="password"/>
 
                         <label for="re-password">Re-password:</label>
                         <label id="error">
                             <%= (session.getAttribute("re-password_error") != null
                                     ? (String) session.getAttribute("re-password_error") : "")%>
                         </label>
-                        <input class="text" type="text" id="re-password" name="re-password"/>
+                        <input class="text" type="password" id="re-password" name="re-password"/>
 
                         <label for="email">Email:</label>
                         <label id="error">

@@ -6,6 +6,7 @@ package DataOOD;
 
 import Miscellanea.EnumValue;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -148,8 +149,10 @@ public class User {
      *
      * @param user
      */
-    public static void doQueryUpdateUser(User user) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static void doQueryUpdateUser(Connection conn,User user) throws SQLException {
+        String query = "update USER set POINT = " + user.point + " where ID = " +user.getId();
+        PreparedStatement updateEXP = conn.prepareStatement(query);
+        ResultSet updateEXP_done = updateEXP.executeQuery();
     }
 
     @Override

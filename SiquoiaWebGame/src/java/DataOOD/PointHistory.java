@@ -16,20 +16,26 @@ import java.util.List;
  *
  * @author mr.nam
  */
-public class PurchaseHistory {
+public class PointHistory {
 
     private int id;
     private String dateTime;
     private int earnedPoint;
     private int usedPoint;
     private int userID;
+    private int topicID;
 
-    public PurchaseHistory(int id, String dateTime, int earnedPoint, int usedPoint, int userID) {
+    public PointHistory(int id, String dateTime, int earnedPoint, int usedPoint, int userID, int topicID) {
         this.id = id;
         this.dateTime = dateTime;
         this.earnedPoint = earnedPoint;
         this.usedPoint = usedPoint;
         this.userID = userID;
+        this.topicID = topicID;
+    }
+
+    public int getTopicID() {
+        return topicID;
     }
 
     public int getId() {
@@ -58,7 +64,7 @@ public class PurchaseHistory {
      * @param i
      * @return
      */
-    public static List<PurchaseHistory> doQueryByID(Connection conn, int i) throws SQLException {
+    public static List<PointHistory> doQueryByID(Connection conn, int i) throws SQLException {
         String query = "SELECT * from POINT_HISTORY where USER_ID = " + i;
         return doQuery(conn, query);
     }
@@ -69,7 +75,7 @@ public class PurchaseHistory {
      * @return
      * @throws SQLException
      */
-    public static List<PurchaseHistory> doQueryGetAll(Connection conn) throws SQLException {
+    public static List<PointHistory> doQueryGetAll(Connection conn) throws SQLException {
         String query = "SELECT * from POINT_HISTORY;";
         return doQuery(conn, query);
     }
@@ -80,18 +86,19 @@ public class PurchaseHistory {
      * @param query
      * @return
      */
-    private static List<PurchaseHistory> doQuery(Connection conn, String query) throws SQLException {
+    private static List<PointHistory> doQuery(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
 
-        List<PurchaseHistory> list = new ArrayList<>();
+        List<PointHistory> list = new ArrayList<>();
         while (rs.next()) {
             int id = rs.getInt("ID");
             int userID = rs.getInt("USER_ID");
             String dateTime = rs.getString("DATETIME");
             int earnP = rs.getInt("POINTEARNED");
-            int useP = rs.getInt("POINTUSED");;
-            PurchaseHistory i = new PurchaseHistory(id, dateTime, earnP, useP, userID);
+            int useP = rs.getInt("POINTUSED");
+            int topicID = rs.getInt("TOPIC_ID");
+            PointHistory i = new PointHistory(id, dateTime, earnP, useP, userID, topicID);
             list.add(i);
         }
         return list;
@@ -101,7 +108,7 @@ public class PurchaseHistory {
      *
      * @param p
      */
-    public static void doQueryUpdatePurchase(Connection conn,PurchaseHistory p) throws SQLException {
+    public static void doQueryUpdatePurchase(Connection conn,PointHistory p) throws SQLException {
         String query = "INSERT INTO Point_History \n"
                 + "			(DateTime\n"
                 + "			,PointEarned\n"

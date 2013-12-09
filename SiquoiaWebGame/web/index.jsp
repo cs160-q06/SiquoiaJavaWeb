@@ -54,8 +54,8 @@
 
 
 
-        <form class="loginfield" action="login1.jsp" method="post">
             <div id="sink">
+        <form class="loginfield" action="login1.jsp" method="post"> 
 
                 <div class="" style="margin: auto 10%;">
                     <label for="username">Username:</label>
@@ -89,6 +89,7 @@
                     <button type="submit" name = "forward" class="btn btn-warning" value="signup.jsp">Register</button>
                     <button type="submit" name = "forward" class="btn btn-success" value="demoQuiz.jsp">Guest Login</button>
                 </div>
+        </form>
 
 
                 <br />
@@ -123,8 +124,8 @@
                 </div>
 
 
-            </div> <!-- END login -->
-        </form>
+            </div> 
+                    
         <footer style="text-align: right">
             <small >© Copyright 2013, SQ06 Sequoia Inc.</small>
         </footer>

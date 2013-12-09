@@ -2,7 +2,7 @@ package Controller;
 
 import DataOOD.Media;
 import DataOOD.Node;
-import DataOOD.PurchaseHistory;
+import DataOOD.PointHistory;
 import DataOOD.Question;
 import DataOOD.Quiz;
 import DataOOD.Topic;
@@ -228,17 +228,25 @@ public class Controller {
         }
         return loginUserList.get(0);
     }
-
-    public static List<PurchaseHistory> getPurchaseHistoryByUserID(int i) {
-        List<PurchaseHistory> list = new ArrayList<>();
+/**
+ * 
+ * @param i
+ * @return 
+ */
+    public static List<PointHistory> getPurchaseHistoryByUserID(int i) {
+        List<PointHistory> list = new ArrayList<>();
         try {
-            list = PurchaseHistory.doQueryByID(conn, i);
+            list = PointHistory.doQueryByID(conn, i);
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
-
+/**
+ * 
+ * @param name
+ * @return 
+ */
     public static boolean logOut(String name) {
         for (User u : loginUserList) {
             if (u.getName().equalsIgnoreCase(name)) {
@@ -248,18 +256,29 @@ public class Controller {
         }
         return false;
     }
-
+/**
+ * 
+ * @param demo
+ * @param dateTime 
+ */
     public static void purchase(String demo, String dateTime) {
         User user = loginUserList.get(0);
         int price = EnumValue.PACKET_PRICE_BY_POINT.getValue();
         if (user.getPoint() > price) {
-            User.doQueryUpdateUser(user);
-            user.setPoint(user.getPoint()-price);
+                        
             Topic topic = getTopicByName(demo);
-            PurchaseHistory p = new PurchaseHistory(0, dateTime, 0, price, user.getId());
-
+            //insert purchasehistory by query
+            PointHistory p = new PointHistory(0, dateTime, 0
+                    , price, user.getId(), topic.getId());
             try {
-                PurchaseHistory.doQueryUpdatePurchase(conn, p);
+                PointHistory.doQueryUpdatePurchase(conn, p);
+            } catch (SQLException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //update point of user by query
+            user.setPoint(user.getPoint()-price);
+            try {
+                User.doQueryUpdateUser(conn,user);
             } catch (SQLException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }

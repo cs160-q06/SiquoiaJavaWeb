@@ -229,7 +229,7 @@ public class Controller {
  * @param i
  * @return 
  */
-    public static List<PointHistory> getPurchaseHistoryByUserID(int i) {
+    public static List<PointHistory> getPointHistoryByUserID(int i) {
         List<PointHistory> list = new ArrayList<>();
         try {
             list = PointHistory.doQueryByID(conn, i);

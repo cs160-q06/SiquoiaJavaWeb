@@ -10,14 +10,13 @@ import DataOOD.User;
 import Database.MySqlController;
 import Miscellanea.EnumString;
 import Miscellanea.EnumValue;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.NamingException;
+
 
 /**
  * Controller controls all request from web pages
@@ -26,9 +25,6 @@ import javax.naming.NamingException;
  */
 public class Controller {
 
-    private static Node root;
-    private static ArrayList<Question> questionList;
-    private static EnumString menuLevel;
     private static Connection conn = new MySqlController().connect();
     private static List<User> loginUserList = new ArrayList<User>();
     private static List<Integer> ipList = new ArrayList<Integer>();

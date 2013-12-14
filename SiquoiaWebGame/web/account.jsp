@@ -51,17 +51,17 @@
         <div id="sink">
 
             <div class="button" style="left:0;">
-                <a href="selectpacket.jsp"><img src="button_take_quiz.png" alt="take quiz"
-                                 style="width: 100px; height: auto;">Take a Quiz</a>
+                <a href="selectpacket.jsp"><img src="img/button_take_quiz.png" alt="take quiz"
+                                                style="width: 100px; height: auto;">Take a Quiz</a>
             </div>
 
             <div class="button" style="left: 200px">
-                <a href="#"><img src="button_quiz_packets.png" alt="quiz pakets"
+                <a href="#"><img src="img/button_quiz_packets.png" alt="quiz pakets"
                                  style="width: 100px; height: auto;">Submit a Quiz Packet</a>
             </div>
 
             <div class="button" style="right:0;">
-                <a href="#"><img src="button_settings.png" alt="settings"
+                <a href="#"><img src="img/button_settings.png" alt="settings"
                                  style="width: 100px; height: auto;">User Settings</a>
             </div>
             <br /><br /><br /><br /><br /><br /><br /><br />
@@ -73,19 +73,24 @@
                     <table border="0" style="width: 100%" class="table-striped table-condensed">
                         <tr>
                             <td><b>Points</b></td>
-                            <td><%=point%></td>
+                            <td><%=point%> </td>
+                            <td align="middle"><a href="payment.jsp"><button type="submit" name="next" class="btn btn-mini">Buy More</button></a>
+                            </td>
                         </tr>
                         <tr>
                             <td><b>Amount of purchased Packets</b></td>
                             <td><%=amountPurchasePacket%></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><b>Amount of earned Points</b></td>
                             <td><%=amountEarnedPoint%></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><b>Amount of used Points</b></td>
                             <td><%=amountUsedPoint%></td>
+                            <td></td>
                         </tr>
                     </table>
                 </div>

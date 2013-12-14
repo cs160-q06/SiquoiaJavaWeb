@@ -32,7 +32,7 @@
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Quiz</title>
                 <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
 
     </head>
@@ -53,7 +53,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-center">
                             <li>
-                                <h2>Account</h2>
+                                <h2>Quiz</h2>
                             </li>
                         </ul>
                         <ul class="nav pull-right">

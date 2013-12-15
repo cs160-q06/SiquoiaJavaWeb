@@ -5,6 +5,7 @@ import DataOOD.Node;
 import DataOOD.PointHistory;
 import DataOOD.Question;
 import DataOOD.Quiz;
+import DataOOD.Token;
 import DataOOD.Topic;
 import DataOOD.User;
 import Database.MySqlController;
@@ -317,7 +318,7 @@ public class Controller {
 
         Topic topic = getTopicByName(topicName);
         //insert purchasehistory by query
-        PointHistory p = new PointHistory(0, dateTime, earnedPoint,0, user.getId(), topic.getId());
+        PointHistory p = new PointHistory(0, dateTime, earnedPoint, 0, user.getId(), topic.getId());
         try {
             PointHistory.doQueryInsert(conn, p);
         } catch (SQLException ex) {
@@ -331,6 +332,47 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
+    public static boolean isExistedToken(Token token){
+        List<Token> list = new ArrayList<>();
+        try {
+            list = Token.doQueryByCode(conn, token.getCode());
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (list.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    /**
+     * 
+     * @param token
+     * @return 
+     */
+    public static boolean isUsedToken(Token token) {
+        
+        List<Token> list = new ArrayList<>();
+        try {
+            list = Token.doQueryByCode(conn, token.getCode());
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (list.isEmpty()) {
+            return false;
+        }
+        if (list.get(0).getUserID() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

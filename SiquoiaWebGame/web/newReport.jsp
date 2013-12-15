@@ -49,10 +49,10 @@
                 <b>Report</b>
                 <hr />
                 <%
-                    if (session.getAttribute("topic") != null && 
+                    if (session.getAttribute("topicReport") != null && 
                             session.getAttribute("correct") != null)
                     {
-                        String topic = (String) session.getAttribute("topic");
+                        String topic = (String) session.getAttribute("topicReport");
                         int correct = (Integer) session.getAttribute("correct");
                         int total = (Integer) session.getAttribute("total");
                         int totalPoint = Controller.getLoginUser().getPoint();
@@ -84,7 +84,7 @@
                 </div>
             </div>
             <div align="center">
-                <a href="account.jsp"><button type="submit" class="btn btn-warning" >Play again</button>
+                <a href="account.jsp"><button type="" class="btn btn-warning" >Play again</button>
                 </a>
             </div>
         </div>

@@ -8,6 +8,7 @@ import Controller.Controller;
 import DataOOD.Media;
 import DataOOD.PointHistory;
 import DataOOD.Question;
+import DataOOD.Token;
 import DataOOD.Topic;
 import DataOOD.User;
 import Database.MySqlController;
@@ -20,28 +21,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Test getting values of quizzes like topic and question to make sure the application connects with the database correctly. Tests querying for login.
+ * Test getting values of quizzes like topic and question to make sure the
+ * application connects with the database correctly. Tests querying for login.
+ *
  * @author mr.nam
  */
 public class Test_DB {
+
     private static Connection conn;
+
     public static void main(String[] args) {
         MySqlController ctrl = new MySqlController();
         try {
             conn = ctrl.connect();
-            //test_Topic(conn);
-            //test_Question(conn);
-            //test_User(conn);            
-            //test_QuestionOfTopic(conn);
-            //testLog_In(conn);
-            //test_addUser(conn);
-            //test_Quiz_QuestionHas1C3W(conn);
-            //test_getTopicByName();
-            //test_Media();
-            //test_Purchase();
-            //test_InsertPointHistory();
-            //test_UpdatePointtoUser();
-            test_EarnedPoint();
+
+            testTopic();
+            testUser();
+            testQuestion();
+            testPointHistory();
+            testToken();
             conn.close();
 
         } catch (Exception ex) {
@@ -118,23 +116,23 @@ public class Test_DB {
         pass1 = user1;
         user2 = "user1";
         pass2 = user2;
-        printLogin(conn,user1,pass1);
-        
+        printLogin(conn, user1, pass1);
+
         printLogin(conn, user2, pass2);
 
     }
 
     private static void printLogin(Connection conn, String name, String pass) throws SQLException {
-        System.out.println("Try to log in with ["+name+","+pass+"]");
-        User user = Controller.login(conn,name, pass);
-        
+        System.out.println("Try to log in with [" + name + "," + pass + "]");
+        User user = Controller.login(conn, name, pass);
+
         if (user != null) {
             System.out.println("Log in sucessfully!");
             System.out.println("Hello " + user.getName());
             System.out.println(user.toString());
-        }
-        else
+        } else {
             System.out.println("Log in failed!");
+        }
     }
 
     private static void test_addUser(Connection conn) throws SQLException {
@@ -143,9 +141,9 @@ public class Test_DB {
         pass1 = user1;
         user2 = "user1";
         pass2 = user2;
-        Controller.registerUser(user1,pass1);
-        Controller.registerUser(user2,pass2);
-        
+        Controller.registerUser(user1, pass1);
+        Controller.registerUser(user2, pass2);
+
     }
 
     private static void test_Quiz_QuestionHas1C3W(Connection conn) {
@@ -162,13 +160,11 @@ public class Test_DB {
     }
 
     private static void test_Purchase() throws SQLException {
-        User user = User.doQueryGetByID(conn,2);
+        User user = User.doQueryGetByID(conn, 2);
         System.out.println(user);
-        Controller.purchase(user,"Demo","2012-12-31 23:59:59");
-                
-    }
+        Controller.purchase(user, "Demo", "2012-12-31 23:59:59");
 
-    
+    }
 
     private static void test_InsertPointHistory() throws SQLException {
         PointHistory p = new PointHistory(1, "2012-12-31 23:59:59", 0, 5, 2, 1);
@@ -177,15 +173,75 @@ public class Test_DB {
     }
 
     private static void test_UpdatePointtoUser() throws SQLException {
-        User user = User.doQueryGetByID(conn,2);
+        User user = User.doQueryGetByID(conn, 2);
         System.out.println(user);
-        user.setPoint(user.getPoint()+1000);
+        user.setPoint(user.getPoint() + 1000);
         User.doQueryUpdateUser(conn, user);
     }
 
     private static void test_EarnedPoint() throws SQLException {
-        User user = User.doQueryGetByID(conn,2);
+        User user = User.doQueryGetByID(conn, 2);
         System.out.println(user);
-        Controller.updatePoint(user,"Demo","2012-12-31 23:59:59",10);
+        Controller.updatePoint(user, "Demo", "2012-12-31 23:59:59", 10);
     }
+
+    private static void testTopic() {
+        //test_Topic(conn);
+        //test_getTopicByName();
+
+    }
+
+    private static void testUser() {
+                    //test_User(conn);
+        //test_addUser(conn);
+        //test_UpdatePointtoUser();
+        //testLog_In(conn);
+
+    }
+
+    private static void testPointHistory() {
+         //test_Purchase();
+        //test_InsertPointHistory();
+        //test_EarnedPoint();
+    }
+
+    private static void testQuestion() {
+        //test_Question(conn);
+        //test_QuestionOfTopic(conn);
+        //test_Quiz_QuestionHas1C3W(conn);
+        //test_Media();
+    }
+
+    private static void testToken() throws SQLException {
+        test_getAllToken();
+        test_getToken();
+        //test_insertToken();
+        test_updateToken();
+        
+    }
+
+    private static void test_getAllToken() throws SQLException {
+        List<Token> list = Token.doQueryGetAll(conn);
+        System.out.println(Arrays.toString(list.toArray()));
+    }
+
+    private static void test_insertToken() throws SQLException {
+        Token t = Token.doQueryByID(conn,1).get(0);
+        t.setCode("DDDD");
+        Token.doQueryUpdateToken(conn,t);
+    }
+
+    private static void test_updateToken() throws SQLException {
+        Token t = Token.doQueryByID(conn,1).get(0);
+        t.setUserID(1);
+        Token.doQueryUpdateToken(conn,t);
+    }
+
+    private static void test_getToken() throws SQLException {
+        Token t = Token.doQueryByID(conn,1).get(0);
+        System.out.println(t.toString());
+        
+    }
+
+    
 }

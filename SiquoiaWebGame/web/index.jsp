@@ -90,7 +90,7 @@
                     <br /> <br />
 
                     <button type="submit" name = "forward" class="btn btn-warning" value="signup.jsp">Register</button>
-                    <button type="submit" name = "forward" class="btn btn-success" value="demoQuiz.jsp">Guest Login</button>
+                    <button type="submit" name = "forward" class="btn btn-success" value="demoQuiz.jsp">Try It</button>
                 </div>
         </form>
 

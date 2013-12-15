@@ -8,6 +8,7 @@ import Controller.Controller;
 import DataOOD.Node;
 import DataOOD.Question;
 import DataOOD.Quiz;
+import DataOOD.Token;
 import DataOOD.Topic;
 import DataOOD.User;
 import Database.MySqlController;
@@ -27,24 +28,29 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Test the functions of the SiQuoia application; connect to the database, generate packet topic, select topic, generate quiz, login, querying media,
+ * Test the functions of the SiQuoia application; connect to the database,
+ * generate packet topic, select topic, generate quiz, login, querying media,
  * security hashing, etc.
+ *
  * @author mr.nam
  */
 public class Test_App {
 
+    private static Connection conn;
+
     public static void main(String[] args) {
         MySqlController ctrl = new MySqlController();
         try {
-            Connection conn = ctrl.connect();
+            conn = ctrl.connect();
             //test_SelectTopicAndSubTopic(conn);
             //test_ShoppingStore(conn);
             //testGenerateNodeTopic(conn);
             //test_generateQuiz();
             //test_login();
             //test_getMediaByID();
-            test_hashMD5();
-            test_getCurrentDateTIme(conn);
+            //test_hashMD5();
+            //test_getCurrentDateTIme(conn);
+            testToken();
             conn.close();
 
         } catch (Exception ex) {
@@ -164,5 +170,25 @@ public class Test_App {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         System.out.println(dateFormat.format(date));
+    }
+
+    private static void testToken() throws SQLException {
+        test_checkToken();
+    }
+
+    private static void test_checkToken() throws SQLException {
+        Token t = Token.doQueryByID(conn, 1).get(0);
+        t.setCode("AAAA");
+        t.setUserID(1);
+        Token.doQueryUpdateToken(conn, t);
+        System.out.println(Controller.isExistedToken(t));
+        System.out.println(Controller.isUsedToken(t));
+        t.setCode("CCCC");
+        System.out.println(Controller.isExistedToken(t));
+        System.out.println(Controller.isUsedToken(t));
+        t.setCode("DDDD");
+        System.out.println(Controller.isExistedToken(t));
+        System.out.println(Controller.isUsedToken(t));
+
     }
 }

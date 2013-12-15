@@ -53,7 +53,7 @@
                 session.invalidate();
                 session = request.getSession();
                 session.setAttribute("correct", point);
-                session.setAttribute("topic", topic);
+                session.setAttribute("topicReport", topic);
                 session.setAttribute("total", total);
                 //
                 DateFormat dateFormat = new SimpleDateFormat(EnumString.DATETIME_FORMAT.getValue());

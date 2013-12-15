@@ -2,6 +2,8 @@
     Document   : signup
     Created on : Dec 5, 2013, 9:57:37 PM
     Author     : mr.nam
+	
+	Registration page for new users to enter account information and set login credentials.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

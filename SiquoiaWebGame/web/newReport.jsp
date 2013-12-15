@@ -2,6 +2,8 @@
     Document   : newReport
     Created on : Dec 8, 2013, 10:47:13 PM
     Author     : mr.nam
+	
+	Information for quiz packet report, displayed at the end of a quiz.
 --%>
 <%@page import="Miscellanea.EnumValue"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

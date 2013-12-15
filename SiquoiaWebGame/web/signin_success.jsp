@@ -2,6 +2,8 @@
     Document   : signsignup_success
     Created on : Dec 5, 2013, 10:48:30 PM
     Author     : mr.nam
+	
+	Successful sign in.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -2,6 +2,8 @@
     Document   : packetcode
     Created on : Dec 6, 2013, 7:21:15 PM
     Author     : mr.nam
+	
+	Enter the branded quiz packet code (unique token) to access a particular branded packet.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -2,6 +2,8 @@
     Document   : demoReport
     Created on : Dec 8, 2013, 10:23:22 PM
     Author     : mr.nam
+	
+	Reporting for the demonstration quiz packet, available at the end of the quiz.
 --%>
 
 <%@page import="Miscellanea.EnumValue"%>

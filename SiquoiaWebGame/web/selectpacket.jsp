@@ -2,6 +2,9 @@
     Document   : test
     Created on : Dec 8, 2013, 4:34:23 PM
     Author     : mr.nam
+	
+	Users select the quiz packet to purchase. The packet information is sent to the controller, which queries the database.
+	Packets are then displayed in newQuiz
 --%>
 
 <%@page import="java.util.List"%>

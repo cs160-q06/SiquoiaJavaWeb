@@ -2,6 +2,8 @@
     Document   : controller
     Created on : Dec 8, 2013, 5:17:44 PM
     Author     : mr.nam
+	
+	The link between the database and webpage. Is the controller leg of the MVC design pattern.
 --%>
 
 <%@page import="Controller.Controller"%>

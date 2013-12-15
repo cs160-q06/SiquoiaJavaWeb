@@ -2,6 +2,8 @@
     Document   : payment1
     Created on : Dec 8, 2013, 8:43:53 PM
     Author     : mr.nam
+	
+	Payment information for purchasing packets.
 --%>
 
 <%@page import="Controller.Controller"%>

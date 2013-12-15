@@ -2,6 +2,8 @@
     Document   : newQuiz
     Created on : Dec 8, 2013, 9:25:03 PM
     Author     : mr.nam
+	
+	Display the quiz packet, chosen in selectpacket.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

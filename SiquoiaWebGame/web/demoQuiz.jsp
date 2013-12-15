@@ -2,6 +2,8 @@
     Document   : quiz
     Created on : Dec 3, 2013, 10:43:50 AM
     Author     : mr.nam
+	
+	The demo quiz for guest users to play. Quiz packet is statically stored in the database, not created upon opening.
 --%>
 
 <%@page import="Miscellanea.EnumString"%>

@@ -2,6 +2,8 @@
     Document   : login1
     Created on : Dec 4, 2013, 11:28:30 PM
     Author     : mr.nam
+	
+	Code to check for errors (exception handling) upon signing in on index.jsp
 --%>
 
 <%@page import="Controller.Controller"%>

@@ -2,6 +2,8 @@
     Document   : signup1
     Created on : Dec 5, 2013, 9:57:49 PM
     Author     : mr.nam
+	
+	Registration page for new users to enter account information and set login credentials.
 --%>
 
 <%@page import="Controller.Controller"%>

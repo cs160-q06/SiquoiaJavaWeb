@@ -2,6 +2,8 @@
     Document   : payment
     Created on : Dec 8, 2013, 8:30:00 PM
     Author     : mr.nam
+	
+	Payment information for purchasing packets.
 --%>
 
 <%@page import="Miscellanea.EnumValue"%>

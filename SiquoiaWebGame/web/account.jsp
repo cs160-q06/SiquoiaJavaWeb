@@ -2,6 +2,8 @@
     Document   : account
     Created on : Dec 8, 2013, 4:34:05 PM
     Author     : mr.nam
+	
+	Homepage for gamer when logged in as a registered user. Access game functions here.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

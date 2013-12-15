@@ -2,6 +2,9 @@
     Document   : index.jsp
     Created on : Dec 6, 2013, 2:30:40 PM
     Author     : mr.nam
+	
+	The main file and homepage for the SiQuoia application.
+	Account credentials are entered and verified (error checking) here, and a successful log in connects to the controler to send information.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

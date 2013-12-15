@@ -6,28 +6,40 @@
 	Payment information for purchasing packets.
 --%>
 
+<%@page import="Miscellanea.EnumString"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="Controller.Controller"%>
 <%
-
+    
     String strViewPage = "payment.jsp";
     //initial
+    session.setAttribute("error", null);
     //
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         if (request.getParameter("next") != null) {
-            
+            if (request.getParameter("pay") != null) {
                 session.setAttribute("payMethod", (String) request.getParameter("pay"));
-           if ( request.getParameter("check") !=null) {
-                //Controller.
+            }
+            String payMethod = (String) session.getAttribute("payMethod");
+            if (payMethod != null && payMethod.equals("point") && request.getParameter("check") != null) {
                 String topic = (String) session.getAttribute("topic");
-                session.invalidate();
-                session = request.getSession();
-                session.setAttribute("topic", topic);
-                strViewPage = "newQuiz.jsp";
+                DateFormat dateFormat = new SimpleDateFormat(EnumString.DATETIME_FORMAT.getValue());
+                Date date = new Date();
+                if (Controller.purchase(topic, dateFormat.format(date))) {
+                    session.invalidate();
+                    session = request.getSession();
+                    session.setAttribute("topic", topic);
+                    strViewPage = "newQuiz.jsp";
+                } else {
+                    session.setAttribute("error", "You do not have enough point! Please buy more point.");
+                }
                 
             }
         }
     }
-
+    
 %>
 
 <%    RequestDispatcher dispatcher = request.getRequestDispatcher(strViewPage);

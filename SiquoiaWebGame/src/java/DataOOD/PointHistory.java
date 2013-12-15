@@ -108,16 +108,20 @@ public class PointHistory {
      *
      * @param p
      */
-    public static void doQueryUpdatePurchase(Connection conn,PointHistory p) throws SQLException {
+    public static void doQueryInsert(Connection conn,PointHistory p) throws SQLException {
         String query = "INSERT INTO Point_History \n"
                 + "			(DateTime\n"
                 + "			,PointEarned\n"
                 + "			,PointUsed\n"
-                + "			,User_ID)\n"
+                + "			,User_ID"
+                + "                     ,Topic_ID)\n"
                 + "VALUES\n"
-                + "('2012-12-31 23:59:59', 0, 20, 2)";
+        +"('"+p.getDateTime()+"',"+p.getEarnedPoint()+","
+                +p.getUsedPoint()+","+p.getUserID()+","+p.getTopicID()+")";
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
+        stmt.executeUpdate(query);
+        stmt.close();
+        System.out.println("Insert into Point History table");
 
     }
 

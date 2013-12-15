@@ -7,6 +7,7 @@
 --%>
 <%@page import="Miscellanea.EnumValue"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file="controller.jsp" %> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,6 +55,7 @@
                         String topic = (String) session.getAttribute("topic");
                         int correct = (Integer) session.getAttribute("correct");
                         int total = (Integer) session.getAttribute("total");
+                        int totalPoint = Controller.getLoginUser().getPoint();
                 %>
                 <table border="0" style="width: 100%" class="table-striped table-condensed">
                         <tr>
@@ -68,7 +70,15 @@
                             <td><b>Correct Answer</b></td>
                             <td><%=correct%></td>
                         </tr>
-                        
+                        <tr>
+                            <td><b>You are reward</b></td>
+                            <td><%=correct%> point(s)</td>
+                        </tr>
+                        <hr />
+                        <tr>
+                            <td><b>Your total points</b></td>
+                            <td><%=totalPoint%> point(s)</td>
+                        </tr>
                     </table>
                 <%}%>
                 </div>

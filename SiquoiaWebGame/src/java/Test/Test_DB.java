@@ -6,6 +6,7 @@ package Test;
 
 import Controller.Controller;
 import DataOOD.Media;
+import DataOOD.PointHistory;
 import DataOOD.Question;
 import DataOOD.Topic;
 import DataOOD.User;
@@ -36,8 +37,11 @@ public class Test_DB {
             //test_addUser(conn);
             //test_Quiz_QuestionHas1C3W(conn);
             //test_getTopicByName();
-            test_Media();
-            test_Purchase();
+            //test_Media();
+            //test_Purchase();
+            //test_InsertPointHistory();
+            //test_UpdatePointtoUser();
+            test_EarnedPoint();
             conn.close();
 
         } catch (Exception ex) {
@@ -157,8 +161,31 @@ public class Test_DB {
         System.out.println(Arrays.toString(list.toArray()));
     }
 
-    private static void test_Purchase() {
-        Controller.purchase("Demo","2012-12-31 23:59:59");
+    private static void test_Purchase() throws SQLException {
+        User user = User.doQueryGetByID(conn,2);
+        System.out.println(user);
+        Controller.purchase(user,"Demo","2012-12-31 23:59:59");
                 
+    }
+
+    
+
+    private static void test_InsertPointHistory() throws SQLException {
+        PointHistory p = new PointHistory(1, "2012-12-31 23:59:59", 0, 5, 2, 1);
+        System.out.println(p.toString());
+        PointHistory.doQueryInsert(conn, p);
+    }
+
+    private static void test_UpdatePointtoUser() throws SQLException {
+        User user = User.doQueryGetByID(conn,2);
+        System.out.println(user);
+        user.setPoint(user.getPoint()+1000);
+        User.doQueryUpdateUser(conn, user);
+    }
+
+    private static void test_EarnedPoint() throws SQLException {
+        User user = User.doQueryGetByID(conn,2);
+        System.out.println(user);
+        Controller.updatePoint(user,"Demo","2012-12-31 23:59:59",10);
     }
 }

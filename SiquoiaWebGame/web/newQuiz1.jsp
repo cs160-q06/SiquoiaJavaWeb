@@ -6,7 +6,13 @@
 	Display the quiz packet, chosen in selectpacket
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="Miscellanea.EnumString"%>
 <%@page import="DataOOD.Quiz"%>
+<%@page import="Controller.Controller"%>
+
 <%
 
     String strViewPage = "newQuiz.jsp";
@@ -14,6 +20,7 @@
     session.setAttribute("select", null);
     session.setAttribute("error", null);
     //
+    
     if ("POST".equalsIgnoreCase(request.getMethod())) {
 
         if (session.getAttribute("start") == null) {//introduction
@@ -27,8 +34,7 @@
                     String s = (String) request.getParameter("answer");
                     if (quiz.isCurrentCorrect(s)) {
                         session.setAttribute("select", "correct");
-                        session.setAttribute("userPoint"
-                                ,(Integer)session.getAttribute("userPoint")+1);
+                        session.setAttribute("userPoint", (Integer) session.getAttribute("userPoint") + 1);
                     } else {
                         session.setAttribute("select", "incorrect");
                     }
@@ -38,17 +44,22 @@
             }
             //end of quiz
             Quiz quiz = (Quiz) session.getAttribute("quiz");
-            if(!quiz.hasNext())
-            {
-                strViewPage = "newReport.jsp";
-                int point = (Integer)session.getAttribute("userPoint");
-                String t = (String) session.getAttribute("topic");
+            if (!quiz.hasNext()) {
+                int point = (Integer) session.getAttribute("userPoint");
+                String topic = (String) session.getAttribute("topic");
                 int total = quiz.getTotal();
+                //
+                strViewPage = "newReport.jsp";
                 session.invalidate();
-                session = request.getSession();                
+                session = request.getSession();
                 session.setAttribute("correct", point);
-                session.setAttribute("topic", t); 
+                session.setAttribute("topic", topic);
                 session.setAttribute("total", total);
+                //
+                DateFormat dateFormat = new SimpleDateFormat(EnumString.DATETIME_FORMAT.getValue());
+                Date date = new Date();
+                //
+                Controller.updatePoint(topic, dateFormat.format(date), point);
             }
         }
     }

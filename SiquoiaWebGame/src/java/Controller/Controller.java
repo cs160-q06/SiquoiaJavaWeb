@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  * Controller controls all request from web pages
  *
@@ -224,11 +223,12 @@ public class Controller {
         }
         return loginUserList.get(0);
     }
-/**
- * 
- * @param i
- * @return 
- */
+
+    /**
+     *
+     * @param i
+     * @return
+     */
     public static List<PointHistory> getPointHistoryByUserID(int i) {
         List<PointHistory> list = new ArrayList<>();
         try {
@@ -238,11 +238,12 @@ public class Controller {
         }
         return list;
     }
-/**
- * 
- * @param name
- * @return 
- */
+
+    /**
+     *
+     * @param name
+     * @return
+     */
     public static boolean logOut(String name) {
         for (User u : loginUserList) {
             if (u.getName().equalsIgnoreCase(name)) {
@@ -252,33 +253,84 @@ public class Controller {
         }
         return false;
     }
-/**
- * 
- * @param demo
- * @param dateTime 
- */
-    public static void purchase(String demo, String dateTime) {
+
+    /**
+     *
+     * @param topicName
+     * @param dateTime
+     */
+    public static boolean purchase(String topicName, String dateTime) {
         User user = loginUserList.get(0);
+        return purchase(user, topicName, dateTime);
+
+    }
+
+    /**
+     *
+     * @param user
+     * @param topicName
+     * @param dateTime
+     */
+    public static boolean purchase(User user, String topicName, String dateTime) {
         int price = EnumValue.PACKET_PRICE_BY_POINT.getValue();
         if (user.getPoint() > price) {
-                        
-            Topic topic = getTopicByName(demo);
+
+            Topic topic = getTopicByName(topicName);
             //insert purchasehistory by query
-            PointHistory p = new PointHistory(0, dateTime, 0
-                    , price, user.getId(), topic.getId());
+            PointHistory p = new PointHistory(0, dateTime, 0, price, user.getId(), topic.getId());
             try {
-                PointHistory.doQueryUpdatePurchase(conn, p);
+                PointHistory.doQueryInsert(conn, p);
             } catch (SQLException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
             //update point of user by query
-            user.setPoint(user.getPoint()-price);
+            user.setPoint(user.getPoint() - price);
             try {
-                User.doQueryUpdateUser(conn,user);
+                User.doQueryUpdateUser(conn, user);
             } catch (SQLException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
+            return true;
         }
+        return false;
+    }
+
+    /**
+     *
+     * @param topicName
+     * @param dateTime
+     * @param earnedPoint
+     */
+    public static void updatePoint(String topicName, String dateTime, int earnedPoint) {
+        User user = loginUserList.get(0);
+        updatePoint(user, topicName, dateTime, earnedPoint);
+    }
+
+    /**
+     *
+     * @param user
+     * @param topicName
+     * @param dateTime
+     * @param earnedPoint
+     */
+    public static void updatePoint(User user, String topicName, String dateTime, int earnedPoint) {
+
+        Topic topic = getTopicByName(topicName);
+        //insert purchasehistory by query
+        PointHistory p = new PointHistory(0, dateTime, earnedPoint,0, user.getId(), topic.getId());
+        try {
+            PointHistory.doQueryInsert(conn, p);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //update point of user by query
+        user.setPoint(user.getPoint() + earnedPoint);
+        try {
+            User.doQueryUpdateUser(conn, user);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

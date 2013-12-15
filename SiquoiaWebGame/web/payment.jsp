@@ -72,7 +72,13 @@
                             <input type="radio" name="pay" id="optionsRadios3" value="card">
                             Visa/MasterCard
                         </label>
+                        
                     </div>
+                    <hr/>
+                    <label id="error">
+                        <%= (session.getAttribute("error") != null
+                            ? (String) session.getAttribute("error") : "")%>
+                    </label>
                 </div>
                 <%
                     if (session.getAttribute("payMethod") != null) {

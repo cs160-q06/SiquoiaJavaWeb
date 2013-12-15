@@ -16,8 +16,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -41,6 +44,7 @@ public class Test_App {
             //test_login();
             //test_getMediaByID();
             test_hashMD5();
+            test_getCurrentDateTIme(conn);
             conn.close();
 
         } catch (Exception ex) {
@@ -139,7 +143,6 @@ public class Test_App {
         System.out.println(MD5("admin1"));
         System.out.println(MD5("user1"));
         System.out.println(MD5("user2"));
-        
 
     }
 
@@ -155,5 +158,11 @@ public class Test_App {
         } catch (java.security.NoSuchAlgorithmException e) {
         }
         return null;
+    }
+
+    private static void test_getCurrentDateTIme(Connection conn) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date));
     }
 }

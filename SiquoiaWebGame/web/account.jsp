@@ -59,7 +59,7 @@
 
             <div class="button" style="left: 200px">
                 <a href="#"><img src="img/button_quiz_packets.png" alt="quiz pakets"
-                                 style="width: 100px; height: auto;">Submit a Quiz Packet</a>
+                                 style="width: 100px; height: auto;">Enter a Token Packet</a>
             </div>
 
             <div class="button" style="right:0;">
@@ -82,17 +82,17 @@
                         <tr>
                             <td><b>Amount of purchased Packets</b></td>
                             <td><%=amountPurchasePacket%></td>
-                            <td></td>
+                            <td align="middle"><button type="submit" name="" class="btn btn-mini" disabled="">Details</button></td>
                         </tr>
                         <tr>
                             <td><b>Amount of earned Points</b></td>
                             <td><%=amountEarnedPoint%></td>
-                            <td></td>
+                            <td align="middle"><button type="submit" name="" class="btn btn-mini" disabled="">Details</button></td>
                         </tr>
                         <tr>
                             <td><b>Amount of used Points</b></td>
                             <td><%=amountUsedPoint%></td>
-                            <td></td>
+                            <td align="middle"><button type="submit" name="" class="btn btn-mini" disabled="">Details</button></td>
                         </tr>
                     </table>
                 </div>

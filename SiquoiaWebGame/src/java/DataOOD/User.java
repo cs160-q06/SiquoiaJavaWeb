@@ -127,7 +127,18 @@ public class User {
      */
     public static List<User> doQueryGetAll(Connection conn) throws SQLException {
         String query = "SELECT * from USER;";
+        return doQuery(conn, query);
 
+    }
+
+    /**
+     *
+     * @param conn
+     * @param query
+     * @return
+     * @throws SQLException
+     */
+    public static List<User> doQuery(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
 
@@ -149,10 +160,23 @@ public class User {
      *
      * @param user
      */
-    public static void doQueryUpdateUser(Connection conn,User user) throws SQLException {
-        String query = "update USER set POINT = " + user.point + " where ID = " +user.getId();
-        PreparedStatement updateEXP = conn.prepareStatement(query);
-        ResultSet updateEXP_done = updateEXP.executeQuery();
+    public static void doQueryUpdateUser(Connection conn, User user) throws SQLException {
+        String query = "update USER set POINT = " + user.point + " where ID = " + user.getId();
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate(query);
+        stmt.close();
+        System.out.println("User " + user.getId() + " is successfully updated");
+    }
+
+    /**
+     *
+     * @param conn
+     * @param i
+     * @return
+     */
+    public static User doQueryGetByID(Connection conn, int i) throws SQLException {
+        String query = "SELECT * from USER where ID = " + i;
+        return doQuery(conn, query).get(0);
     }
 
     @Override

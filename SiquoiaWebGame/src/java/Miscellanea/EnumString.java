@@ -14,6 +14,7 @@ public enum EnumString {
     VIDEO("video") //
     , IMAGE("image") //
     , AUDIO("audio") //
+    , DATETIME_FORMAT("yyyy-MM-dd HH:mm:ss")
     ;
     private String s;
 

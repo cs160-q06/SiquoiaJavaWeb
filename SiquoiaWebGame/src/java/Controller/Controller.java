@@ -334,15 +334,16 @@ public class Controller {
 
     }
 
-    /**
-     *
-     * @param token
-     * @return
-     */
-    public static boolean isExistedToken(Token token){
+   /**
+    * 
+    * @param code
+    * @return 
+    */
+
+    public static boolean isExistedToken(String code) {
         List<Token> list = new ArrayList<>();
         try {
-            list = Token.doQueryByCode(conn, token.getCode());
+            list = Token.doQueryByCode(conn, code);
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -352,16 +353,15 @@ public class Controller {
             return true;
         }
     }
-    /**
-     * 
-     * @param token
-     * @return 
-     */
-    public static boolean isUsedToken(Token token) {
-        
+/**
+ * 
+ * @param code
+ * @return 
+ */
+    public static boolean isUsedToken(String code) {
         List<Token> list = new ArrayList<>();
         try {
-            list = Token.doQueryByCode(conn, token.getCode());
+            list = Token.doQueryByCode(conn, code);
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -373,6 +373,19 @@ public class Controller {
         } else {
             return false;
         }
+    }
+    /**
+     * 
+     * @param aaaa
+     * @return 
+     */
+    public static Token getTokenByCode(String code) {
+        try {
+            return Token.doQueryByCode(conn, code).get(0);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

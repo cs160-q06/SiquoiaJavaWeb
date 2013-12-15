@@ -174,21 +174,24 @@ public class Test_App {
 
     private static void testToken() throws SQLException {
         test_checkToken();
+        test_getByCode();
     }
 
     private static void test_checkToken() throws SQLException {
-        Token t = Token.doQueryByID(conn, 1).get(0);
-        t.setCode("AAAA");
-        t.setUserID(1);
-        Token.doQueryUpdateToken(conn, t);
+        String t = "AAAA";
         System.out.println(Controller.isExistedToken(t));
         System.out.println(Controller.isUsedToken(t));
-        t.setCode("CCCC");
+        t = "CCCC";
         System.out.println(Controller.isExistedToken(t));
         System.out.println(Controller.isUsedToken(t));
-        t.setCode("DDDD");
+        t = "DDDD";
         System.out.println(Controller.isExistedToken(t));
         System.out.println(Controller.isUsedToken(t));
 
+    }
+
+    private static void test_getByCode() {
+        Token t = Controller.getTokenByCode("AAAA");
+        System.out.println(t.toString());
     }
 }

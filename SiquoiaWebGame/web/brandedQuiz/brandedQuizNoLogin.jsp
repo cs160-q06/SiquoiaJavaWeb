@@ -31,7 +31,7 @@
 
     %>
     <head>
-        <title>Branded Quiz</title>
+        <title>Branded Quiz Without Login</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
 
@@ -54,7 +54,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-center">
                             <li>
-                                <h2>Branded Quiz</h2>
+                                <h2>Branded Quiz Without Login</h2>
                             </li>
                         </ul>
                         <ul class="nav pull-right">

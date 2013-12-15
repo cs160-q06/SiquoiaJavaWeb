@@ -27,7 +27,6 @@
         private Quiz quiz;
 
         private Quiz generateQuiz() {
-            Node<Topic> root = Controller.generateNodeTopic();
             Quiz quiz = Controller.generateQuizFromTopic(Controller.getTopicByName("Demo"));
             return quiz;
         }
@@ -37,7 +36,10 @@
         <title>Demo Quiz</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
-
+<script type="text/javascript">
+	window.history.forward(1);
+	
+</script>
     </head>
 
     <body>

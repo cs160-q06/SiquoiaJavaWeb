@@ -51,6 +51,7 @@ public class Test_App {
             //test_hashMD5();
             //test_getCurrentDateTIme(conn);
             testToken();
+            testTopic();
             conn.close();
 
         } catch (Exception ex) {
@@ -116,10 +117,6 @@ public class Test_App {
         }
     }
 
-    private static void test_ShoppingStore(Connection conn) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.s
-    }
-
     private static void testGenerateNodeTopic(Connection conn) {
         Node<Topic> root = Controller.generateNodeTopic();
         System.out.println(root.toString());
@@ -173,8 +170,10 @@ public class Test_App {
     }
 
     private static void testToken() throws SQLException {
-        test_checkToken();
+        //test_checkToken();
         test_getByCode();
+        //test_updateTokenToUsed();
+
     }
 
     private static void test_checkToken() throws SQLException {
@@ -193,5 +192,21 @@ public class Test_App {
     private static void test_getByCode() {
         Token t = Controller.getTokenByCode("AAAA");
         System.out.println(t.toString());
+        System.out.println(Controller.getTopicByID(t.getTopic_ID()));
+    }
+
+    private static void test_updateTokenToUsed() {
+        //guest
+        Token t = Controller.getTokenByCode("BBBB");
+        Controller.updateTokenToUsed(t, 0);
+    }
+
+    private static void testTopic() {
+        //test_getTopicbyID();
+    }
+
+    private static void test_getTopicbyID() {
+        System.out.println(Controller.getTopicByID(1).toString());
+
     }
 }

@@ -213,8 +213,8 @@ public class Test_DB {
     }
 
     private static void testToken() throws SQLException {
-        test_getAllToken();
-        test_getToken();
+        //test_getAllToken();
+        //test_getToken();
         //test_insertToken();
         test_updateToken();
         

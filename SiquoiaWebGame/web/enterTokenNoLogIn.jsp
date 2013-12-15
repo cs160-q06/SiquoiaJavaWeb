@@ -46,7 +46,7 @@
                 <div class="well well-small" align="center">
                     <label class="control-label" for="inputEmail">Enter Packet Code</label>
                     <hr />
-                    <input type="text" name="code" id="inputPacketCode" placeholder="Enter the 4-digit code">
+                    <input type="text" name="code" id="code" placeholder="Enter the 4-digit code">
                     <hr />
                     <label id="error">
                         <%= (session.getAttribute("error") != null

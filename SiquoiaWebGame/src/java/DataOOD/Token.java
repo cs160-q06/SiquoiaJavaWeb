@@ -18,8 +18,6 @@ import java.util.List;
  */
 public class Token {
 
-    
-
     private int topic_ID;
     private int userID;
     private int numberQuestion;
@@ -154,11 +152,9 @@ public class Token {
                 + "Description = '" + token.getDescription() + "',\n"
                 + "Status = '" + token.getStatus() + "',\n"
                 + "NumberQuestion = " + token.getNumberQuestion() + ",\n";
-        if (token.getId() == 0) {
-            query += "User_ID =  null,\n";
-        } else {
+        if (token.getUserID()> 0) {
             query += "User_ID = " + token.getUserID() + ",\n";
-        }
+        } 
         query += "Topic_ID = " + token.getTopic_ID() + "\n"
                 + "WHERE ID = " + token.getId();
         Statement stmt = conn.createStatement();
@@ -174,7 +170,7 @@ public class Token {
      * @return
      */
     public static List<Token> doQueryByCode(Connection conn, String code) throws SQLException {
-        String query = "Select * from TOKEN where CODE = '" + code+"'";
+        String query = "Select * from TOKEN where CODE = '" + code + "'";
         return doQuery(conn, query);
     }
 

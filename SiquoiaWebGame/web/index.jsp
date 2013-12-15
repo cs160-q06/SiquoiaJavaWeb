@@ -91,6 +91,8 @@
 
                     <button type="submit" name = "forward" class="btn btn-warning" value="signup.jsp">Register</button>
                     <button type="submit" name = "forward" class="btn btn-success" value="demoQuiz.jsp">Try It</button>
+                    <button type="submit" name = "forward" class="btn btn-danger" value="enterTokenNoLogIn.jsp">Enter Branded Packet</button>
+                    
                 </div>
         </form>
 

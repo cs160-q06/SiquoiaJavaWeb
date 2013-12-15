@@ -15,6 +15,7 @@ public enum EnumString {
     , IMAGE("image") //
     , AUDIO("audio") //
     , DATETIME_FORMAT("yyyy-MM-dd HH:mm:ss")
+    , USED_TOKEN("used");
     ;
     private String s;
 

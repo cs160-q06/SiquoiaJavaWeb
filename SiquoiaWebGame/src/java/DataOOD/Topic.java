@@ -18,6 +18,10 @@ import java.util.List;
  */
 public class Topic {
 
+    
+
+    
+
     private int id;
     private String description;
     private int parent;
@@ -128,7 +132,7 @@ public class Topic {
         }
         return null;
     }
-
+    
     /**
      * get topic by ID
      *
@@ -242,13 +246,25 @@ public class Topic {
         }
         return null;
     }
-
+    /**
+     * 
+     * @param conn
+     * @param id
+     * @return 
+     */
+    public static Node<Topic> getTopicByID(Connection conn, int id) throws SQLException {
+        Node<Topic> root = createRootNode(conn);
+        return root.getChildNodeByID(id);
+    }
     @Override
     public String toString() {
         return "[(id : " + id + "),(topic : " + description
                 + "),(parent : " + parent + "),(level : " + level + ")]";
     }
-
+    /**
+     * 
+     * @return 
+     */
     String toSimpleString() {
         return description;
     }

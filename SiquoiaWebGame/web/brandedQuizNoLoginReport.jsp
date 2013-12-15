@@ -1,9 +1,7 @@
 <%-- 
-    Document   : demoReport
-    Created on : Dec 8, 2013, 10:23:22 PM
+    Document   : brandedQuizNoLoginReport
+    Created on : Dec 15, 2013, 3:39:38 AM
     Author     : mr.nam
-	
-	Reporting for the demonstration quiz packet, available at the end of the quiz.
 --%>
 
 <%@page import="Miscellanea.EnumValue"%>
@@ -12,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Demo Report</title>
+        <title>Report</title>
                 <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
 
     </head>
@@ -75,7 +73,7 @@
                 </div>
             </div>
             <div align="center">
-                <a href="demoQuiz.jsp"><button type="submit" class="btn btn-warning" >Play again</button>
+                <a href="index.jsp"><button type="submit" class="btn btn-warning" >Back Home</button>
                 </a>
             </div>
         </div>
@@ -84,3 +82,4 @@
         </footer>
     </body>
 </html>
+

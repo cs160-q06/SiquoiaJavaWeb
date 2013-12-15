@@ -118,11 +118,22 @@ public class Controller {
      * @return
      */
     public static Quiz generateQuizFromTopic(Topic topic) {
+        return generateQuizFromTopic(topic, EnumValue.PACKET_QUESTION_NUMBER.getValue());
+
+    }
+
+    /**
+     *
+     * @param topic
+     * @param numberQuestion
+     * @return
+     */
+    public static Quiz generateQuizFromTopic(Topic topic, int numberQuestion) {
         List<Question> list = new ArrayList<>();
         List<Question> sublist = new ArrayList<>();
         try {
             list = Question.doQueryByTopic(conn, topic);
-            while (sublist.size() < EnumValue.PACKET_QUESTION_NUMBER.getValue()
+            while (sublist.size() < numberQuestion
                     && !list.isEmpty()) {
                 int random = (int) (Math.random() * list.size());
                 sublist.add(list.get(random));
@@ -132,7 +143,6 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new Quiz(sublist);
-
     }
 
     /**
@@ -334,12 +344,11 @@ public class Controller {
 
     }
 
-   /**
-    * 
-    * @param code
-    * @return 
-    */
-
+    /**
+     *
+     * @param code
+     * @return
+     */
     public static boolean isExistedToken(String code) {
         List<Token> list = new ArrayList<>();
         try {
@@ -353,11 +362,12 @@ public class Controller {
             return true;
         }
     }
-/**
- * 
- * @param code
- * @return 
- */
+
+    /**
+     *
+     * @param code
+     * @return
+     */
     public static boolean isUsedToken(String code) {
         List<Token> list = new ArrayList<>();
         try {
@@ -368,20 +378,50 @@ public class Controller {
         if (list.isEmpty()) {
             return false;
         }
-        if (list.get(0).getUserID() > 0) {
+        if (list.get(0).getUserID() > 0
+                || !list.get(0).getStatus().equalsIgnoreCase(EnumString.USED_TOKEN.getValue())) {
             return true;
         } else {
             return false;
         }
     }
+
     /**
-     * 
+     *
      * @param aaaa
-     * @return 
+     * @return
      */
     public static Token getTokenByCode(String code) {
         try {
             return Token.doQueryByCode(conn, code).get(0);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param token
+     * @param userID
+     */
+    public static void updateTokenToUsed(Token token, int userID) {
+        token.setStatus(EnumString.USED_TOKEN.getValue());
+        token.setUserID(userID);
+        try {
+            Token.doQueryUpdateToken(conn, token);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    /**
+     * 
+     * @param id
+     * @return 
+     */
+    public static Topic getTopicByID(int id) {
+        try {        
+            return Topic.getTopicByID(conn, id).getData();
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -23,9 +23,8 @@
         private List<Topic> list;
         private Quiz quiz;
 
-        private Quiz generateQuiz() {
-            Node<Topic> root = Controller.generateNodeTopic();
-            Quiz quiz = Controller.generateQuizFromTopic(Controller.getTopicByName("Demo"));
+        private Quiz generateQuiz(String topic, int numberQuestion) {
+            Quiz quiz = Controller.generateQuizFromTopic(Controller.getTopicByName(topic), numberQuestion);
             return quiz;
         }
 
@@ -34,7 +33,10 @@
         <title>Branded Quiz Without Login</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
+        <script type="text/javascript">
+            window.history.forward(1);
 
+        </script>
     </head>
 
     <body>
@@ -44,7 +46,7 @@
                 <div class="container-fluid">
                     <ul class="nav pull-left">
                         <li>
-                            <a href="index.jsp">
+                            <a href="#">
                                 <img class="centre" id="topBar" src="img/SiQuoia logo.jpg" />
                             </a>
                         </li>
@@ -66,11 +68,16 @@
         </div>
         <div id="wallpaper">
 
-            <form action="demoQuiz1.jsp" class="loginfield" method="post">
+            <form action="brandedQuizNoLogin1.jsp" class="loginfield" method="post">
                 <div id="sink">
                     <%
-                        if (session.getAttribute("quiz") == null) {//generate quiz in beginning
-                            quiz = generateQuiz();
+                        String topicName = (String) session.getAttribute("branded_topic");
+
+                        if (topicName != null
+                            && session.getAttribute("quiz") == null) {//generate quiz in beginning
+                            
+                            int numberQuestion = (Integer) session.getAttribute("numberQuestion");
+                            quiz = generateQuiz(topicName, numberQuestion);
                             session.setAttribute("userPoint", 0); //
                         }
                         if (session.getAttribute("start") == null) {
@@ -102,7 +109,7 @@
                         session.setAttribute("quiz", quiz);
                     %>
                     <div class="well well-small">
-                        <label style="text-align: center">Question #<%=count%>/<%=total%></label> 
+                        <label style="text-align: center">Topic: <b><%=topicName%></b> | Question #<%=count%>/<%=total%></label> 
                     </div>
                     <%
                         if (mediaID > 0) {
@@ -154,7 +161,7 @@
                         }
                     %>
                     <div class="well well-small" align=""center>
-                       Total Correct: <%= (session.getAttribute("userPoint") != null
+                        Total Correct: <%= (session.getAttribute("userPoint") != null
                                 ? (Integer) session.getAttribute("userPoint") : 0)%>
                         <br />  
                         <%= (session.getAttribute("select") != null

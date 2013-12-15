@@ -13,7 +13,7 @@
     //
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         if (session.getAttribute("submit") == null) {//introduction
-            String code = (String) session.getAttribute("code");
+            String code = (String) request.getParameter("code");
             if (code == null || code.isEmpty()) {
                 session.setAttribute("error", "CODE cannot be blank!");
             } else {
@@ -22,12 +22,14 @@
                 } else if (!Controller.isUsedToken(code)) {// already used
                     session.setAttribute("error", "This CODE is already used!");
                 } else {
-                    strViewPage = "enterTokenNoLogIn1.jsp";
+                    Token token = Controller.getTokenByCode(code);
+                    Controller.updateTokenToUsed(token, 0);//0 because guest
+                    strViewPage = "brandedQuizNoLogin.jsp";
                     session.invalidate();
                     session = request.getSession();
-                    Token token = Controller.getTokenByCode(code);
-                    token.setCode(code);
-                    //Controller.
+                    session.setAttribute("branded_topic", Controller.getTopicByID(token.getTopic_ID()).getDescription());
+                    session.setAttribute("numberQuestion", token.getNumberQuestion());
+
                 }
             }
         }

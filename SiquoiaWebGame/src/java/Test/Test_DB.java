@@ -19,7 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Test getting values of quizzes like topic and question to make sure the application connects with the database correctly. Tests querying for login.
  * @author mr.nam
  */
 public class Test_DB {

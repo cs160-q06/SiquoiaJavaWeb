@@ -5,7 +5,7 @@
 package Miscellanea;
 
 /**
- *
+ * Enumerated type to store the default number of questions, points, prices, and other values.
  * @author mr.nam
  */
 public enum EnumValue {

@@ -5,7 +5,7 @@
 package Miscellanea;
 
 /**
- *
+ * Enumerated type to store multimedia values for quiz questions.
  * @author mr.nam
  */
 public enum EnumString {

@@ -24,7 +24,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Test the functions of the SiQuoia application; connect to the database, generate packet topic, select topic, generate quiz, login, querying media,
+ * security hashing, etc.
  * @author mr.nam
  */
 public class Test_App {

@@ -53,8 +53,9 @@
             </form>
         </div>
         <!-- -->
-        <footer style="text-align: right">
-            <small >© Copyright 2013, SQ06 Sequoia Inc.</small>
-        </footer>
+        <hr />
+        <div>
+            <small>© Copyright 2013, SQ06 Sequoia Inc.</small>
+        </div>
     </body>
 </html>

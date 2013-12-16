@@ -70,127 +70,127 @@
                 </div>
             </div>
         </div>
-        <div id="wallpaper">
+        <form action="brandedQuizNoLogin1.jsp" class="loginfield" method="post">
+            <div id="sink">
+                <div class="well well-small" align="center" style="width: 150px">
+                    <img src="img/branded.jpg"/>
 
-            <form action="brandedQuizNoLogin1.jsp" class="loginfield" method="post">
-                <div id="sink">
-                    <div class="well well-small" align="center" style="width: 150px">
-                        <img src="img/branded.jpg"/>
+                </div>
+                <%                        String topicName = (String) session.getAttribute("branded_topic");
 
-                    </div>
-                    <%                        String topicName = (String) session.getAttribute("branded_topic");
+                    if (topicName != null
+                            && session.getAttribute("quiz") == null) {//generate quiz in beginning
 
-                        if (topicName != null
-                                && session.getAttribute("quiz") == null) {//generate quiz in beginning
+                        int numberQuestion = (Integer) session.getAttribute("numberQuestion");
+                        quiz = generateQuiz(topicName, numberQuestion);
+                        session.setAttribute("userPoint", 0); //
+                    }
+                    if (session.getAttribute("start") == null) {
+                %>
 
-                            int numberQuestion = (Integer) session.getAttribute("numberQuestion");
-                            quiz = generateQuiz(topicName, numberQuestion);
-                            session.setAttribute("userPoint", 0); //
-                        }
-                        if (session.getAttribute("start") == null) {
-                    %>
-                    
-                    <div class="well well-small">
-                        <label><b>Instructions</b></label>
-                        <ul>
-                            <li>Read the question carefully</li>
-                            <li>Select an answer and click <b>NEXT</b></li>
-                            <li>When the quiz is in progress, cannot go Back</li>
-                            <li>Click <b>SAVE</b> to save the quiz and exit. 
-                                (*Play the quiz without login will not have <b>SAVE</b> option)</li>
-                        </ul>
-                    </div>
+                <div class="well well-small">
+                    <label><b>Instructions</b></label>
+                    <ul>
+                        <li>Read the question carefully</li>
+                        <li>Select an answer and click <b>NEXT</b></li>
+                        <li>When the quiz is in progress, cannot go Back</li>
+                        <li>Click <b>SAVE</b> to save the quiz and exit. 
+                            (*Play the quiz without login will not have <b>SAVE</b> option)</li>
+                    </ul>
+                </div>
+                <%
+                } else {
+                    if (session.getAttribute("next") != null) {
+                        quiz.next();
+                        session.setAttribute("next", null);
+                    }
+                    int count = quiz.getCurrentNumber();
+                    int total = quiz.getTotal();
+                    Question q = quiz.getCurrentQuestion();
+                    String des = q.getQuestion();
+                    String a1 = q.getAnswer1();
+                    String a2 = q.getAnswer2();
+                    String a3 = q.getAnswer3();
+                    String a4 = q.getCorrectAnswer();
+                    int mediaID = q.getMedia();
+                    session.setAttribute("quiz", quiz);
+                %>
+                <div class="well well-small">
+                    <label style="text-align: center">Topic: <b><%=topicName%></b> | Question #<%=count%>/<%=total%></label> 
+                </div>
+                <%
+                    if (mediaID > 0) {
+                %>
+
+
+                <div class="well well-small">
                     <%
-                    } else {
-                        if (session.getAttribute("next") != null) {
-                            quiz.next();
-                            session.setAttribute("next", null);
-                        }
-                        int count = quiz.getCurrentNumber();
-                        int total = quiz.getTotal();
-                        Question q = quiz.getCurrentQuestion();
-                        String des = q.getQuestion();
-                        String a1 = q.getAnswer1();
-                        String a2 = q.getAnswer2();
-                        String a3 = q.getAnswer3();
-                        String a4 = q.getCorrectAnswer();
-                        int mediaID = q.getMedia();
-                        session.setAttribute("quiz", quiz);
+                        Media media = Controller.getMediaByID(mediaID);
+                        String type = media.getType();
+                        String mediaDes = media.getDescription();
+                        if (type.equals(EnumString.IMAGE.getValue())) {
                     %>
-                    <div class="well well-small">
-                        <label style="text-align: center">Topic: <b><%=topicName%></b> | Question #<%=count%>/<%=total%></label> 
-                    </div>
+                    <img src="<%=mediaDes%>" alt="Pulpit rock" width="100%"/>
                     <%
-                        if (mediaID > 0) {
+                    } else if (type.equals(EnumString.AUDIO.getValue())) {
                     %>
-
-
-                    <div class="well well-small">
-                        <%
-                            Media media = Controller.getMediaByID(mediaID);
-                            String type = media.getType();
-                            String mediaDes = media.getDescription();
-                            if (type.equals(EnumString.IMAGE.getValue())) {
-                        %>
-                        <img src="<%=mediaDes%>" alt="Pulpit rock" width="100%"/>
-                        <%
-                        } else if (type.equals(EnumString.AUDIO.getValue())) {
-                        %>
-                        <embed  width="100%" src="<%=mediaDes%>" />
-                        <%
-                        } else if (type.equals(EnumString.VIDEO.getValue())) {
-                        %>
-                        <video width="100%" controls="" autoplay="" src="<%=mediaDes%>"></video>
-
-                        <%
-                            }
-                        %>
-                    </div>
+                    <embed  width="100%" src="<%=mediaDes%>" />
+                    <%
+                    } else if (type.equals(EnumString.VIDEO.getValue())) {
+                    %>
+                    <video width="100%" controls="" autoplay="" src="<%=mediaDes%>"></video>
 
                     <%
                         }
                     %>
-
-
-
-                    <div class="well well-small">
-                        <label><b><%=des%></b></label>
-                        <hr />
-                        <p>
-                            <input type="radio" name="answer" id="1" value="<%=a1%>" /><%=a1%><br /><br />
-                            <input type="radio" name="answer" id="2" value="<%=a2%>" /><%=a2%><br /><br />
-                            <input type="radio" name="answer" id="3" value="<%=a3%>" /><%=a3%><br /><br />
-                            <input type="radio" name="answer" id="4" value="<%=a4%>" /><%=a4%><br /><br />
-                        </p>
-                    </div>
-
-
-
-                    <%
-                        }
-                    %>
-                    <div class="well well-small" align=""center>
-                        Total Correct: <%= (session.getAttribute("userPoint") != null
-                                ? (Integer) session.getAttribute("userPoint") : 0)%>
-                        <br />  
-                        <%= (session.getAttribute("select") != null
-                                ? (String) session.getAttribute("select") : "")%>
-                        <br />
-                        <%= (session.getAttribute("error") != null
-                                ? "Error: " + (String) session.getAttribute("error") : "")%>
-                    </div>
-                    <div align=""center>   
-
-                        <button type="submit" class="btn btn-large" value="Next" name="next">Next</button>
-                        <button type="submit" class="btn btn-large" name="save" disabled="">Save</button>
-                    </div>
                 </div>
 
-            </form>
+                <%
+                    }
+                %>
 
 
 
-        </div> <!-- END wallpaper -->
+                <div class="well well-small">
+                    <label><b><%=des%></b></label>
+                    <hr />
+                    <p>
+                        <input type="radio" name="answer" id="1" value="<%=a1%>" /><%=a1%><br /><br />
+                        <input type="radio" name="answer" id="2" value="<%=a2%>" /><%=a2%><br /><br />
+                        <input type="radio" name="answer" id="3" value="<%=a3%>" /><%=a3%><br /><br />
+                        <input type="radio" name="answer" id="4" value="<%=a4%>" /><%=a4%><br /><br />
+                    </p>
+                </div>
+
+
+
+                <%
+                    }
+                %>
+                <div class="well well-small" align="center">
+                    Total Correct: <%= (session.getAttribute("userPoint") != null
+                                ? (Integer) session.getAttribute("userPoint") : 0)%>
+                    <br />  
+                    <%= (session.getAttribute("select") != null
+                                ? (String) session.getAttribute("select") : "")%>
+                    <br />
+                    <%= (session.getAttribute("error") != null
+                                ? "Error: " + (String) session.getAttribute("error") : "")%>
+                </div>
+                <div align="center">   
+
+                    <button type="submit" class="btn btn-large" value="Next" name="next">Next</button>
+                    <button type="submit" class="btn btn-large" name="save" disabled="">Save</button>
+                </div>
+            </div>
+
+        </form>
+
+
+        <hr />
+        <div>
+            <small>© Copyright 2013, SQ06 Sequoia Inc.</small>
+        </div>
     </body>
 
 

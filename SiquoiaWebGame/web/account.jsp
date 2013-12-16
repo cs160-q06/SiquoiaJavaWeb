@@ -6,6 +6,7 @@
         Homepage for gamer when logged in as a registered user. Access game functions here.
 --%>
 
+<%@page import="DataOOD.Question"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="controller.jsp" %> 
 <%@ include file="account1.jsp" %> 
@@ -99,9 +100,42 @@
                     </form>
                 </div>
             </div>
+            <div class="well well-small" style="">
+                <div align="center"><b>Leader Board</b></div>
+                <hr />
+
+                <div>
+                    <%
+                        List<Question> top10 = Controller.getTop10Question();
+                    %>
+                    <div align="center">Top 10 Highest Ranking Question</div>
+                    <table border="0" style="width: 100%" class="table-striped table-condensed">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Question</th>
+
+                        </tr>
+                        <%
+                            for (Question q : top10) {
+                                int ranking = q.getRanking();
+                                String question = q.getQuestion();
+                                if (question.length() > 60) {
+                                    question = question.substring(0, 59) + "...";
+                                }
+                        %>
+                        <tr>
+                            <td><%=ranking%></td>
+                            <td><%=question%></td>
+
+                        </tr>
+                        <%}%>
+                    </table>
+                </div>
+            </div>              
         </div>
-        <footer>
+                    <hr />
+        <div>
             <small>© Copyright 2013, SQ06 Sequoia Inc.</small>
-        </footer>
+        </div>
     </body>
 </html>

@@ -69,8 +69,6 @@
                 </div>
             </div>
         </div>
-        <div id="wallpaper">
-
             <form action="demoQuiz1.jsp" class="loginfield" method="post">
                 <div id="sink">
                     <%
@@ -105,10 +103,11 @@
                         String a3 = q.getAnswer3();
                         String a4 = q.getCorrectAnswer();
                         int mediaID = q.getMedia();
+                        int ranking = q.getRanking();
                         session.setAttribute("quiz", quiz);
                     %>
                     <div class="well well-small">
-                        <label style="text-align: center">Question #<%=count%>/<%=total%></label> 
+                        <label style="text-align: center">Question #<%=count%>/<%=total%> | <%=ranking%></label> 
                     </div>
                     <%
                         if (mediaID > 0) {
@@ -159,7 +158,7 @@
                     <%
                         }
                     %>
-                    <div class="well well-small" align=""center>
+                    <div class="well well-small" align=center">
                         Total Correct: <%= (session.getAttribute("userPoint") != null
                                ? (Integer) session.getAttribute("userPoint") : 0)%>
                         <br />  
@@ -169,7 +168,7 @@
                         <%= (session.getAttribute("error") != null
                                 ? "Error: " + (String) session.getAttribute("error") : "")%>
                     </div>
-                    <div align=""center>   
+                    <div align="center">   
 
                         <button type="submit" class="btn btn-large" value="Next" name="next">Next</button>
                     </div>
@@ -177,9 +176,11 @@
 
             </form>
 
+<hr />
+        <div>
+            <small>© Copyright 2013, SQ06 Sequoia Inc.</small>
+        </div>
 
-
-        </div> <!-- END wallpaper -->
     </body>
 
 

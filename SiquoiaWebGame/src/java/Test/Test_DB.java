@@ -208,9 +208,11 @@ public class Test_DB {
 
     private static void testQuestion() throws SQLException {
         //test_Question(conn);
-        test_QuestionOfTopic();
+        //test_QuestionOfTopic();
         //test_Quiz_QuestionHas1C3W(conn);
         //test_Media();
+        test_updateQuestion();
+        test_top10Question();
 
     }
 
@@ -284,6 +286,22 @@ public class Test_DB {
         String questionList = "2|5|9|15|19|21|25|26|29|31|32|33|35|36|44|48|51|54|58|59";
         QuizHistory q = new QuizHistory(0, userID, topicID, questionList, 26, 3);
         QuizHistory.doQueryInsert(conn,q);
+    }
+
+    private static void test_updateQuestion() throws SQLException {
+        Question q = Question.doQueryGetByID(conn, 435);
+        System.out.println(q.toString());
+        q.incrementRanking();
+        System.out.println(q.toString());
+        Question.doQueryUpdateRanking(conn,q);
+    }
+
+    private static void test_top10Question() throws SQLException {
+        List<Question> list = Question.doQueryGetTop10(conn);
+        for(Question q : list)
+        {
+            System.out.print("|"+q.getId()+"-"+q.getRanking());
+        }
     }
 
 }

@@ -86,7 +86,13 @@ public class Quiz {
      * @return true if correct
      */
     public boolean isCurrentCorrect(String answer) {
-        return correctQuestionList.get(currentQuestionIndex).getCorrectAnswer().toLowerCase().equals(answer.toLowerCase());
+        Question q = correctQuestionList.get(currentQuestionIndex);
+        if(q.getCorrectAnswer().toLowerCase().equals(answer.toLowerCase()))
+        {
+            Controller.Controller.increaseQuestionRanking(q.getId());
+            return true;
+        }
+        return false;
     }
 
     /**

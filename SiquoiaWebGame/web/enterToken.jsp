@@ -66,8 +66,9 @@
                 </div>
             </div>
         </form>
-        <footer>
+        <hr />
+        <div>
             <small>© Copyright 2013, SQ06 Sequoia Inc.</small>
-        </footer>
+        </div>
     </body>
 </html>

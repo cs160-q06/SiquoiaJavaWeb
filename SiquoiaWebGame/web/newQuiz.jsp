@@ -200,5 +200,9 @@
             </div>
 
         </form>
+                    <hr />
+        <div>
+            <small>© Copyright 2013, SQ06 Sequoia Inc.</small>
+        </div>
     </body>
 </html>

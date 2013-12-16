@@ -39,10 +39,6 @@
                 </div>
             </div>
         </div>
-        <div id="wallpaper">
-
-
-
             <div id="sink">
 
                 <form class="loginfield" action="signup1.jsp" method="post">
@@ -88,9 +84,9 @@
 
             </div> <!-- END login -->
 
-        </div> <!-- END wallpaper -->
-        <footer>
+        <hr />
+        <div>
             <small>© Copyright 2013, SQ06 Sequoia Inc.</small>
-        </footer>
+        </div>
     </body>
 </html>

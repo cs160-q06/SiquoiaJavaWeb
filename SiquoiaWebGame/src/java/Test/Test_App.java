@@ -53,6 +53,7 @@ public class Test_App {
             testToken();
             testTopic();
             testUser();
+            testQuestion();
             conn.close();
 
         } catch (Exception ex) {
@@ -219,5 +220,22 @@ public class Test_App {
         User user = User.doQueryGetByID(conn, 2);
         user.setPoint(user.getPoint()+100);
         Controller.updateUser(user);
+    }
+
+    private static void testQuestion()  {
+        test_increaseRanking();
+        test_top10();
+    }
+
+    private static void test_increaseRanking() {
+        Controller.increaseQuestionRanking(23);
+    }
+
+    private static void test_top10()  {
+        List<Question> list =Controller.getTop10Question();
+        for(Question q : list)
+        {
+            System.out.print("|"+q.getId()+"-"+q.getRanking());
+        }
     }
 }

@@ -133,12 +133,13 @@ public class Question {
         }
         return list;
     }
+
     /**
-     * 
+     *
      * @param conn
      * @param query
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public static List<Question> doQuery(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
@@ -164,7 +165,7 @@ public class Question {
         }
         return list;
     }
-    
+
     @Override
     public String toString() {
         String s = "Question #" + id + " (" + topicID + "): " + question + "\n";
@@ -174,4 +175,35 @@ public class Question {
         return s; //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param conn
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    public static Question doQueryGetByID(Connection conn, int id) throws SQLException {
+        String query = "Select * from QUESTION where ID = " + id;
+        return doQuery(conn, query).get(0);
+    }
+    /**
+     * 
+     * @param conn
+     * @param q
+     * @throws SQLException 
+     */
+    public static void doQueryUpdateRanking(Connection conn, Question q) throws SQLException {
+        String query = "UPDATE siquoia.question\n"
+                + "SET\n"
+                + "Ranking = " + q.getRanking() + "\n"
+                + "WHERE ID = " + q.getId() + ";";
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate(query);
+        stmt.close();
+        System.out.println("Question " + q.getId() + " is successfully updated");
+    }
+    public static List<Question> doQueryGetTop10(Connection conn) throws SQLException {
+        String query = "select * from QUESTION order by RANKING desc limit 10;";
+        return doQuery(conn, query);
+    }
 }

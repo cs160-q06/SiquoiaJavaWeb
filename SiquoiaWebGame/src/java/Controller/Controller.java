@@ -414,13 +414,14 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
-     * 
+     *
      * @param id
-     * @return 
+     * @return
      */
     public static Topic getTopicByID(int id) {
-        try {        
+        try {
             return Topic.getTopicByID(conn, id).getData();
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -428,12 +429,44 @@ public class Controller {
         return null;
     }
 
+    /**
+     *
+     * @param user
+     */
     public static void updateUser(User user) {
         try {
             User.doQueryUpdateUser(conn, user);
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     *
+     * @param id
+     */
+    public static void increaseQuestionRanking(int id) {
+        try {
+            Question q = Question.doQueryGetByID(conn, id);
+            q.incrementRanking();
+            Question.doQueryUpdateRanking(conn, q);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * 
+     * @return
+     * @throws SQLException 
+     */
+    public static List<Question> getTop10Question()  {
+        try {
+            return Question.doQueryGetTop10(conn);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new ArrayList<>();
     }
 
 }

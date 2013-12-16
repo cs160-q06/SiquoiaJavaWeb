@@ -46,9 +46,9 @@
         </div>
         <div id="sink">
             <div class="well well-small" align="center" style="width: 150px">
-                        <img src="img/branded.jpg"/>
+                <img src="img/branded.jpg"/>
 
-                    </div>
+            </div>
             <div class="well well-small">
                 <div align="center">
                     <b>Report</b>
@@ -83,9 +83,10 @@
                 </a>
             </div>
         </div>
-        <footer>
+        <hr />
+        <div>
             <small>© Copyright 2013, SQ06 Sequoia Inc.</small>
-        </footer>
+        </div>
     </body>
 </html>
 

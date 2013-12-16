@@ -2,8 +2,8 @@
     Document   : test
     Created on : Dec 8, 2013, 4:34:23 PM
     Author     : mr.nam
-	
-	Test code
+        
+        Test code
 --%>
 
 <%@page import="DataOOD.User"%>
@@ -15,7 +15,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Buypacket</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
-
+        <script type="text/javascript">
+            var hook = true;
+            window.onbeforeunload = function() {
+                if (hook) {
+                    return "\nDid you save the game?\nUnless all of your point and progress will be lost!\n"
+                }
+            }
+            function unhook() {
+                hook = false;
+            }
+        </script>
     </head>
     <body>
         <div class="navbar navbar-inverse">
@@ -37,7 +47,7 @@
                             </li>
                         </ul>
                         <ul class="nav pull-right">
-                            <li>Welcome <b> <%=usernameLogin%></b>
+                            <li>Welcome <b> <%--=usernameLogin--%></b>
                                 <form action="controller.jsp" method="post">
                                     <i class="icon-white icon-lock"></i> 
                                     <button type="submit" name="logout">Logout</button>
@@ -50,7 +60,9 @@
             </div>
         </div>
         <div id="sink">
-            <div class="well well-small"></div>
+            <div class="well well-small">
+                 
+            </div>
         </div>
         <footer>
             <small>© Copyright 2013, SQ06 Sequoia Inc.</small>

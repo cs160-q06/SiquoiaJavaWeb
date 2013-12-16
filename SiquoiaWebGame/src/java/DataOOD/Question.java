@@ -18,6 +18,8 @@ import java.util.List;
  */
 public class Question {
 
+    
+
     private int id;
     private String correctAnswer;
     private String answer1;
@@ -131,7 +133,13 @@ public class Question {
         }
         return list;
     }
-
+    /**
+     * 
+     * @param conn
+     * @param query
+     * @return
+     * @throws SQLException 
+     */
     public static List<Question> doQuery(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
@@ -156,7 +164,7 @@ public class Question {
         }
         return list;
     }
-
+    
     @Override
     public String toString() {
         String s = "Question #" + id + " (" + topicID + "): " + question + "\n";

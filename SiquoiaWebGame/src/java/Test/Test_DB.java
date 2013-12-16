@@ -8,6 +8,7 @@ import Controller.Controller;
 import DataOOD.Media;
 import DataOOD.PointHistory;
 import DataOOD.Question;
+import DataOOD.QuizHistory;
 import DataOOD.Token;
 import DataOOD.Topic;
 import DataOOD.User;
@@ -17,8 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Random;
 
 /**
  * Test getting values of quizzes like topic and question to make sure the
@@ -40,6 +40,7 @@ public class Test_DB {
             testQuestion();
             testPointHistory();
             testToken();
+            testQuizHistory();
             conn.close();
 
         } catch (Exception ex) {
@@ -192,7 +193,7 @@ public class Test_DB {
     }
 
     private static void testUser() {
-                    //test_User(conn);
+        //test_User(conn);
         //test_addUser(conn);
         //test_UpdatePointtoUser();
         //testLog_In(conn);
@@ -200,24 +201,25 @@ public class Test_DB {
     }
 
     private static void testPointHistory() {
-         //test_Purchase();
+        //test_Purchase();
         //test_InsertPointHistory();
         //test_EarnedPoint();
     }
 
-    private static void testQuestion() {
+    private static void testQuestion() throws SQLException {
         //test_Question(conn);
-        //test_QuestionOfTopic(conn);
+        test_QuestionOfTopic();
         //test_Quiz_QuestionHas1C3W(conn);
         //test_Media();
+
     }
 
     private static void testToken() throws SQLException {
         //test_getAllToken();
         //test_getToken();
         //test_insertToken();
-        test_updateToken();
-        
+        //test_updateToken();
+
     }
 
     private static void test_getAllToken() throws SQLException {
@@ -226,24 +228,62 @@ public class Test_DB {
     }
 
     private static void test_insertToken() throws SQLException {
-        Token t = Token.doQueryByID(conn,1).get(0);
+        Token t = Token.doQueryByID(conn, 1).get(0);
         t.setCode("DDDD");
-        Token.doQueryUpdateToken(conn,t);
+        Token.doQueryUpdateToken(conn, t);
     }
 
     private static void test_updateToken() throws SQLException {
-        Token t = Token.doQueryByID(conn,1).get(0);
+        Token t = Token.doQueryByID(conn, 1).get(0);
         t.setUserID(1);
-        Token.doQueryUpdateToken(conn,t);
+        Token.doQueryUpdateToken(conn, t);
     }
 
     private static void test_getToken() throws SQLException {
-        Token t = Token.doQueryByID(conn,1).get(0);
+        Token t = Token.doQueryByID(conn, 1).get(0);
         System.out.println(t.toString());
+
+    }
+
+    private static void test_QuestionOfTopic() throws SQLException {
+        Topic t = Controller.getTopicByID(3);
+        List<Question> list = Question.doQueryByTopic(conn, t);
+        List<Question> tmpList = new ArrayList<>();
+        for (Question q : list) {
+            Random rand = new Random();
+
+            int n = rand.nextInt(10);
+            if (n > 5) {
+                tmpList.add(q);
+            }
+            System.out.println(n);
+            if(tmpList.size()==20)
+            {
+                break;
+            }
+        }
+        for(Question q:tmpList)
+            System.out.print(q.getId()+"|");
+    }
+
+    private static void testQuizHistory() throws SQLException {
+        //test_getQuizHistory();
+        test_insertQuizHistory();
         
     }
 
-    
+    private static void test_getQuizHistory() throws SQLException {
+        List<QuizHistory> list = QuizHistory.doQueryGetAll(conn);
+        System.out.println(Arrays.toString(list.toArray()));
+        
+    }
 
-    
+    private static void test_insertQuizHistory() throws SQLException {
+        int userID = 3;
+        int topicID = 2;
+        String questionList = "2|5|9|15|19|21|25|26|29|31|32|33|35|36|44|48|51|54|58|59";
+        QuizHistory q = new QuizHistory(0, userID, topicID, questionList, 26, 3);
+        QuizHistory.doQueryInsert(conn,q);
+    }
+
 }

@@ -34,15 +34,14 @@
         <title>Branded Quiz</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
-        <%
-            if (session.getAttribute("branded_topic") == null) {
+        <%            if (session.getAttribute("branded_topic") == null) {
         %>
         <META HTTP-EQUIV=Refresh CONTENT="0; URL=account.jsp">
             <%}%>
-        <script type="text/javascript">
-            window.history.forward(1);
+            <script type="text/javascript">
+                window.history.forward(1);
 
-        </script>
+            </script>
     </head>
 
     <body>
@@ -89,8 +88,8 @@
                         String topicName = (String) session.getAttribute("branded_topic");
 
                         if (topicName != null
-                            && session.getAttribute("quiz") == null) {//generate quiz in beginning
-                            
+                                && session.getAttribute("quiz") == null) {//generate quiz in beginning
+
                             int numberQuestion = (Integer) session.getAttribute("numberQuestion");
                             quiz = generateQuiz(topicName, numberQuestion);
                             session.setAttribute("userPoint", 0); //
@@ -100,12 +99,11 @@
 
                     <div class="well well-small">
                         <label><b>Instructions</b></label>
-                         <ul>
+                        <ul>
                             <li>Read the question carefully</li>
                             <li>Select an answer and click <b>NEXT</b></li>
                             <li>When the quiz is in progress, cannot go Back</li>
-                            <li>Click <b>PAUSE</b> to pause the game. Choose <b>SAVE</b>
-                                to save the quiz, <b>ABORT</b> to abort the quiz without saving 
+                            <li>Click <b>SAVE</b> to save the quiz and exit. 
                                 (*Play the quiz without login will not have <b>SAVE</b> option)</li>
                         </ul>
                     </div>
@@ -191,7 +189,7 @@
                     <div align=""center>   
 
                         <button type="submit" class="btn btn-large" value="Next" name="next">Next</button>
-                                                <button type="submit" class="btn btn-large" name="pause">Pause</button>
+                        <button type="submit" class="btn btn-large" name="save">Save</button>
 
                     </div>
                 </div>

@@ -96,8 +96,7 @@
                             <li>Read the question carefully</li>
                             <li>Select an answer and click <b>NEXT</b></li>
                             <li>When the quiz is in progress, cannot go Back</li>
-                            <li>Click <b>PAUSE</b> to pause the game. Choose <b>SAVE</b>
-                                to save the quiz, <b>ABORT</b> to abort the quiz without saving 
+                            <li>Click <b>SAVE</b> to save the quiz and exit. 
                                 (*Play the quiz without login will not have <b>SAVE</b> option)</li>
                         </ul>
                     </div>
@@ -183,7 +182,7 @@
                     <div align=""center>   
 
                         <button type="submit" class="btn btn-large" value="Next" name="next">Next</button>
-                        <button type="submit" class="btn btn-large" name="pause">Pause</button>
+                        <button type="submit" class="btn btn-large" name="save" disabled="">Save</button>
                     </div>
                 </div>
 

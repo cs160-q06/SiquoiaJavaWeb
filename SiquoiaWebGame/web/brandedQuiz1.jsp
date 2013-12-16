@@ -28,14 +28,15 @@
             //pause the quiz
             //start the quiz
             if (request.getParameter("answer") != null) {
-                if (request.getParameter("next") != null) {
+                if (request.getParameter("save") != null) {//save quiz and exit
+                    
+                } else if (request.getParameter("next") != null) {//next question
                     session.setAttribute("next", "next");
                     Quiz quiz = (Quiz) session.getAttribute("quiz");
                     String s = (String) request.getParameter("answer");
                     if (quiz.isCurrentCorrect(s)) {
                         session.setAttribute("select", "correct");
-                        session.setAttribute("userPoint"
-                                ,(Integer)session.getAttribute("userPoint")+1);
+                        session.setAttribute("userPoint", (Integer) session.getAttribute("userPoint") + 1);
                     } else {
                         session.setAttribute("select", "incorrect");
                     }
@@ -45,8 +46,7 @@
             }
             //end of quiz
             Quiz quiz = (Quiz) session.getAttribute("quiz");
-            if(!quiz.hasNext())
-            {
+            if (!quiz.hasNext()) {
                 int point = (Integer) session.getAttribute("userPoint");
                 String topic = (String) session.getAttribute("branded_topic");
                 int total = quiz.getTotal();
@@ -62,7 +62,7 @@
                 Date date = new Date();
                 //
                 Controller.updatePoint(topic, dateFormat.format(date), point);
-                
+
             }
         }
     }

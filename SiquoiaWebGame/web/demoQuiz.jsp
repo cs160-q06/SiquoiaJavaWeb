@@ -2,8 +2,8 @@
     Document   : quiz
     Created on : Dec 3, 2013, 10:43:50 AM
     Author     : mr.nam
-	
-	The demo quiz for guest users to play. Quiz packet is statically stored in the database, not created upon opening.
+        
+        The demo quiz for guest users to play. Quiz packet is statically stored in the database, not created upon opening.
 --%>
 
 <%@page import="Miscellanea.EnumString"%>
@@ -36,10 +36,10 @@
         <title>Demo Quiz</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
-<script type="text/javascript">
-	window.history.forward(1);
-	
-</script>
+        <script type="text/javascript">
+            window.history.forward(1);
+            
+        </script>
     </head>
 
     <body>
@@ -87,7 +87,7 @@
                             <li>Read the question carefully</li>
                             <li>Select an answer and click <b>NEXT</b></li>
                             <li>When the quiz is in progress, cannot go Back</li>
-                            
+
                         </ul>
                     </div>
                     <%
@@ -160,8 +160,8 @@
                         }
                     %>
                     <div class="well well-small" align=""center>
-                       Total Correct: <%= (session.getAttribute("userPoint") != null
-                                ? (Integer) session.getAttribute("userPoint") : 0)%>
+                        Total Correct: <%= (session.getAttribute("userPoint") != null
+                               ? (Integer) session.getAttribute("userPoint") : 0)%>
                         <br />  
                         <%= (session.getAttribute("select") != null
                                 ? (String) session.getAttribute("select") : "")%>

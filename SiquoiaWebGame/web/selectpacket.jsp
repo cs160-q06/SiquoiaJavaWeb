@@ -81,7 +81,7 @@
                             Selected: <%= (session.getAttribute("select") != null
                                     ? (String) session.getAttribute("select") : "")%>
                         </div>   
-                        <div>
+                        <div id="error">
                             <%= (session.getAttribute("error") != null
                                     ? "Error: " + (String) session.getAttribute("error") : "")%>
                         </div>   

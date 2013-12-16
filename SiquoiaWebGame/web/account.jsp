@@ -17,7 +17,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Account</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
-
+        <%            session.invalidate();
+            session = request.getSession();
+        %>
     </head>
     <body>
         <div class="navbar navbar-inverse">
@@ -133,7 +135,7 @@
                 </div>
             </div>              
         </div>
-                    <hr />
+        <hr />
         <div>
             <small>© Copyright 2013, SQ06 Sequoia Inc.</small>
         </div>

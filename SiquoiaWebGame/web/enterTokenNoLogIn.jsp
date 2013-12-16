@@ -48,10 +48,10 @@
                     <hr />
                     <input type="text" name="code" id="code" placeholder="Enter the 4-digit code">
                     <hr />
-                    <label id="error">
+                    <div id="error">
                         <%= (session.getAttribute("error") != null
                                 ? "Error: " + (String) session.getAttribute("error") : "")%>
-                    </label>
+                    </div>
                 </div>
 
                 <div align="center">

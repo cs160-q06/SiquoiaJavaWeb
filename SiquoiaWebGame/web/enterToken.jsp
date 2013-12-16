@@ -1,16 +1,18 @@
 <%-- 
     Document   : enterToken
-    Created on : Dec 14, 2013, 6:52:25 PM
-    Author     : mr.nam
+    Created on : Dec 15, 2013, 1:27:01 PM
+    Author     : nam
 --%>
 
 <%@page import="DataOOD.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file="controller.jsp" %> 
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Enter Token Without Login</title>
+        <title>Enter Token</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
 
     </head>
@@ -20,7 +22,7 @@
                 <div class="container-fluid">
                     <ul class="nav pull-left">
                         <li>
-                            <a href="index.jsp">
+                            <a href="account.jsp">
                                 <img class="centre" id="topBar" border="0" src="img/SiQuoia logo.jpg">
                             </a>
                         </li>
@@ -34,14 +36,19 @@
                             </li>
                         </ul>
                         <ul class="nav pull-right">
-
+                            <li>Welcome <b> <%=usernameLogin%></b>
+                                <form action="controller.jsp" method="post">
+                                    <i class="icon-white icon-lock"></i> 
+                                    <button type="submit" name="logout">Logout</button>
+                                </form>
+                            </li>
                         </ul>
 
                     </div>
                 </div>
             </div>
         </div>
-        <form action="enterTokenNoLogIn1.jsp" class="loginfield" method="post">
+        <form action="enterToken1.jsp" class="loginfield" method="post">
             <div id="sink">
                 <div class="well well-small" align="center">
                     <label class="control-label" for="inputEmail">Enter Packet Code</label>
@@ -56,7 +63,6 @@
 
                 <div align="center">
                     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-                    
                 </div>
             </div>
         </form>

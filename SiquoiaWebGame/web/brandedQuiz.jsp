@@ -1,7 +1,7 @@
 <%-- 
     Document   : brandedQuiz
-    Created on : Dec 14, 2013, 11:34:18 PM
-    Author     : mr.nam
+    Created on : Dec 15, 2013, 1:27:14 PM
+    Author     : nam
 --%>
 
 
@@ -17,6 +17,7 @@
 <%@page import="DataOOD.Topic"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file="controller.jsp" %> 
 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
     <%!
@@ -30,17 +31,18 @@
 
     %>
     <head>
-        <title>Branded Quiz Without Login</title>
+        <title>Branded Quiz</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
         <%
             if (session.getAttribute("branded_topic") == null) {
         %>
-        <META HTTP-EQUIV=Refresh CONTENT="0; URL=index.jsp">
+        <META HTTP-EQUIV=Refresh CONTENT="0; URL=account.jsp">
             <%}%>
-            <script type="text/javascript">
-                window.history.forward(1);
-            </script>
+        <script type="text/javascript">
+            window.history.forward(1);
+
+        </script>
     </head>
 
     <body>
@@ -60,39 +62,45 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-center">
                             <li>
-                                <h2>Branded Quiz Without Login</h2>
+                                <h2>Branded Quiz</h2>
                             </li>
                         </ul>
                         <ul class="nav pull-right">
-                            <li>
-                            </li></ul>
+                            <li>Welcome <b> <%=usernameLogin%></b>
+                                <form action="controller.jsp" method="post">
+                                    <i class="icon-white icon-lock"></i> 
+                                    <button type="submit" name="logout">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
         <div id="wallpaper">
 
-            <form action="brandedQuizNoLogin1.jsp" class="loginfield" method="post">
+            <form action="brandedQuiz1.jsp" class="loginfield" method="post">
                 <div id="sink">
                     <div class="well well-small" align="center" style="width: 150px">
                         <img src="img/branded.jpg"/>
 
                     </div>
-                    <%                        String topicName = (String) session.getAttribute("branded_topic");
+                    <%
+                        String topicName = (String) session.getAttribute("branded_topic");
 
                         if (topicName != null
-                                && session.getAttribute("quiz") == null) {//generate quiz in beginning
-
+                            && session.getAttribute("quiz") == null) {//generate quiz in beginning
+                            
                             int numberQuestion = (Integer) session.getAttribute("numberQuestion");
                             quiz = generateQuiz(topicName, numberQuestion);
                             session.setAttribute("userPoint", 0); //
                         }
                         if (session.getAttribute("start") == null) {
                     %>
-                    
+
                     <div class="well well-small">
                         <label><b>Instructions</b></label>
-                        <ul>
+                         <ul>
                             <li>Read the question carefully</li>
                             <li>Select an answer and click <b>NEXT</b></li>
                             <li>When the quiz is in progress, cannot go Back</li>
@@ -183,7 +191,8 @@
                     <div align=""center>   
 
                         <button type="submit" class="btn btn-large" value="Next" name="next">Next</button>
-                        <button type="submit" class="btn btn-large" name="pause">Pause</button>
+                                                <button type="submit" class="btn btn-large" name="pause">Pause</button>
+
                     </div>
                 </div>
 

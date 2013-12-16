@@ -2,8 +2,8 @@
     Document   : account
     Created on : Dec 8, 2013, 4:34:05 PM
     Author     : mr.nam
-	
-	Homepage for gamer when logged in as a registered user. Access game functions here.
+        
+        Homepage for gamer when logged in as a registered user. Access game functions here.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -58,8 +58,8 @@
             </div>
 
             <div class="button" style="left: 200px">
-                <a href="#"><img src="img/button_quiz_packets.png" alt="quiz pakets"
-                                 style="width: 100px; height: auto;">Enter a Token Packet</a>
+                <a href="enterToken.jsp"><img src="img/button_quiz_packets.png" alt="quiz pakets"
+                                              style="width: 100px; height: auto;">Enter a Token Packet</a>
             </div>
 
             <div class="button" style="right:0;">
@@ -72,29 +72,31 @@
                 <label style="text-align: center"><b>Account Summary</b></label> 
                 <hr />
                 <div>
-                    <table border="0" style="width: 100%" class="table-striped table-condensed">
-                        <tr>
-                            <td><b>Points</b></td>
-                            <td><%=point%> </td>
-                            <td align="middle"><a href="payment.jsp"><button type="submit" name="next" class="btn btn-mini">Buy More</button></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Amount of purchased Packets</b></td>
-                            <td><%=amountPurchasePacket%></td>
-                            <td align="middle"><button type="submit" name="" class="btn btn-mini" disabled="">Details</button></td>
-                        </tr>
-                        <tr>
-                            <td><b>Amount of earned Points</b></td>
-                            <td><%=amountEarnedPoint%></td>
-                            <td align="middle"><button type="submit" name="" class="btn btn-mini" disabled="">Details</button></td>
-                        </tr>
-                        <tr>
-                            <td><b>Amount of used Points</b></td>
-                            <td><%=amountUsedPoint%></td>
-                            <td align="middle"><button type="submit" name="" class="btn btn-mini" disabled="">Details</button></td>
-                        </tr>
-                    </table>
+                    <form action="account2.jsp" class="loginfield" method="post">
+                        <table border="0" style="width: 100%" class="table-striped table-condensed">
+                            <tr>
+                                <td><b>Points</b></td>
+                                <td><%=point%> </td>
+                                <td align="middle"><button type="submit" name="buyMore" class="btn btn-mini">Buy More</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Amount of purchased Packets</b></td>
+                                <td><%=amountPurchasePacket%></td>
+                                <td align="middle"><button type="submit" name="" class="btn btn-mini" disabled="">Details</button></td>
+                            </tr>
+                            <tr>
+                                <td><b>Amount of earned Points</b></td>
+                                <td><%=amountEarnedPoint%></td>
+                                <td align="middle"><button type="submit" name="" class="btn btn-mini" disabled="">Details</button></td>
+                            </tr>
+                            <tr>
+                                <td><b>Amount of used Points</b></td>
+                                <td><%=amountUsedPoint%></td>
+                                <td align="middle"><button type="submit" name="" class="btn btn-mini" disabled="">Details</button></td>
+                            </tr>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>

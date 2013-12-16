@@ -41,7 +41,7 @@
         <%}%>
         <script type="text/javascript">
             window.history.forward(1);
-            
+
         </script>
     </head>
     <body>
@@ -80,10 +80,10 @@
         <form action="newQuiz1.jsp" class="loginfield" method="post">
             <div id="sink">
                 <%
-                    String topicName = (String)session.getAttribute("topic");
+                    String topicName = (String) session.getAttribute("topic");
                     if (topicName != null
                             && session.getAttribute("quiz") == null) {//generate quiz in beginning
-                        
+
                         quiz = generateQuiz(topicName);
                         session.setAttribute("userPoint", 0);
                     }
@@ -93,9 +93,12 @@
                 <div class="well well-small">
                     <label><b>Instructions</b></label>
                     <ul>
-                        <li>Read the question carefully.</li>
-                        <li>Select an answer and click next.</li>
-                        <li>Click Submit at anytime to submit the quiz</li>
+                        <li>Read the question carefully</li>
+                        <li>Select an answer and click <b>NEXT</b></li>
+                        <li>When the quiz is in progress, cannot go Back</li>
+                        <li>Click <b>PAUSE</b> to pause the game. Choose <b>SAVE</b>
+                            to save the quiz, <b>ABORT</b> to abort the quiz without saving 
+                            (*Play the quiz without login will not have <b>SAVE</b> option)</li>
                     </ul>
                 </div>
                 <%
@@ -183,6 +186,8 @@
                 <div align=""center>   
 
                     <button type="submit" class="btn btn-large" value="Next" name="next">Next</button>
+                    <button type="submit" class="btn btn-large" name="pause">Pause</button>
+
                 </div>
             </div>
 

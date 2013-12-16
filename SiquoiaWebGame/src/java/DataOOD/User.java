@@ -161,7 +161,14 @@ public class User {
      * @param user
      */
     public static void doQueryUpdateUser(Connection conn, User user) throws SQLException {
-        String query = "update USER set POINT = " + user.point + " where ID = " + user.getId();
+        String query
+                = "UPDATE USER\n"
+                + "SET\n"
+                + "Username = '"+user.getName()+"',\n"
+                + "Password = '"+user.getPassword()+"',\n"
+                + "Type = '"+user.getType()+"',\n"
+                + "Point = "+user.getPoint()+"\n"
+                + "WHERE ID = "+user.getId();
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(query);
         stmt.close();

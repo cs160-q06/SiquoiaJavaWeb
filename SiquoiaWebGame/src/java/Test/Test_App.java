@@ -52,6 +52,7 @@ public class Test_App {
             //test_getCurrentDateTIme(conn);
             testToken();
             testTopic();
+            testUser();
             conn.close();
 
         } catch (Exception ex) {
@@ -170,8 +171,8 @@ public class Test_App {
     }
 
     private static void testToken() throws SQLException {
-        //test_checkToken();
-        test_getByCode();
+        test_checkToken();
+        //test_getByCode();
         //test_updateTokenToUsed();
 
     }
@@ -208,5 +209,15 @@ public class Test_App {
     private static void test_getTopicbyID() {
         System.out.println(Controller.getTopicByID(1).toString());
 
+    }
+
+    private static void testUser() throws SQLException {
+        test_updateUser();
+    }
+
+    private static void test_updateUser() throws SQLException {
+        User user = User.doQueryGetByID(conn, 2);
+        user.setPoint(user.getPoint()+100);
+        Controller.updateUser(user);
     }
 }

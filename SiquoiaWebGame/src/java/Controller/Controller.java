@@ -376,10 +376,10 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (list.isEmpty()) {
-            return false;
+            return true;
         }
         if (list.get(0).getUserID() > 0
-                || !list.get(0).getStatus().equalsIgnoreCase(EnumString.USED_TOKEN.getValue())) {
+                || list.get(0).getStatus().equalsIgnoreCase(EnumString.USED_TOKEN.getValue())) {
             return true;
         } else {
             return false;
@@ -426,6 +426,14 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public static void updateUser(User user) {
+        try {
+            User.doQueryUpdateUser(conn, user);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

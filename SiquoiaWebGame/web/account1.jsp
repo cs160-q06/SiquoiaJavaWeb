@@ -20,9 +20,9 @@
     for (PointHistory p : list) {
         amountEarnedPoint += p.getEarnedPoint();
         amountUsedPoint += p.getUsedPoint();
-        if(p.getUsedPoint() > 0)
-        {
+        if (p.getUsedPoint() > 0) {
             amountPurchasePacket++;
         }
     }
 %>
+

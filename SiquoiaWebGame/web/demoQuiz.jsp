@@ -84,9 +84,10 @@
                     <div class="well well-small">
                         <label><b>Instructions</b></label>
                         <ul>
-                            <li>Read the question carefully.</li>
-                            <li>Select an answer and click next.</li>
-                            <li>Click Submit at anytime to submit the quiz</li>
+                            <li>Read the question carefully</li>
+                            <li>Select an answer and click <b>NEXT</b></li>
+                            <li>When the quiz is in progress, cannot go Back</li>
+                            
                         </ul>
                     </div>
                     <%

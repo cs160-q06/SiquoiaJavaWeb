@@ -1,13 +1,13 @@
 <%-- 
-    Document   : enterTokenNoLogIn1
-    Created on : Dec 14, 2013, 7:05:00 PM
-    Author     : mr.nam
+    Document   : enterToken1
+    Created on : Dec 15, 2013, 1:51:04 PM
+    Author     : nam
 --%>
 
 <%@page import="DataOOD.Token"%>
 <%@page import="Controller.Controller"%>
 <%
-    String strViewPage = "enterTokenNoLogIn.jsp";
+    String strViewPage = "enterToken.jsp";
     //initial
     session.setAttribute("error", null);
     //
@@ -23,13 +23,12 @@
                     session.setAttribute("error", "This CODE is already used!");
                 } else {
                     Token token = Controller.getTokenByCode(code);
-                    Controller.updateTokenToUsed(token, 0);//0 because guest
-                    strViewPage = "brandedQuizNoLogin.jsp";
+                    Controller.updateTokenToUsed(token, Controller.getLoginUser().getId());//
+                    strViewPage = "brandedQuiz.jsp";
                     session.invalidate();
                     session = request.getSession();
                     session.setAttribute("branded_topic", Controller.getTopicByID(token.getTopic_ID()).getDescription());
                     session.setAttribute("numberQuestion", token.getNumberQuestion());
-
                 }
             }
         }

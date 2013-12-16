@@ -1,11 +1,14 @@
 <%-- 
-    Document   : brandedQuizNoLoginReport
-    Created on : Dec 15, 2013, 3:39:38 AM
-    Author     : mr.nam
+    Document   : brandedQuizReport
+    Created on : Dec 15, 2013, 2:08:40 PM
+    Author     : nam
 --%>
+
 
 <%@page import="Miscellanea.EnumValue"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file="controller.jsp" %> 
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,11 +36,16 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-center">
                             <li>
-                                <h2>Report</h2>
+                                <h2>Branded Quiz Report</h2>
                             </li>
                         </ul>
                         <ul class="nav pull-right">
-
+                            <li>Welcome <b> <%=usernameLogin%></b>
+                                <form action="controller.jsp" method="post">
+                                    <i class="icon-white icon-lock"></i> 
+                                    <button type="submit" name="logout">Logout</button>
+                                </form>
+                            </li>
                         </ul>
 
                     </div>
@@ -45,20 +53,18 @@
             </div>
         </div>
         <div id="sink">
-            <div class="well well-small" align="center" style="width: 150px">
-                        <img src="img/branded.jpg"/>
-
-                    </div>
             <div class="well well-small">
                 <div align="center">
                     <b>Report</b>
                     <hr />
-                    <%
-                        if (session.getAttribute("topic") != null
+                    <%                    if (session.getAttribute("topicReport") != null
                                 && session.getAttribute("correct") != null) {
-                            String topic = (String) session.getAttribute("topic");
+                            String topic = (String) session.getAttribute("topicReport");
                             int correct = (Integer) session.getAttribute("correct");
                             int total = (Integer) session.getAttribute("total");
+                            int totalPoint = Controller.getLoginUser().getPoint();
+                            int previousPoint = totalPoint - correct;
+
                     %>
                     <table border="0" style="width: 100%" class="table-striped table-condensed">
                         <tr>
@@ -73,13 +79,28 @@
                             <td><b>Correct Answer</b></td>
                             <td><%=correct%></td>
                         </tr>
-
+                        <tr>
+                            <td><b>Your previous points</b></td>
+                            <td><%=previousPoint%> point(s)</td>
+                        </tr>
+                        <tr>
+                            <td><b>You are rewarded</b></td>
+                            <td><%=correct%> point(s)</td>
+                        </tr>
+                        
+                    </table>
+                    <hr />
+                    <table border="0" style="width: 100%" class="table-striped table-condensed">
+                        <tr>
+                            <td><b>Your total points</b></td>
+                            <td><%=totalPoint%> point(s)</td>
+                        </tr>
                     </table>
                     <%}%>
                 </div>
             </div>
             <div align="center">
-                <a href="index.jsp"><button type="submit" class="btn btn-warning" >Back Home</button>
+                <a href="account.jsp"><button type="submit" class="btn btn-warning" >Back Home</button>
                 </a>
             </div>
         </div>

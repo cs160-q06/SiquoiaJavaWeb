@@ -2,8 +2,8 @@
     Document   : demoReport
     Created on : Dec 8, 2013, 10:23:22 PM
     Author     : mr.nam
-	
-	Reporting for the demonstration quiz packet, available at the end of the quiz.
+        
+        Reporting for the demonstration quiz packet, available at the end of the quiz.
 --%>
 
 <%@page import="Miscellanea.EnumValue"%>
@@ -13,8 +13,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Demo Report</title>
-                <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="handheld,all" />
+        <script type="text/javascript">
+            window.history.forward(1);
 
+        </script>
     </head>
     <body>
         <div class="navbar navbar-inverse">
@@ -36,7 +39,7 @@
                             </li>
                         </ul>
                         <ul class="nav pull-right">
-                            
+
                         </ul>
 
                     </div>
@@ -46,17 +49,16 @@
         <div id="sink">
             <div class="well well-small">
                 <div align="center">
-                <b>Report</b>
-                <hr />
-                <%
-                    if (session.getAttribute("topic") != null && 
-                            session.getAttribute("correct") != null)
-                    {
-                        String topic = (String) session.getAttribute("topic");
-                        int correct = (Integer) session.getAttribute("correct");
-                        int total = (Integer) session.getAttribute("total");
-                %>
-                <table border="0" style="width: 100%" class="table-striped table-condensed">
+                    <b>Report</b>
+                    <hr />
+                    <%
+                        if (session.getAttribute("topic") != null
+                                && session.getAttribute("correct") != null) {
+                            String topic = (String) session.getAttribute("topic");
+                            int correct = (Integer) session.getAttribute("correct");
+                            int total = (Integer) session.getAttribute("total");
+                    %>
+                    <table border="0" style="width: 100%" class="table-striped table-condensed">
                         <tr>
                             <td><b>Topic</b></td>
                             <td><%=topic%></td>
@@ -69,9 +71,9 @@
                             <td><b>Correct Answer</b></td>
                             <td><%=correct%></td>
                         </tr>
-                        
+
                     </table>
-                <%}%>
+                    <%}%>
                 </div>
             </div>
             <div align="center">

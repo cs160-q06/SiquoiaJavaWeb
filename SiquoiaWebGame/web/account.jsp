@@ -59,7 +59,7 @@
 
             <div class="button" style="left: 200px">
                 <a href="enterToken.jsp"><img src="img/button_quiz_packets.png" alt="quiz pakets"
-                                              style="width: 100px; height: auto;">Enter a Token Packet</a>
+                                              style="width: 100px; height: auto;">Branded Packet</a>
             </div>
 
             <div class="button" style="right:0;">

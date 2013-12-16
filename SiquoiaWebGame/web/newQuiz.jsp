@@ -59,7 +59,7 @@
                 <div class="container-fluid">
                     <ul class="nav pull-left">
                         <li>
-                            <a href="#">
+                            <a href="account.jsp">
                                 <img class="centre" id="topBar" src="img/SiQuoia logo.jpg">
                             </a>
                         </li>

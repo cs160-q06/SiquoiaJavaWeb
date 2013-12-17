@@ -226,8 +226,8 @@ public class Test_App {
     }
 
     private static void testQuestion()  {
-        test_increaseRanking();
-        test_top10();
+        //test_increaseRanking();
+        //test_top10();
     }
 
     private static void test_increaseRanking() {
@@ -259,5 +259,6 @@ public class Test_App {
 
     private static void test_getQuizHistoey() {
         Quiz q = Controller.getNormalQuizFromHistory();
+        System.out.println(q.toString());
     }
 }

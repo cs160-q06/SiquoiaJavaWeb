@@ -19,7 +19,7 @@ public class Quiz {
     private int currentQuestionIndex;//index of the current question in the list
     private List<Question> correctQuestionList;//list of question without suffle
     private int total;//total of questions when the quiz is created
-
+    private int correct = 0;
     public Quiz(List<Question> questionList) {
         this.total = questionList.size();
         this.correctQuestionList = questionList;
@@ -27,6 +27,14 @@ public class Quiz {
         currentQuestionIndex = 0;
     }
 
+    public int getCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(int correct) {
+        this.correct = correct;
+    }
+    
     public void setCurrentQuestionIndex(int currentQuestionIndex) {
         this.currentQuestionIndex = currentQuestionIndex;
     }
@@ -132,5 +140,16 @@ public class Quiz {
         }
         return list;
     }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for(Question q : questionList)
+        {
+            s+="|"+q.getId();
+        }
+        return s;
+    }
+    
 
 }

@@ -545,6 +545,11 @@ public class Controller {
         return getQuizFromHistory(EnumString.BRANDED_QUIZ.getValue());
 
     }
+    /**
+     * 
+     * @param type
+     * @return 
+     */
 
     private static Quiz getQuizFromHistory(String type) {
         int userId = 3;//Controller.getLoginUser().getId();
@@ -567,11 +572,22 @@ public class Controller {
         String questionL = quizHistory.getQuestionList();
         String[] arr = questionL.split(EnumString.DELIMITER_QUIZHISTORY.getValue());
         List<Question> questionList = new ArrayList<>();
+        int index = 0;
         for(int i = 0; i < arr.length; i++)
         {
-            
+            int questionID = Integer.parseInt(arr[i]);            
+            if(questionID == quizHistory.getCurrent_questionID())
+                index = i;
+            try {
+                Question q = Question.doQueryGetByID(conn, questionID);
+                questionList.add(q);
+            } catch (SQLException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         Quiz quiz = new Quiz(questionList);
+        quiz.setCurrentQuestionIndex(index);
+        quiz.setCorrect(quizHistory.getPoint());
         return quiz;
     }
 

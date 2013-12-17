@@ -8,10 +8,12 @@ import Controller.Controller;
 import DataOOD.Node;
 import DataOOD.Question;
 import DataOOD.Quiz;
+import DataOOD.QuizHistory;
 import DataOOD.Token;
 import DataOOD.Topic;
 import DataOOD.User;
 import Database.MySqlController;
+import Miscellanea.EnumString;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -54,6 +56,7 @@ public class Test_App {
             testTopic();
             testUser();
             testQuestion();
+            testQuizHistory();
             conn.close();
 
         } catch (Exception ex) {
@@ -237,5 +240,24 @@ public class Test_App {
         {
             System.out.print("|"+q.getId()+"-"+q.getRanking());
         }
+    }
+
+    private static void testQuizHistory() {
+        test_InsertQuizHistory();
+        test_getQuizHistoey();
+    }
+
+    private static void test_InsertQuizHistory() {
+        int userID = 3;
+        int topicID = 2;
+        int currentQuestion = 26;
+        int point = 3;
+        String questionList = "2|5|9|15|19|21|25|26|29|31|32|33|35|36|44|48|51|54|58|59";
+        QuizHistory q = new QuizHistory(0, userID, topicID, questionList, currentQuestion, point, EnumString.NORMAL_QUIZ.getValue());
+        Controller.insertQuizHistory(q);
+    }
+
+    private static void test_getQuizHistoey() {
+        Quiz q = Controller.getNormalQuizFromHistory();
     }
 }

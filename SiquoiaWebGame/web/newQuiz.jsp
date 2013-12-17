@@ -41,6 +41,7 @@
         <%}%>
         <script type="text/javascript">
             window.history.forward(1);
+            //
             var hook = true;
             window.onbeforeunload = function() {
                 if (hook) {

@@ -15,7 +15,10 @@ public enum EnumString {
     , IMAGE("image") //
     , AUDIO("audio") //
     , DATETIME_FORMAT("yyyy-MM-dd HH:mm:ss")
-    , USED_TOKEN("used");
+    , USED_TOKEN("used")
+    , NORMAL_QUIZ("normal")
+    , BRANDED_QUIZ("branded")
+    , DELIMITER_QUIZHISTORY("|")
     ;
     private String s;
 

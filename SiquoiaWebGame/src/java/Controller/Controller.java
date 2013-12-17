@@ -5,6 +5,7 @@ import DataOOD.Node;
 import DataOOD.PointHistory;
 import DataOOD.Question;
 import DataOOD.Quiz;
+import DataOOD.QuizHistory;
 import DataOOD.Token;
 import DataOOD.Topic;
 import DataOOD.User;
@@ -456,17 +457,122 @@ public class Controller {
     }
 
     /**
-     * 
-     * @return
-     * @throws SQLException 
+     *
+     * @return @throws SQLException
      */
-    public static List<Question> getTop10Question()  {
+    public static List<Question> getTop10Question() {
         try {
             return Question.doQueryGetTop10(conn);
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new ArrayList<>();
+    }
+
+    /**
+     *
+     * @param quizHistory
+     * @return
+     */
+    public static boolean insertQuizHistory(QuizHistory quizHistory) {
+        try {
+            QuizHistory.doQueryInsert(conn, quizHistory);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param quiz
+     * @param topicName
+     * @param point
+     * @param type
+     */
+    public static void insertNormalQuizHistory(Quiz quiz, String topicName, int point, String type) {
+        int userID = Controller.getLoginUser().getId();
+        int topicID = Controller.getTopicByName(topicName).getId();
+        int currentQuestion = quiz.getCurrentQuestion().getId();//must be questionID
+        List<Question> list = quiz.getQuestionList();
+        String questionList = "";
+        for (Question q : list) {
+            questionList += q.getId() + "|";
+        }
+        QuizHistory q = new QuizHistory(0, userID, topicID, questionList, currentQuestion, point, type);
+        insertQuizHistory(q);
+    }
+
+    /**
+     *
+     * @param quiz
+     * @param topicName
+     * @param point
+     */
+    public static void insertNormalQuizHistory(Quiz quiz, String topicName, int point) {
+        String type = EnumString.NORMAL_QUIZ.getValue();
+        insertNormalQuizHistory(quiz, topicName, point, type);
+
+    }
+
+    /**
+     *
+     * @param quiz
+     * @param topicName
+     * @param point
+     */
+    public static void insertBrandedQuizHistory(Quiz quiz, String topicName, int point) {
+        String type = EnumString.BRANDED_QUIZ.getValue();
+        insertNormalQuizHistory(quiz, topicName, point, type);
+
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static Quiz getNormalQuizFromHistory() {
+        return getQuizFromHistory(EnumString.NORMAL_QUIZ.getValue());
+
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static Quiz getBrandedQuizFromHistory() {
+        return getQuizFromHistory(EnumString.BRANDED_QUIZ.getValue());
+
+    }
+
+    private static Quiz getQuizFromHistory(String type) {
+        int userId = 3;//Controller.getLoginUser().getId();
+        List<QuizHistory> list = new ArrayList<>();
+        try {
+            list = QuizHistory.doQueryGetByUserID(conn, userId);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        QuizHistory quizHistory = null;
+        for (QuizHistory q : list) {
+            if (q.getType().equalsIgnoreCase(type)) {
+                quizHistory = q;
+                break;
+            }
+        }
+        if (quizHistory == null) {
+            return null;
+        }
+        String questionL = quizHistory.getQuestionList();
+        String[] arr = questionL.split(EnumString.DELIMITER_QUIZHISTORY.getValue());
+        List<Question> questionList = new ArrayList<>();
+        for(int i = 0; i < arr.length; i++)
+        {
+            
+        }
+        Quiz quiz = new Quiz(questionList);
+        return quiz;
     }
 
 }

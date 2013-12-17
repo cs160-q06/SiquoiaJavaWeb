@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="DataOOD.QuizHistory"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.DateFormat"%>
@@ -25,14 +26,25 @@
         if (session.getAttribute("start") == null) {//introduction
             session.setAttribute("start", "start");
         } else {
-            //pause the quiz
+            //initial
+            Quiz quiz = (Quiz) session.getAttribute("quiz");
+            //save and quit the quiz
+            if (request.getParameter("save") != null) {
+                //save quiz history
+                String topicName = (String) session.getAttribute("branded_topic");
+                int point = (Integer) session.getAttribute("userPoint");
+                Controller.insertBrandedQuizHistory(quiz,topicName,point);
+                //
+                strViewPage = "account.jsp";
+                session.invalidate();
+                session = request.getSession();
+            }
             //start the quiz
             if (request.getParameter("answer") != null) {
                 if (request.getParameter("save") != null) {//save quiz and exit
-                    
+
                 } else if (request.getParameter("next") != null) {//next question
                     session.setAttribute("next", "next");
-                    Quiz quiz = (Quiz) session.getAttribute("quiz");
                     String s = (String) request.getParameter("answer");
                     if (quiz.isCurrentCorrect(s)) {
                         session.setAttribute("select", "correct");
@@ -45,7 +57,6 @@
                 session.setAttribute("error", "no answer was chosen");
             }
             //end of quiz
-            Quiz quiz = (Quiz) session.getAttribute("quiz");
             if (!quiz.hasNext()) {
                 int point = (Integer) session.getAttribute("userPoint");
                 String topic = (String) session.getAttribute("branded_topic");

@@ -27,6 +27,10 @@ public class Quiz {
         currentQuestionIndex = 0;
     }
 
+    public void setCurrentQuestionIndex(int currentQuestionIndex) {
+        this.currentQuestionIndex = currentQuestionIndex;
+    }
+
     public int getTotal() {
         return total;
     }

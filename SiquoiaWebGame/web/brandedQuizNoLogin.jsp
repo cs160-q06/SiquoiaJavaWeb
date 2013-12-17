@@ -40,6 +40,15 @@
             <%}%>
             <script type="text/javascript">
                 window.history.forward(1);
+                var hook = true;
+                window.onbeforeunload = function() {
+                    if (hook) {
+                        return "\nDid you save the game?\nUnless all of your point and progress will be lost!\n"
+                    }
+                }
+                function unhook() {
+                    hook = false;
+                }
             </script>
     </head>
 
@@ -169,18 +178,17 @@
                 %>
                 <div class="well well-small" align="center">
                     Total Correct: <%= (session.getAttribute("userPoint") != null
-                                ? (Integer) session.getAttribute("userPoint") : 0)%>
+                            ? (Integer) session.getAttribute("userPoint") : 0)%>
                     <br />  
                     <%= (session.getAttribute("select") != null
-                                ? (String) session.getAttribute("select") : "")%>
+                            ? (String) session.getAttribute("select") : "")%>
                     <br />
                     <%= (session.getAttribute("error") != null
-                                ? "Error: " + (String) session.getAttribute("error") : "")%>
+                            ? "Error: " + (String) session.getAttribute("error") : "")%>
                 </div>
                 <div align="center">   
 
-                    <button type="submit" class="btn btn-large" value="Next" name="next">Next</button>
-                    <button type="submit" class="btn btn-large" name="save" disabled="">Save</button>
+                    <button type="submit" class="btn btn-large" value="next" name="next" onclick="unhook();">Next</button>
                 </div>
             </div>
 

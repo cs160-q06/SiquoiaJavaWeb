@@ -18,21 +18,33 @@ import java.util.List;
  */
 public class QuizHistory {
 
+    
+
     private int id;
     private int userID;
     private int topicID;
     private String questionList;
     private int current_questionID;
     private int point;
+    private String type;
 
     public QuizHistory(int id, int userID, int topicID, String questionList,
-            int current_questionID, int point) {
+            int current_questionID, int point, String type) {
         this.id = id;
         this.userID = userID;
         this.topicID = topicID;
         this.questionList = questionList;
         this.current_questionID = current_questionID;
         this.point = point;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getId() {
@@ -61,8 +73,9 @@ public class QuizHistory {
 
     @Override
     public String toString() {
-        return "[id: " + id + "|" + userID + "|" + topicID + "|[" + questionList
-                + "]|currrent: " + current_questionID + "|point: " + point + "]";
+        return "[id: " + id + "|" + userID + "|" + topicID + "| [" + questionList
+                + "]|currrent: " + current_questionID + "|point: " + point 
+                + "|"+type+ "]";
     }
 
     /**
@@ -94,7 +107,9 @@ public class QuizHistory {
             String questionList = rs.getString("QUESTIONLIST");
             int current_questionID = rs.getInt("CURRENT_QUESTIONID");
             int point = rs.getInt("POINT");
-            QuizHistory i = new QuizHistory(id, topicID, topicID, questionList, current_questionID, point);
+            String type = rs.getString("TYPE");
+
+            QuizHistory i = new QuizHistory(id, topicID, topicID, questionList, current_questionID, point, type);
             list.add(i);
         }
         return list;
@@ -106,6 +121,7 @@ public class QuizHistory {
                 + "Topic_ID,\n"
                 + "QuestionList,\n"
                 + "Current_QuestionID,\n"
+                + "Type,\n"
                 + "Point)\n"
                 + "VALUES\n"
                 + "(\n"
@@ -113,11 +129,18 @@ public class QuizHistory {
                 + q.getTopicID() + ",\n"
                 + "'" + q.getQuestionList() + "',\n"
                 + q.getCurrent_questionID() + ",\n"
+                + "'" + q.getType() + "',\n"
                 + q.getPoint() + "\n"
                 + ");";
         return doQueryExecuteUpdate(conn, query);
     }
-
+    /**
+     * 
+     * @param conn
+     * @param query
+     * @return
+     * @throws SQLException 
+     */
     private static boolean doQueryExecuteUpdate(Connection conn, String query) throws SQLException {
 
         Statement stmt = conn.createStatement();
@@ -126,5 +149,9 @@ public class QuizHistory {
         stmt.close();
 
         return true;
+    }
+    public static List<QuizHistory> doQueryGetByUserID(Connection conn, int id) throws SQLException {
+        String query = "Select * from QUIZ_HISTORY where USER_ID = " + id;
+        return doQuery(conn, query);
     }
 }

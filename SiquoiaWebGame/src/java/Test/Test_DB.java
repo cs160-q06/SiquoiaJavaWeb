@@ -13,6 +13,7 @@ import DataOOD.Token;
 import DataOOD.Topic;
 import DataOOD.User;
 import Database.MySqlController;
+import Miscellanea.EnumString;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -259,33 +260,35 @@ public class Test_DB {
                 tmpList.add(q);
             }
             System.out.println(n);
-            if(tmpList.size()==20)
-            {
+            if (tmpList.size() == 20) {
                 break;
             }
         }
-        for(Question q:tmpList)
-            System.out.print(q.getId()+"|");
+        for (Question q : tmpList) {
+            System.out.print(q.getId() + "|");
+        }
     }
 
     private static void testQuizHistory() throws SQLException {
         //test_getQuizHistory();
-        test_insertQuizHistory();
-        
+        //test_insertQuizHistory();
+
     }
 
     private static void test_getQuizHistory() throws SQLException {
         List<QuizHistory> list = QuizHistory.doQueryGetAll(conn);
         System.out.println(Arrays.toString(list.toArray()));
-        
+        List<QuizHistory> qList = QuizHistory.doQueryGetByUserID(conn, 3);
+        System.out.println(Arrays.toString(list.toArray()));
+
     }
 
     private static void test_insertQuizHistory() throws SQLException {
         int userID = 3;
         int topicID = 2;
         String questionList = "2|5|9|15|19|21|25|26|29|31|32|33|35|36|44|48|51|54|58|59";
-        QuizHistory q = new QuizHistory(0, userID, topicID, questionList, 26, 3);
-        QuizHistory.doQueryInsert(conn,q);
+        QuizHistory q = new QuizHistory(0, userID, topicID, questionList, 26, 3, EnumString.NORMAL_QUIZ.getValue());
+        QuizHistory.doQueryInsert(conn, q);
     }
 
     private static void test_updateQuestion() throws SQLException {
@@ -293,14 +296,13 @@ public class Test_DB {
         System.out.println(q.toString());
         q.incrementRanking();
         System.out.println(q.toString());
-        Question.doQueryUpdateRanking(conn,q);
+        Question.doQueryUpdateRanking(conn, q);
     }
 
     private static void test_top10Question() throws SQLException {
         List<Question> list = Question.doQueryGetTop10(conn);
-        for(Question q : list)
-        {
-            System.out.print("|"+q.getId()+"-"+q.getRanking());
+        for (Question q : list) {
+            System.out.print("|" + q.getId() + "-" + q.getRanking());
         }
     }
 
